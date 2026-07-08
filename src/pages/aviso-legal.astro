@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LegalDocument from '../components/sections/LegalDocument.astro';
+import { getPageMeta } from '../data/pages-meta';
+import { contact, site } from '../data/site';
+import { owner } from '../data/owner';
+import { brand } from '../data/brand';
+import { legal } from '../data/legal';
+import { routes } from '../data/routes';
+
+const meta = getPageMeta('/aviso-legal');
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <LegalDocument title="Aviso legal" updated={legal.lastUpdated}>
+    <p>
+      En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de
+      Comercio Electrónico (LSSI-CE), se informa a los usuarios de {site.url} ({brand.name}) de los datos
+      siguientes.
+    </p>
+
+    <h2>1. Titular del sitio web</h2>
+    <ul>
+      <li><strong>Denominación / titular:</strong> {owner.fullName}</li>
+      <li><strong>Marca comercial:</strong> {brand.name}</li>
+      <li><strong>NIF:</strong> {legal.nif}</li>
+      <li>
+        <strong>Domicilio:</strong> {legal.address}, {legal.postalCode} {legal.city} ({legal.province}),
+        {legal.country}
+      </li>
+      <li><strong>Actividad:</strong> {legal.activity}</li>
+      <li><strong>Datos registrales:</strong> {legal.registryInfo}</li>
+      <li>
+        <strong>Correo electrónico:</strong>
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+      </li>
+      {contact.phoneDisplay && (
+        <li>
+          <strong>Teléfono:</strong>
+          <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>
+        </li>
+      )}
+    </ul>
+
+    <h2>2. Objeto</h2>
+    <p>
+      El presente aviso legal regula el acceso y la utilización del sitio web {site.url}, que tiene por objeto
+      presentar los servicios de marketing digital de {owner.fullName} ({brand.name}), facilitar el contacto con
+      clientes y potenciales clientes, y ofrecer información sobre su trayectoria profesional.
+    </p>
+    <p>
+      El acceso al sitio implica la aceptación de este aviso legal. Si no estás de acuerdo con estas
+      condiciones, te rogamos que no utilices el sitio.
+    </p>
+
+    <h2>3. Condiciones de uso</h2>
+    <p>El usuario se compromete a hacer un uso adecuado del sitio web y, en particular, a no:</p>
+    <ul>
+      <li>Utilizarlo con fines ilícitos o contrarios a la buena fe y al orden público.</li>
+      <li>
+        Introducir o difundir virus informáticos o cualesquiera otros sistemas que puedan dañar equipos o
+        documentos del titular o de terceros.
+      </li>
+      <li>
+        Intentar acceder, utilizar o manipular datos, sistemas o cuentas sin autorización.
+      </li>
+      <li>Reproducir, copiar, distribuir o transformar los contenidos sin autorización expresa del titular.</li>
+    </ul>
+    <p>
+      {owner.fullName} se reserva el derecho a denegar o retirar el acceso al sitio, sin previo aviso, a
+      usuarios que incumplan estas condiciones.
+    </p>
+
+    <h2>4. Propiedad intelectual e industrial</h2>
+    <p>
+      Los contenidos de este sitio web — textos, imágenes, diseño gráfico, código fuente, logotipos, marcas y
+      demás elementos — son propiedad de {owner.fullName} o de terceros que han autorizado su uso, y están
+      protegidos por la legislación española e internacional en materia de propiedad intelectual e industrial.
+    </p>
+    <p>
+      Queda prohibida la reproducción, distribución, comunicación pública, transformación o cualquier otra
+      explotación, total o parcial, sin autorización expresa y por escrito del titular, salvo en los supuestos
+      legalmente permitidos (uso privado, citas con mención de la fuente, etc.).
+    </p>
+    <p>
+      Las marcas, nombres comerciales o signos distintivos de terceros que aparezcan en el sitio pertenecen a
+      sus respectivos titulares y se mencionan a título informativo en el contexto de proyectos o experiencia
+      profesional.
+    </p>
+
+    <h2>5. Responsabilidad</h2>
+    <h3>5.1. Contenidos</h3>
+    <p>
+      {owner.fullName} se esfuerza por mantener la información del sitio actualizada y exacta, pero no garantiza
+      la ausencia de errores ni la disponibilidad ininterrumpida del servicio. El titular no será responsable de
+      daños derivados del uso de la información publicada, de interrupciones del servicio o de la presencia de
+      virus u otros elementos lesivos introducidos por terceros.
+    </p>
+
+    <h3>5.2. Enlaces externos</h3>
+    <p>
+      El sitio puede incluir enlaces a páginas de terceros. {owner.fullName} no controla ni asume responsabilidad
+      por los contenidos, políticas de privacidad o prácticas de sitios ajenos. El acceso a enlaces externos es
+      bajo tu propia responsabilidad.
+    </p>
+
+    <h3>5.3. Formulario de contacto</h3>
+    <p>
+      Los datos enviados a través del <a href={routes.contact}>formulario de contacto</a> se tratarán conforme a
+      la <a href="/politica-de-privacidad">política de privacidad</a>. El usuario garantiza que la información
+      facilitada es veraz y que tiene capacidad legal para contactar en su propio nombre o en representación
+      debidamente acreditada.
+    </p>
+
+    <h2>6. Protección de datos y cookies</h2>
+    <p>
+      El tratamiento de datos personales se describe en la
+      <a href="/politica-de-privacidad">política de privacidad</a>. El uso de cookies y tecnologías similares
+      se detalla en la <a href="/politica-de-cookies">política de cookies</a>.
+    </p>
+
+    <h2>7. Alojamiento</h2>
+    <p>
+      Este sitio web está alojado por <strong>{legal.hosting.name}</strong>.
+      {legal.hosting.url !== '[COMPLETAR: URL del proveedor]' && (
+        <>
+          {' '}
+          <a href={legal.hosting.url} rel="noopener noreferrer" target="_blank">Más información</a>
+        </>
+      )}
+    </p>
+
+    <h2>8. Legislación aplicable y jurisdicción</h2>
+    <p>
+      Las relaciones entre {owner.fullName} y el usuario se regirán por la normativa española vigente. Para la
+      resolución de controversias, las partes se someten a los juzgados y tribunales de {legal.jurisdiction},
+      salvo que la normativa de consumidores y usuarios establezca otro fuero imperativo.
+    </p>
+
+    <h2>9. Modificaciones</h2>
+    <p>
+      {owner.fullName} se reserva el derecho de modificar este aviso legal para adaptarlo a cambios legislativos,
+      en el sitio web o en la actividad profesional. La versión publicada en esta página será la vigente en cada
+      momento.
+    </p>
+  </LegalDocument>
+</BaseLayout>

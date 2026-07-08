@@ -1,0 +1,134 @@
+---
+import { routes } from '../../data/routes';
+
+const links = [
+  {
+    href: routes.about,
+    title: 'Sobre mí',
+    description: 'Quién soy, cómo trabajo y qué me inspira.',
+    accent: 'rosa',
+  },
+  {
+    href: routes.projects,
+    title: 'Proyectos',
+    description: 'Casos y trabajos en los que he participado.',
+    accent: 'menta',
+  },
+  {
+    href: routes.services,
+    title: 'Servicios',
+    description: 'SEO, SEM, web, RRSS y estrategia digital 360º.',
+    accent: 'lila',
+  },
+  {
+    href: routes.contact,
+    title: 'Contacto',
+    description: 'Cuéntame tu idea y hablamos sin compromiso.',
+    accent: 'naranja',
+  },
+];
+---
+
+<section class="teaser section" aria-labelledby="teaser-title">
+  <div class="container">
+    <h2 id="teaser-title" class="visually-hidden">Explora el sitio</h2>
+    <div class="teaser__grid">
+      {
+        links.map((link) => (
+          <a href={link.href} class={`teaser-card teaser-card--${link.accent}`} data-reveal>
+            <h3>{link.title}</h3>
+            <p>{link.description}</p>
+            <span class="teaser-card__arrow" aria-hidden="true">
+              →
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .teaser {
+    background: var(--color-bg-soft);
+  }
+
+  .teaser__grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .teaser-card {
+    position: relative;
+    display: block;
+    padding: 1.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform var(--transition-bounce),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .teaser-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .teaser-card--lila:hover {
+    border-color: var(--color-lila);
+  }
+
+  .teaser-card--rosa:hover {
+    border-color: var(--color-rosa);
+  }
+
+  .teaser-card--menta:hover {
+    border-color: var(--color-menta);
+  }
+
+  .teaser-card--naranja:hover {
+    border-color: var(--color-naranja);
+  }
+
+  .teaser-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .teaser-card p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+    padding-right: 2rem;
+  }
+
+  .teaser-card__arrow {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-lila-strong);
+    transition: transform var(--transition-fast);
+  }
+
+  .teaser-card:hover .teaser-card__arrow {
+    transform: translateX(4px);
+  }
+
+  @media (min-width: 640px) {
+    .teaser__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 992px) {
+    .teaser__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

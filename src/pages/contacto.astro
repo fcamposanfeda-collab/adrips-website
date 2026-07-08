@@ -1,0 +1,17 @@
+---
+import { getPageMeta } from '../data/pages-meta';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/sections/PageIntro.astro';
+import ContactCta from '../components/sections/ContactCta.astro';
+
+const meta = getPageMeta('/contacto');
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <PageIntro
+    eyebrow="Contacto"
+    title="¿Hablamos de tu proyecto?"
+    description="Escríbeme con calma: te respondo yo personalmente, sin respuestas automáticas."
+  />
+  <ContactCta compact formId="contact-page" />
+</BaseLayout>

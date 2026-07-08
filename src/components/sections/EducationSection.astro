@@ -1,0 +1,153 @@
+---
+import { degrees, courses, tools } from '../../data/education';
+---
+
+<section class="education section" aria-labelledby="education-title">
+  <div class="container education__grid">
+    <div class="education__col">
+      <header>
+        <p class="section-header__eyebrow">Formación</p>
+        <h2 id="education-title">Estudios y cursos</h2>
+      </header>
+
+      <ul class="education__degrees">
+        {
+          degrees.map((degree) => (
+            <li class="education-item">
+              <h3>{degree.title}</h3>
+              <p>
+                {degree.school} · {degree.year}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="education__col">
+      <h3 class="education__subtitle">Complementos y idiomas</h3>
+      <ul class="education__courses">
+        {
+          courses.map((course) => (
+            <li>
+              {course.title}
+              {course.note && <span class="education__note">({course.note})</span>}
+            </li>
+          ))
+        }
+      </ul>
+
+      <h3 class="education__subtitle">Herramientas</h3>
+      <ul class="education__tools" aria-label="Herramientas que utilizo">
+        {tools.map((tool) => <li>{tool}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .education {
+    background: var(--color-bg-soft);
+  }
+
+  .education__grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .education__col header h2 {
+    margin: 0 0 1.5rem;
+    text-align: left;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .education__degrees {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .education-item {
+    padding: 1.25rem 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .education-item h3 {
+    margin: 0 0 0.375rem;
+    font-size: 1.0625rem;
+  }
+
+  .education-item p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+  }
+
+  .education__subtitle {
+    margin: 0 0 1rem;
+    font-size: 1.0625rem;
+  }
+
+  .education__subtitle:not(:first-child) {
+    margin-top: 2rem;
+  }
+
+  .education__tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .education__tools li {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+  }
+
+  .education__courses {
+    display: grid;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .education__courses li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.55;
+  }
+
+  .education__courses li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-lila-strong);
+    font-weight: 700;
+  }
+
+  .education__note {
+    color: var(--color-muted);
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    .education__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

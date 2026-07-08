@@ -1,0 +1,101 @@
+---
+interface Props {
+  title: string;
+  updated: string;
+}
+
+const { title, updated } = Astro.props;
+---
+
+<section class="legal section">
+  <div class="container legal__inner">
+    <h1>{title}</h1>
+    <p class="legal__updated">Última actualización: {updated}</p>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .legal__inner {
+    max-width: 42rem;
+  }
+
+  .legal h1 {
+    margin: 0 0 0.5rem;
+  }
+
+  .legal__updated {
+    margin: 0 0 2rem;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+
+  .legal :global(h2) {
+    margin: 2rem 0 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  .legal :global(h3) {
+    margin: 1.25rem 0 0.5rem;
+    font-size: 1.0625rem;
+  }
+
+  .legal :global(p),
+  .legal :global(ul),
+  .legal :global(ol) {
+    margin: 0 0 1rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+  }
+
+  .legal :global(ul),
+  .legal :global(ol) {
+    padding-left: 1.25rem;
+  }
+
+  .legal :global(ul) {
+    list-style: disc;
+  }
+
+  .legal :global(ol) {
+    list-style: decimal;
+  }
+
+  .legal :global(li) {
+    margin-bottom: 0.35rem;
+  }
+
+  .legal :global(a) {
+    color: var(--color-lila-strong);
+    text-decoration: underline;
+  }
+
+  .legal :global(table) {
+    width: 100%;
+    margin: 0 0 1rem;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .legal :global(th),
+  .legal :global(td) {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .legal :global(th) {
+    background: var(--color-bg-soft, rgba(0, 0, 0, 0.03));
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .legal :global(.legal__placeholder) {
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--color-lila-strong);
+    background: rgba(167, 139, 250, 0.08);
+    font-size: 0.875rem;
+    color: var(--color-text);
+  }
+</style>

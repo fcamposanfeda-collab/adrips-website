@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LegalDocument from '../components/sections/LegalDocument.astro';
+import { getPageMeta } from '../data/pages-meta';
+import { contact, site } from '../data/site';
+import { owner } from '../data/owner';
+import { brand } from '../data/brand';
+import { legal } from '../data/legal';
+
+const meta = getPageMeta('/politica-de-cookies');
+const usesAnalytics = !legal.analytics.measurementId.startsWith('[COMPLETAR');
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <LegalDocument title="Política de cookies" updated={legal.lastUpdated}>
+    <p>
+      En {site.url} ({brand.name}) usamos cookies y tecnologías similares para que el sitio funcione
+      correctamente y, solo con tu permiso, para entender cómo se utiliza. Esta política complementa la
+      <a href="/politica-de-privacidad">política de privacidad</a>.
+    </p>
+
+    <h2>1. ¿Qué son las cookies?</h2>
+    <p>
+      Las cookies son pequeños archivos de texto que un sitio web almacena en tu dispositivo (ordenador,
+      móvil o tablet) cuando lo visitas. Permiten recordar preferencias, mantener sesiones o recopilar
+      información estadística. También usamos el almacenamiento local del navegador (<em>localStorage</em>)
+      para guardar tu decisión sobre cookies.
+    </p>
+
+    <h2>2. ¿Quién es el responsable?</h2>
+    <p>
+      {owner.fullName} · Correo: <a href={`mailto:${contact.email}`}>{contact.email}</a>
+    </p>
+
+    <h2>3. Tipos de cookies que utilizamos</h2>
+
+    <h3>3.1. Cookies técnicas o necesarias</h3>
+    <p>
+      Son imprescindibles para el funcionamiento básico del sitio. No requieren consentimiento. En un sitio
+      estático como este, su uso es mínimo; el servidor de alojamiento puede registrar cookies técnicas de
+      sesión o seguridad propias de la infraestructura.
+    </p>
+
+    <h3>3.2. Preferencias de consentimiento</h3>
+    <p>
+      Guardamos tu elección (aceptar o rechazar cookies no esenciales) para no mostrarte el banner en cada
+      visita.
+    </p>
+
+    <h3>3.3. Cookies analíticas (opcionales)</h3>
+    <p>
+      {usesAnalytics ? (
+        <>
+          Solo se activan si pulsas <strong>Aceptar</strong> en el banner de cookies. Nos ayudan a medir
+          visitas y mejorar el sitio mediante {legal.analytics.provider}.
+        </>
+      ) : (
+        <>
+          Actualmente <strong>no</strong> usamos cookies analíticas de terceros. Si las configuras en el
+          futuro (p. ej. Google Analytics), solo se activarán tras tu consentimiento explícito.
+        </>
+      )}
+    </p>
+
+    <h2>4. Relación de cookies y tecnologías similares</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Finalidad</th>
+          <th>Duración</th>
+          <th>Proveedor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>aps-cookie-consent</code></td>
+          <td>Preferencia (localStorage)</td>
+          <td>Recordar si aceptaste o rechazaste cookies no esenciales</td>
+          <td>Persistente hasta que borres datos del sitio</td>
+          <td>{brand.name} (primera parte)</td>
+        </tr>
+        {usesAnalytics && (
+          <tr>
+            <td><code>_ga</code>, <code>_ga_*</code></td>
+            <td>Analítica</td>
+            <td>Distinguir usuarios y medir sesiones</td>
+            <td>Hasta 2 años</td>
+            <td>Google ({legal.analytics.measurementId})</td>
+          </tr>
+        )}
+        <tr>
+          <td>Cookies técnicas del hosting</td>
+          <td>Técnica</td>
+          <td>Seguridad, balanceo de carga o CDN</td>
+          <td>Sesión / variable</td>
+          <td>{legal.hosting.name}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="legal__placeholder">
+      Si añades Google Analytics u otras herramientas, actualiza el ID en <code>src/data/legal.ts</code> y
+      completa la tabla con las cookies que genere cada servicio.
+    </p>
+
+    <h2>5. Cookies de terceros</h2>
+    <p>Algunos servicios integrados pueden instalar cookies de terceros:</p>
+    <ul>
+      <li>
+        <strong>Google Fonts</strong> — tipografías cargadas desde los servidores de Google. Consulta la
+        <a href={legal.fonts.privacyUrl} rel="noopener noreferrer" target="_blank">
+          política de privacidad de Google
+        </a>.
+      </li>
+      {usesAnalytics && (
+        <li>
+          <strong>{legal.analytics.provider}</strong> — medición de audiencia, solo con tu consentimiento.
+          <a href={legal.analytics.privacyUrl} rel="noopener noreferrer" target="_blank">
+            Más información
+          </a>
+        </li>
+      )}
+      <li>
+        <strong>{legal.formProvider.name}</strong> — solo al enviar el formulario de contacto (no al navegar
+        por el sitio).
+      </li>
+    </ul>
+
+    <h2>6. ¿Cómo gestionar o revocar el consentimiento?</h2>
+    <ol>
+      <li>
+        <strong>Banner de cookies:</strong> al entrar por primera vez puedes <strong>Aceptar</strong> o
+        <strong>Rechazar</strong> las cookies no esenciales.
+      </li>
+      <li>
+        <strong>Borrar la elección guardada:</strong> elimina los datos de navegación de {site.url} en tu
+        navegador (o borra específicamente el almacenamiento local). El banner volverá a mostrarse.
+      </li>
+      <li>
+        <strong>Configuración del navegador:</strong> puedes bloquear o eliminar cookies desde las opciones
+        de privacidad de Chrome, Firefox, Safari, Edge, etc. Ten en cuenta que bloquear cookies técnicas
+        puede afectar al funcionamiento del sitio.
+      </li>
+    </ol>
+    <p>
+      Enlaces útiles para gestionar cookies según navegador:
+      <a href="https://support.google.com/chrome/answer/95647" rel="noopener noreferrer" target="_blank">Chrome</a>,
+      <a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" rel="noopener noreferrer" target="_blank">Firefox</a>,
+      <a href="https://support.apple.com/es-es/105082" rel="noopener noreferrer" target="_blank">Safari</a>.
+    </p>
+
+    <h2>7. Base legal</h2>
+    <ul>
+      <li><strong>Cookies técnicas:</strong> interés legítimo / necesidad para el servicio solicitado.</li>
+      <li><strong>Cookies analíticas:</strong> consentimiento del usuario (art. 22.2 LSSI).</li>
+    </ul>
+
+    <h2>8. Cambios en esta política</h2>
+    <p>
+      Podemos modificar esta política si incorporamos nuevas herramientas o cambia la normativa. La fecha de
+      la última actualización aparece al inicio del documento.
+    </p>
+
+    <h2>9. Más información</h2>
+    <p>
+      Para cualquier duda sobre cookies o protección de datos, escribe a
+      <a href={`mailto:${contact.email}`}>{contact.email}</a> o consulta la
+      <a href="/politica-de-privacidad">política de privacidad</a>.
+    </p>
+  </LegalDocument>
+</BaseLayout>

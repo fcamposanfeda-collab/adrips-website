@@ -1,0 +1,145 @@
+---
+import ContactForm from '../forms/ContactForm.astro';
+import { contact } from '../../data/site';
+
+interface Props {
+  compact?: boolean;
+  formId?: string;
+}
+
+const { compact = false, formId = 'contact' } = Astro.props;
+---
+
+<section
+  id="contacto"
+  class:list={['contact', 'section', { 'contact--compact': compact }]}
+  {...(!compact && { 'aria-labelledby': 'contact-title' })}
+>
+  <div class="container contact__grid">
+    <div class="contact__info">
+      {
+        !compact && (
+          <>
+            <p class="section-header__eyebrow">Contacto</p>
+            <h2 id="contact-title">¿Hablamos de tu proyecto?</h2>
+            <p class="contact__lead">
+              Escríbeme con calma: cuéntame qué tienes en mente y te respondo yo personalmente. Sin
+              formularios eternos ni respuestas automáticas.
+            </p>
+          </>
+        )
+      }
+      <div class="contact__details">
+        <p>
+          <strong>Email</strong><br />
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </p>
+        {
+          contact.phoneDisplay && (
+            <p>
+              <strong>Teléfono</strong><br />
+              <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>
+            </p>
+          )
+        }
+      </div>
+      <ul class="contact__benefits">
+        <li>Te respondo yo, no un bot</li>
+        <li>Presupuesto claro y sin letra pequeña</li>
+        <li>Primera conversación sin compromiso</li>
+      </ul>
+    </div>
+    <div class="contact__form-wrap">
+      <ContactForm formId={formId} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: linear-gradient(
+      160deg,
+      var(--color-footer-bg) 0%,
+      #a07070 55%,
+      var(--color-brand-pink-deep) 100%
+    );
+    color: var(--color-on-dark);
+  }
+
+  .contact--compact {
+    padding-top: 0;
+  }
+
+  .contact__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .contact__info .section-header__eyebrow {
+    background: rgba(240, 228, 184, 0.25);
+    color: var(--color-brand-cream);
+  }
+
+  .contact h2 {
+    margin: 0 0 1rem;
+    color: var(--color-on-dark);
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+  }
+
+  .contact__lead {
+    margin: 0 0 1.5rem;
+    opacity: 0.9;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+
+  .contact__details {
+    margin-bottom: 1.5rem;
+  }
+
+  .contact__details p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .contact__details a {
+    color: var(--color-brand-cream);
+    font-weight: 500;
+  }
+
+  .contact__benefits {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .contact__benefits li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.9375rem;
+    opacity: 0.9;
+  }
+
+  .contact__benefits li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-brand-coral);
+    font-weight: 700;
+  }
+
+  .contact__form-wrap {
+    padding: 2rem;
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  @media (min-width: 992px) {
+    .contact__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

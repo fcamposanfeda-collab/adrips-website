@@ -1,0 +1,200 @@
+---
+import Button from '../ui/Button.astro';
+import { services } from '../../data/services';
+import { routes } from '../../data/routes';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<section
+  id="servicios"
+  class:list={['services', 'section', { 'services--compact': compact }]}
+  {...(!compact && { 'aria-labelledby': 'services-title' })}
+>
+  <div class="container">
+    {
+      !compact && (
+        <header class="section-header">
+          <p class="section-header__eyebrow">Servicios</p>
+          <h2 id="services-title">Marketing digital 360º</h2>
+          <p>
+            SEO, Google Ads, web, redes y estrategia integral — lo que necesitas para crecer online,
+            con trato directo y sin intermediarios.
+          </p>
+        </header>
+      )
+    }
+
+    <div class="services__grid">
+      {
+        services.map((service) => (
+          <article class={`service-card service-card--${service.accent}`}>
+            <span class="service-card__icon" aria-hidden="true">
+              {service.icon}
+            </span>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            <ul class="service-card__features">
+              {service.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="services__cta">
+      <Button href={routes.contact} variant="primary">Cuéntame tu idea</Button>
+      <Button href={routes.projects} variant="outline">Ver mis proyectos</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--color-bg-soft);
+  }
+
+  .services--compact {
+    padding-top: 0;
+  }
+
+  .services__grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  /* Tarjetas con hover suave — personaliza colores por servicio */
+  .service-card {
+    padding: 2rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform var(--transition-bounce),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .service-card--lila:hover {
+    border-color: var(--color-lila);
+  }
+
+  .service-card--rosa:hover {
+    border-color: var(--color-rosa);
+  }
+
+  .service-card--menta:hover {
+    border-color: var(--color-menta);
+  }
+
+  .service-card__icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.375rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .service-card--lila .service-card__icon {
+    background: rgba(196, 181, 253, 0.35);
+    color: var(--color-lila-strong);
+  }
+
+  .service-card--rosa .service-card__icon {
+    background: rgba(249, 168, 212, 0.35);
+    color: var(--color-rosa-strong);
+  }
+
+  .service-card--menta .service-card__icon {
+    background: rgba(232, 220, 200, 0.5);
+    color: var(--color-menta-strong);
+  }
+
+  .service-card--naranja .service-card__icon {
+    background: rgba(240, 200, 168, 0.4);
+    color: var(--color-naranja-strong);
+  }
+
+  .service-card--azul .service-card__icon {
+    background: rgba(200, 216, 240, 0.45);
+    color: var(--color-azul-strong);
+  }
+
+  .service-card--amarillo .service-card__icon {
+    background: rgba(240, 228, 184, 0.5);
+    color: var(--color-amarillo-strong);
+  }
+
+  .service-card--naranja:hover {
+    border-color: var(--color-naranja);
+  }
+
+  .service-card--azul:hover {
+    border-color: var(--color-azul);
+  }
+
+  .service-card--amarillo:hover {
+    border-color: var(--color-amarillo);
+  }
+
+  .service-card h3 {
+    margin: 0 0 0.75rem;
+    color: var(--color-text);
+  }
+
+  .service-card > p {
+    margin: 0 0 1.25rem;
+    font-size: 0.96875rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  .service-card__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .service-card__features li {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border-radius: var(--radius-full);
+  }
+
+  .services__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

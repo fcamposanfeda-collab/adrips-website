@@ -1,0 +1,207 @@
+---
+import { formConfig } from '../../data/form-config';
+import { owner } from '../../data/owner';
+
+interface Props {
+  formId?: string;
+}
+
+const { formId = 'contact' } = Astro.props;
+const { endpoint: formEndpoint, web3formsAccessKey: web3formsKey } = formConfig;
+const nameId = `${formId}-nombre`;
+const emailId = `${formId}-email`;
+const messageId = `${formId}-mensaje`;
+const statusId = `${formId}-status`;
+const honeypotId = `${formId}-company`;
+---
+
+<form
+  class="contact-form"
+  method="post"
+  action={formEndpoint || '#'}
+  data-contact-form
+  data-form-endpoint={formEndpoint}
+  data-form-configured={formConfig.isConfigured ? 'true' : 'false'}
+  novalidate
+>
+  <div class="contact-form__honeypot" aria-hidden="true">
+    <label for={honeypotId}>Empresa</label>
+    <input type="text" id={honeypotId} name="company" tabindex="-1" autocomplete="off" />
+  </div>
+
+  {web3formsKey && <input type="hidden" name="access_key" value={web3formsKey} />}
+  <input type="hidden" name="subject" value={`Nuevo mensaje — ${owner.fullName}`} />
+  <input type="hidden" name="from_name" value={`Web ${owner.fullName}`} />
+
+  <div class="contact-form__field">
+    <label class="contact-form__label" for={nameId}>
+      Nombre<span class="contact-form__required">*</span>
+    </label>
+    <input
+      class="contact-form__input"
+      type="text"
+      id={nameId}
+      name="nombre"
+      autocomplete="name"
+      required
+    />
+  </div>
+
+  <div class="contact-form__field">
+    <label class="contact-form__label" for={emailId}>
+      Correo electrónico<span class="contact-form__required">*</span>
+    </label>
+    <input
+      class="contact-form__input"
+      type="email"
+      id={emailId}
+      name="email"
+      autocomplete="email"
+      required
+    />
+  </div>
+
+  <div class="contact-form__field">
+    <label class="contact-form__label" for={messageId}>
+      Cuéntame tu proyecto<span class="contact-form__required">*</span>
+    </label>
+    <textarea
+      class="contact-form__input contact-form__textarea"
+      id={messageId}
+      name="mensaje"
+      rows="5"
+      placeholder="¿Qué necesitas? Web, SEO, campañas..."
+      required
+    ></textarea>
+  </div>
+
+  <p class="contact-form__status" id={statusId} role="status" aria-live="polite" hidden data-form-status></p>
+
+  <button type="submit" class="contact-form__submit">Enviar mensaje</button>
+</form>
+
+<style>
+  .contact-form {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .contact-form__honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .contact-form__field {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .contact-form__label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+
+  .contact-form__required {
+    color: var(--color-rosa-strong);
+  }
+
+  .contact-form__input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font: inherit;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .contact-form__input:focus {
+    outline: none;
+    border-color: var(--color-lila-strong);
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+  }
+
+  .contact-form__textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  .contact-form__status[data-type='success'] {
+    color: #15803d;
+  }
+
+  .contact-form__status[data-type='error'] {
+    color: #dc2626;
+  }
+
+  .contact-form__submit {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-on-dark);
+    background: linear-gradient(135deg, var(--color-lila-strong), var(--color-rosa-strong));
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
+  }
+
+  .contact-form__submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(167, 139, 250, 0.35);
+  }
+</style>
+
+<script>
+  function showStatus(form: HTMLFormElement, message: string, type: 'success' | 'error') {
+    const status = form.querySelector('[data-form-status]');
+    if (!(status instanceof HTMLElement)) return;
+    status.textContent = message;
+    status.dataset.type = type;
+    status.hidden = false;
+  }
+
+  document.querySelectorAll('[data-contact-form]').forEach((element) => {
+    if (!(element instanceof HTMLFormElement)) return;
+    const form = element;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const honeypot = form.querySelector('input[name="company"]');
+      if (honeypot instanceof HTMLInputElement && honeypot.value.trim()) return;
+
+      if (form.dataset.formConfigured !== 'true') {
+        showStatus(
+          form,
+          'Formulario en configuración. Escríbeme directamente por email mientras tanto.',
+          'error',
+        );
+        return;
+      }
+
+      const endpoint = form.dataset.formEndpoint ?? '';
+      const submit = form.querySelector('button[type="submit"]');
+      if (submit instanceof HTMLButtonElement) submit.disabled = true;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (!response.ok) throw new Error('Network error');
+        form.reset();
+        showStatus(form, '¡Mensaje enviado! Te responderé en menos de 24 h.', 'success');
+      } catch {
+        showStatus(form, 'Error al enviar. Inténtalo de nuevo o escríbeme por email.', 'error');
+      } finally {
+        if (submit instanceof HTMLButtonElement) submit.disabled = false;
+      }
+    });
+  });
+</script>

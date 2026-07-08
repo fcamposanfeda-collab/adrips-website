@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-label="Adrips  Marketing Digital 360">
+  <rect width="480" height="320" fill="#D4A5A5"/>
+
+  <!-- Flor junto a la A -->
+  <g transform="translate(52 118)">
+    <circle cx="0" cy="0" r="9" fill="#F0E4B8"/>
+    <ellipse cx="0" cy="-16" rx="9" ry="13" fill="#E8A8A0"/>
+    <ellipse cx="14" cy="-8" rx="9" ry="13" fill="#E8A8A0" transform="rotate(60 14 -8)"/>
+    <ellipse cx="14" cy="8" rx="9" ry="13" fill="#E8A8A0" transform="rotate(120 14 8)"/>
+    <ellipse cx="0" cy="16" rx="9" ry="13" fill="#E8A8A0" transform="rotate(180 0 16)"/>
+    <ellipse cx="-14" cy="8" rx="9" ry="13" fill="#E8A8A0" transform="rotate(240 -14 8)"/>
+    <ellipse cx="-14" cy="-8" rx="9" ry="13" fill="#E8A8A0" transform="rotate(300 -14 -8)"/>
+  </g>
+
+  <!-- Estrella sobre la i -->
+  <g transform="translate(318 72)">
+    <path
+      d="M0 -14 L3.5 -4 L14 -3 L5.5 4 L8 14 L0 8 L-8 14 L-5.5 4 L-14 -3 L-3.5 -4 Z"
+      fill="#C8B0E0"
+    />
+    <path
+      d="M10 0 L52 2 L10 4 Z"
+      fill="#C8B0E0"
+      opacity="0.85"
+    />
+  </g>
+
+  <!-- Nombre -->
+  <text
+    x="240"
+    y="168"
+    text-anchor="middle"
+    font-family="'Rozha One', Georgia, serif"
+    font-size="92"
+    fill="#F0E4B8"
+  >Adrips</text>
+
+  <!-- Tagline -->
+  <text
+    x="240"
+    y="228"
+    text-anchor="middle"
+    font-family="Montserrat, Arial, sans-serif"
+    font-size="15"
+    font-weight="300"
+    letter-spacing="0.28em"
+    fill="#F0E4B8"
+  >MARKETING DIGITAL 360°</text>
+</svg>

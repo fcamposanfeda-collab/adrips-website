@@ -1,0 +1,218 @@
+---
+import Button from '../ui/Button.astro';
+import { owner } from '../../data/owner';
+import { brand } from '../../data/brand';
+import { routes } from '../../data/routes';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const { lifestyle } = owner.photos;
+---
+
+<section
+  id="sobre-mi"
+  class:list={['about', 'section', { 'about--compact': compact }]}
+  {...(!compact && { 'aria-labelledby': 'about-title' })}
+>
+  <div class="container">
+    {
+      !compact && (
+        <header class="about__intro">
+          <p class="section-header__eyebrow">Sobre mí</p>
+          <h2 id="about-title">Un poco más sobre mí</h2>
+        </header>
+      )
+    }
+
+    <div class="about__grid">
+      <div class="about__content">
+        {
+          owner.bio.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))
+        }
+
+        <div class="about__cta">
+          <Button href={routes.projects} variant="outline">Ver proyectos</Button>
+          <Button href={routes.contact} variant="primary">Hablemos</Button>
+        </div>
+      </div>
+
+      <figure class="about__photo-wrap">
+        <img
+          class="about__photo"
+          src={lifestyle.src}
+          alt={lifestyle.alt}
+          width="480"
+          height="360"
+          loading="lazy"
+        />
+      </figure>
+    </div>
+
+    <article class="about__personal about__brand-story" aria-labelledby="brand-story-title">
+      <div class="about__personal-copy">
+        <h3 id="brand-story-title">{brand.name}</h3>
+        <p>{brand.story}</p>
+      </div>
+    </article>
+
+    <article class="about__personal" aria-labelledby="personal-title">
+      <div class="about__personal-copy">
+        <h3 id="personal-title">{owner.personal.title}</h3>
+        <p>{owner.personal.text}</p>
+        <div class="about__personal-link">
+          <Button href={routes.inspiration} variant="outline">
+            Ver galería de inspiración
+          </Button>
+        </div>
+      </div>
+
+      <ul class="about__interests" aria-label="Intereses personales">
+        {
+          owner.personal.interests.map((interest) => (
+            <li>{interest}</li>
+          ))
+        }
+      </ul>
+    </article>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--color-bg-soft);
+  }
+
+  .about--compact {
+    padding-top: 1.75rem;
+  }
+
+  .about--compact .about__grid {
+    padding-top: 0.75rem;
+  }
+
+  .about__intro {
+    max-width: 40rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .about__intro h2 {
+    margin: 0;
+    text-align: left;
+  }
+
+  .about__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: stretch;
+    margin-bottom: 2.5rem;
+  }
+
+  .about__content p {
+    margin: 0 0 1.125rem;
+    font-size: 1.0625rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  .about__content p:last-of-type {
+    margin-bottom: 1.75rem;
+  }
+
+  .about__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .about__photo-wrap {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about__photo {
+    width: 100%;
+    max-width: 22rem;
+    margin-inline: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center 35%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 4px solid white;
+  }
+
+  .about__brand-story {
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, rgba(240, 228, 184, 0.35), rgba(200, 176, 224, 0.2));
+  }
+
+  .about__personal {
+    display: grid;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .about__personal h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  .about__personal-copy p {
+    margin: 0;
+    font-size: 1.0625rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  .about__personal-link {
+    margin-top: 1.25rem;
+  }
+
+  .about__interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+  }
+
+  .about__interests li {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: linear-gradient(135deg, rgba(240, 228, 184, 0.5), rgba(232, 168, 160, 0.3));
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 768px) {
+    .about__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 3rem;
+    }
+
+    .about--compact {
+      padding-top: 2.5rem;
+    }
+
+    .about--compact .about__grid {
+      padding-top: 1rem;
+    }
+
+    .about__personal {
+      grid-template-columns: 1.4fr auto;
+      align-items: center;
+      gap: 2rem;
+    }
+  }
+</style>

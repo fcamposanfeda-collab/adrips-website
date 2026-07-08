@@ -1,0 +1,57 @@
+---
+import { owner } from '../../data/owner';
+---
+
+<section class="quote section" aria-label="Frase personal">
+  <div class="container quote__inner">
+    <blockquote>
+      <p>
+        “El marketing digital no es magia: es estrategia, ejecución y medir lo que funciona.
+        Yo me encargo de lo digital para que tú te centres en tu negocio.”
+      </p>
+      <footer>
+        <cite>{owner.fullName}</cite>
+        <span>{owner.role}</span>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<style>
+  .quote {
+    padding-block: 3rem;
+  }
+
+  .quote__inner {
+    max-width: 44rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  blockquote {
+    margin: 0;
+  }
+
+  blockquote p {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 3vw, 1.625rem);
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--color-text);
+  }
+
+  blockquote footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+  }
+
+  cite {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--color-brand-pink-deep);
+  }
+</style>

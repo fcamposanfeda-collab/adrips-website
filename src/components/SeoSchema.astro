@@ -1,0 +1,46 @@
+---
+import { site, contact } from '../data/site';
+import { owner } from '../data/owner';
+import { services } from '../data/services';
+
+const graph = [
+  {
+    '@type': 'WebSite',
+    '@id': `${site.url}/#website`,
+    url: site.url,
+    name: owner.fullName,
+    description: site.description,
+    inLanguage: site.lang,
+    author: { '@id': `${site.url}/#person` },
+  },
+  {
+    '@type': 'Person',
+    '@id': `${site.url}/#person`,
+    name: owner.fullName,
+    givenName: owner.firstName,
+    jobTitle: owner.role,
+    url: site.url,
+    email: contact.email,
+    description: owner.intro,
+    image: `${site.url}${owner.photos.hero.src}`,
+    knowsAbout: [
+      'Marketing digital',
+      'Desarrollo web',
+      'SEO',
+      'SEM',
+      'Google Ads',
+      'Redes sociales',
+      'Estrategia de contenidos',
+    ],
+    makesOffer: services.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: s.title, description: s.description },
+    })),
+  },
+];
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': graph,
+})} />

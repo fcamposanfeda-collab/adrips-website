@@ -1,0 +1,20 @@
+---
+import { getPageMeta } from '../data/pages-meta';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/sections/PageIntro.astro';
+import InspirationSection from '../components/sections/InspirationSection.astro';
+import { inspirationMeta } from '../data/inspiration';
+
+const meta = getPageMeta('/inspiracion');
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <PageIntro
+    wide
+    eyebrow={inspirationMeta.eyebrow}
+    title={inspirationMeta.title}
+    description={inspirationMeta.lead}
+    descriptionExtra={inspirationMeta.leadExtra}
+  />
+  <InspirationSection />
+</BaseLayout>

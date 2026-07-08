@@ -1,0 +1,247 @@
+---
+import Button from '../ui/Button.astro';
+import { owner } from '../../data/owner';
+import { routes } from '../../data/routes';
+
+const { hero } = owner.photos;
+---
+
+<section class="hero section" aria-labelledby="hero-title">
+  <div class="hero__blobs" aria-hidden="true">
+    <span class="hero__blob hero__blob--lila"></span>
+    <span class="hero__blob hero__blob--rosa"></span>
+    <span class="hero__blob hero__blob--menta"></span>
+    <span class="hero__blob hero__blob--amarillo"></span>
+  </div>
+
+  <div class="container hero__layout">
+    <div class="hero__content" data-reveal>
+      <h1 id="hero-title" class="hero__title">
+        <span class="hero__greeting-line">
+          <span class="hero__greeting-prefix">¡Hola!</span>
+          <span class="hero__greeting-name">Soy {owner.firstName}</span>
+        </span>
+      </h1>
+
+      <p class="hero__headline">
+        <span class="text-gradient">{owner.headline}</span>
+      </p>
+
+      <p class="hero__subtitle">{owner.intro}</p>
+
+      <div class="hero__actions">
+        <Button href={routes.projects} variant="primary" size="lg">Ver mis proyectos</Button>
+        <Button href={routes.contact} variant="secondary" size="lg">Escríbeme</Button>
+      </div>
+    </div>
+
+    <figure class="hero__visual" data-reveal data-reveal-delay="2">
+      <div class="hero__portrait-wrap" aria-hidden="true">
+        <span class="hero__sparkle hero__sparkle--lavender"></span>
+        <span class="hero__sparkle hero__sparkle--cream"></span>
+        <span class="hero__sparkle hero__sparkle--coral"></span>
+      </div>
+      <img
+        class="hero__photo hero__photo--illustration"
+        src={hero.src}
+        alt={hero.alt}
+        width="560"
+        height="560"
+        fetchpriority="high"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(32rem, 88vh, 44rem);
+    display: flex;
+    align-items: center;
+    padding-top: 2rem;
+  }
+
+  .hero__blobs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+  }
+
+  .hero__blob--lila {
+    width: 22rem;
+    height: 22rem;
+    top: -4rem;
+    right: -6rem;
+    background: var(--color-lila);
+  }
+
+  .hero__blob--rosa {
+    width: 18rem;
+    height: 18rem;
+    bottom: 10%;
+    left: -4rem;
+    background: var(--color-rosa);
+  }
+
+  .hero__blob--menta {
+    width: 14rem;
+    height: 14rem;
+    top: 30%;
+    right: 20%;
+    background: var(--color-menta);
+  }
+
+  .hero__blob--amarillo {
+    width: 10rem;
+    height: 10rem;
+    bottom: 20%;
+    right: 5%;
+    background: var(--color-amarillo);
+  }
+
+  .hero__layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .hero__title {
+    margin: 0 0 0.75rem;
+    line-height: 1.1;
+  }
+
+  .hero__greeting-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35em;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--color-brand-coral);
+    letter-spacing: 0.01em;
+  }
+
+  .hero__greeting-prefix,
+  .hero__greeting-name {
+    color: inherit;
+    font: inherit;
+  }
+
+  .hero__headline {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .hero__subtitle {
+    margin: 0 0 2rem;
+    font-size: clamp(1.0625rem, 2.5vw, 1.2rem);
+    color: var(--color-muted);
+    max-width: 34rem;
+    line-height: 1.75;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .hero__visual {
+    position: relative;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero__portrait-wrap {
+    position: absolute;
+    inset: -0.5rem;
+    pointer-events: none;
+  }
+
+  .hero__sparkle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.85;
+  }
+
+  .hero__sparkle--lavender {
+    top: 8%;
+    left: 4%;
+    width: 0.65rem;
+    height: 0.65rem;
+    background: var(--color-brand-lavender);
+    box-shadow: 0 0 12px rgba(200, 176, 224, 0.6);
+  }
+
+  .hero__sparkle--cream {
+    top: 18%;
+    right: 2%;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-brand-cream-deep);
+  }
+
+  .hero__sparkle--coral::before {
+    content: '✦';
+    position: absolute;
+    top: 72%;
+    right: 6%;
+    font-size: 1.125rem;
+    color: var(--color-brand-coral);
+    opacity: 0.75;
+  }
+
+  .hero__photo {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 22rem);
+    max-width: 28rem;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .hero__photo--illustration {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    filter: drop-shadow(0 20px 40px rgba(184, 132, 132, 0.18));
+    transition: transform var(--transition-bounce);
+  }
+
+  .hero__visual:hover .hero__photo--illustration {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+
+  @media (min-width: 992px) {
+    .hero__layout {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+    }
+
+    .hero__photo {
+      width: min(100%, 26rem);
+      max-width: 30rem;
+    }
+  }
+</style>

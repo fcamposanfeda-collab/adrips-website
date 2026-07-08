@@ -1,0 +1,21 @@
+---
+import { getPageMeta } from '../data/pages-meta';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import HomeTeaser from '../components/sections/HomeTeaser.astro';
+import PortfolioTeaser from '../components/sections/PortfolioTeaser.astro';
+import PersonalQuote from '../components/sections/PersonalQuote.astro';
+import InspirationTeaser from '../components/sections/InspirationTeaser.astro';
+import { owner } from '../data/owner';
+
+const meta = getPageMeta('/');
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <link rel="preload" as="image" href={owner.photos.hero.src} slot="head" />
+  <Hero />
+  <HomeTeaser />
+  <PortfolioTeaser />
+  <PersonalQuote />
+  <InspirationTeaser />
+</BaseLayout>

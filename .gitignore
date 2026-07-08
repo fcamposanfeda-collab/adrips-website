@@ -1,0 +1,21 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# deploy
+.ftp-deploy-sync-state.json
+
+# macOS
+.DS_Store

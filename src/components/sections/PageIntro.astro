@@ -1,0 +1,73 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description?: string;
+  descriptionExtra?: string;
+  wide?: boolean;
+}
+
+const { eyebrow, title, description, descriptionExtra, wide = false } = Astro.props;
+---
+
+<header class:list={['page-intro', 'container', { 'page-intro--wide': wide }]} data-reveal>
+  <p class="page-intro__eyebrow">{eyebrow}</p>
+  <h1 class="page-intro__title">{title}</h1>
+  {
+    (description || descriptionExtra) && (
+      <div class="page-intro__copy">
+        {description && <p class="page-intro__desc">{description}</p>}
+        {descriptionExtra && <p class="page-intro__desc">{descriptionExtra}</p>}
+      </div>
+    )
+  }
+</header>
+
+<style>
+  .page-intro {
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+    max-width: 42rem;
+  }
+
+  .page-intro--wide {
+    max-width: var(--container-max);
+    text-align: left;
+  }
+
+  .page-intro--wide .page-intro__title,
+  .page-intro--wide .page-intro__copy {
+    max-width: none;
+    text-align: left;
+  }
+
+  .page-intro__copy {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .page-intro__eyebrow {
+    display: inline-block;
+    margin: 0 0 0.75rem;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-lila-strong);
+    background: rgba(196, 181, 253, 0.2);
+    border-radius: var(--radius-full);
+  }
+
+  .page-intro__title {
+    margin: 0 0 0.75rem;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+  }
+
+  .page-intro__desc {
+    margin: 0;
+    font-size: 1.0625rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+</style>

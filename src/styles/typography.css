@@ -1,0 +1,45 @@
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: clamp(2.25rem, 6vw, 3.75rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+}
+
+p {
+  line-height: 1.75;
+}
+
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-cream-deep) 0%,
+    var(--color-brand-coral) 45%,
+    var(--color-brand-lavender) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-tagline {
+  font-family: var(--font-tagline);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}

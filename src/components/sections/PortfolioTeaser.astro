@@ -1,0 +1,266 @@
+---
+import Button from '../ui/Button.astro';
+import { portfolioItems, type PortfolioLink } from '../../data/portfolio';
+import { routes } from '../../data/routes';
+
+const latestWork = portfolioItems.filter((item) => item.status === 'live').slice(0, 2);
+
+const linkLabel = (link: PortfolioLink) => `${link.label} ↗`;
+---
+
+<section class="work-teaser section" aria-labelledby="work-teaser-title">
+  <div class="container">
+    <header class="work-teaser__header" data-reveal>
+      <p class="section-header__eyebrow">Proyectos</p>
+      <h2 id="work-teaser-title">Mis últimos trabajos</h2>
+      <p>
+        Campañas y proyectos recientes en los que he participado — con resultados medibles y
+        enlaces para verlos en contexto.
+      </p>
+    </header>
+
+    <div class="work-teaser__grid">
+      {
+        latestWork.map((item, index) => (
+          <article
+            class:list={[
+              'work-card',
+              `work-card--${item.accent}`,
+              { 'work-card--featured': item.featured },
+            ]}
+            data-reveal
+            data-reveal-delay={String(index + 1)}
+          >
+            <div class="work-card__visual" aria-hidden="true">
+              <span class="work-card__tag">{item.category.split('·')[0].trim()}</span>
+              {item.employer && <span class="work-card__employer">{item.employer}</span>}
+            </div>
+
+            <div class="work-card__body">
+              {item.role && (
+                <p class="work-card__role">
+                  {item.role} · {item.period}
+                </p>
+              )}
+              <h3>{item.title}</h3>
+              <p class="work-card__desc">{item.description}</p>
+
+              {
+                item.metrics && item.metrics.length > 0 && (
+                  <ul class="work-card__metrics" aria-label="Resultados destacados">
+                    {item.metrics.slice(0, 2).map((metric) => (
+                      <li>{metric}</li>
+                    ))}
+                  </ul>
+                )
+              }
+
+              {
+                item.links.length > 0 && (
+                  <a
+                    href={item.links[0].href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="work-card__link"
+                  >
+                    {linkLabel(item.links[0])}
+                  </a>
+                )
+              }
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="work-teaser__cta" data-reveal>
+      <div class="work-teaser__cta-cell">
+        <Button href={routes.projects} variant="primary" class="work-teaser__btn">
+          Ver toda mi experiencia
+        </Button>
+      </div>
+      <div class="work-teaser__cta-cell">
+        <Button href={routes.contact} variant="primary" class="work-teaser__btn">
+          Contáctame
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .work-teaser__header {
+    max-width: 40rem;
+    margin: 0 0 2rem;
+    text-align: left;
+  }
+
+  .work-teaser__header h2 {
+    margin: 0 0 0.75rem;
+  }
+
+  .work-teaser__header p {
+    margin: 0;
+    font-size: 1.0625rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  .work-teaser__grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .work-card {
+    display: grid;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform var(--transition-bounce),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .work-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .work-card--lila:hover {
+    border-color: var(--color-lila);
+  }
+
+  .work-card--rosa:hover {
+    border-color: var(--color-rosa);
+  }
+
+  .work-card__visual {
+    min-height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.25rem;
+  }
+
+  .work-card--lila .work-card__visual {
+    background: linear-gradient(145deg, rgba(196, 181, 253, 0.65), rgba(167, 139, 250, 0.25));
+  }
+
+  .work-card--rosa .work-card__visual {
+    background: linear-gradient(145deg, rgba(249, 168, 212, 0.65), rgba(244, 114, 182, 0.25));
+  }
+
+  .work-card__tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  .work-card__employer {
+    font-family: var(--font-heading);
+    font-size: clamp(1.375rem, 3vw, 1.75rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--color-text);
+  }
+
+  .work-card__body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .work-card__role {
+    margin: 0 0 0.375rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+
+  .work-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .work-card__desc {
+    margin: 0 0 1rem;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+  }
+
+  .work-card__metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .work-card__metrics li {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+  }
+
+  .work-card__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    transition:
+      background var(--transition-fast),
+      border-color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .work-card__link:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-lila);
+    background: rgba(196, 181, 253, 0.15);
+  }
+
+  .work-teaser__cta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .work-teaser__cta-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .work-teaser__cta :global(.work-teaser__btn) {
+    width: 100%;
+    max-width: 22rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .work-teaser__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .work-teaser__cta {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

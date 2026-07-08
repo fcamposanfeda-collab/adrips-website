@@ -1,0 +1,21 @@
+---
+import { getPageMeta } from '../data/pages-meta';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/sections/PageIntro.astro';
+import ServicesGrid from '../components/sections/ServicesGrid.astro';
+import MethodologySection from '../components/sections/MethodologySection.astro';
+import PersonalQuote from '../components/sections/PersonalQuote.astro';
+
+const meta = getPageMeta('/servicios');
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <PageIntro
+    eyebrow="Servicios"
+    title="Lo que puedo hacer por tu marca"
+    description="SEO, SEM, diseño web, redes sociales, publicidad digital y estrategia inbound — marketing digital 360º con enfoque en resultados y trato personal."
+  />
+  <ServicesGrid compact />
+  <MethodologySection />
+  <PersonalQuote />
+</BaseLayout>

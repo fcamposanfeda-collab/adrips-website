@@ -1,0 +1,155 @@
+---
+import Button from '../ui/Button.astro';
+import { pricingPlans } from '../../data/pricing';
+---
+
+<section id="precios" class="pricing section" aria-labelledby="pricing-title">
+  <div class="container">
+    <header class="section-header">
+      <p class="section-header__eyebrow">Precios</p>
+      <h2 id="pricing-title">Planes claros, sin sorpresas</h2>
+      <p>
+        Precios orientativos para que sepas por dónde empezar. Cada proyecto es único — el
+        presupuesto final se adapta a tus objetivos.
+      </p>
+    </header>
+
+    <div class="pricing__grid">
+      {
+        pricingPlans.map((plan) => (
+          <article
+            class:list={['pricing-card', `pricing-card--${plan.accent}`, { 'is-highlighted': plan.highlighted }]}
+          >
+            {plan.highlighted && <span class="pricing-card__ribbon">Más popular</span>}
+            <h3>{plan.name}</h3>
+            <p class="pricing-card__price">
+              {plan.price}
+              <span>{plan.period}</span>
+            </p>
+            <p class="pricing-card__desc">{plan.description}</p>
+            <ul class="pricing-card__features">
+              {plan.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+            <Button href="/#contacto" variant={plan.highlighted ? 'primary' : 'outline'}>
+              Solicitar presupuesto
+            </Button>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing {
+    background: var(--color-bg-soft);
+  }
+
+  .pricing__grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .pricing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition-bounce);
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .pricing-card.is-highlighted {
+    border-color: var(--color-lila);
+    box-shadow: var(--shadow-hover);
+    transform: scale(1.02);
+  }
+
+  .pricing-card.is-highlighted:hover {
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  .pricing-card__ribbon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: white;
+    background: linear-gradient(135deg, var(--color-lila-strong), var(--color-rosa-strong));
+    border-radius: var(--radius-full);
+  }
+
+  .pricing-card h3 {
+    margin: 0 0 0.5rem;
+  }
+
+  .pricing-card__price {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-text);
+  }
+
+  .pricing-card__price span {
+    display: block;
+    margin-top: 0.25rem;
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+
+  .pricing-card__desc {
+    margin: 0 0 1.5rem;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+  }
+
+  .pricing-card__features {
+    flex: 1;
+    margin: 0 0 1.75rem;
+    display: grid;
+    gap: 0.625rem;
+  }
+
+  .pricing-card__features li {
+    position: relative;
+    padding-left: 1.375rem;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+  }
+
+  .pricing-card__features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--color-menta-strong);
+  }
+
+  .pricing-card--lila.is-highlighted {
+    background: linear-gradient(180deg, rgba(196, 181, 253, 0.08) 0%, var(--color-surface) 40%);
+  }
+
+  @media (min-width: 992px) {
+    .pricing__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import { brand } from '../../data/brand';
+
+interface Props {
+  size?: 'sm' | 'md' | 'lg' | 'footer' | 'intrinsic';
+  class?: string;
+  src?: string;
+  width?: number;
+  height?: number;
+}
+
+const { size = 'md', class: className, src = brand.logo, width, height } = Astro.props;
+---
+
+<img
+  src={src}
+  class:list={['logo-mark', `logo-mark--${size}`, className]}
+  alt={brand.name}
+  decoding="async"
+  width={width}
+  height={height}
+/>
+
+<style>
+  .logo-mark {
+    display: block;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Header — cabe dentro de --header-height (5rem) */
+  .logo-mark--sm {
+    height: 3rem;
+  }
+
+  .logo-mark--md {
+    height: 2.5rem;
+  }
+
+  .logo-mark--lg {
+    height: 4.5rem;
+  }
+
+  .logo-mark--footer {
+    height: 5.5625rem;
+    width: auto;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  .logo-mark--intrinsic {
+    width: auto;
+    height: auto;
+    max-width: none;
+    border-radius: 0;
+  }
+</style>
