@@ -1,0 +1,93 @@
+---
+import { eventProcessSteps } from '../../data/eventos';
+---
+
+<section class="eventos-process section" aria-labelledby="eventos-process-title">
+  <div class="container">
+    <header class="section-header" data-reveal>
+      <p class="section-header__eyebrow">Cómo trabajo</p>
+      <h2 id="eventos-process-title">De la idea al día del evento</h2>
+      <p>
+        Un proceso claro y personal: tú cuentas la visión, yo diseño cada pieza desde cero y te
+        acompaño hasta que todo esté listo.
+      </p>
+    </header>
+
+    <ol class="eventos-process__grid">
+      {
+        eventProcessSteps.map((item) => (
+          <li class="eventos-process-card" data-reveal>
+            <span class="eventos-process-card__step" aria-hidden="true">
+              {item.step}
+            </span>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .eventos-process {
+    background: var(--color-surface);
+  }
+
+  .eventos-process__grid {
+    display: grid;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .eventos-process-card {
+    padding: 1.75rem;
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition:
+      transform var(--transition-bounce),
+      box-shadow var(--transition-fast);
+  }
+
+  .eventos-process-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .eventos-process-card__step {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-tagline);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--color-brand-pink-deep);
+  }
+
+  .eventos-process-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.125rem;
+  }
+
+  .eventos-process-card p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  @media (min-width: 640px) {
+    .eventos-process__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 992px) {
+    .eventos-process__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

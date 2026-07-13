@@ -9,7 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check:forms": "node scripts/check-form-env.mjs"
+    "check:forms": "node --env-file=.env scripts/check-form-env.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

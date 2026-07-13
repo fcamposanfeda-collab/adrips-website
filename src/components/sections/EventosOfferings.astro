@@ -1,0 +1,179 @@
+---
+import Button from '../ui/Button.astro';
+import { eventOfferings } from '../../data/eventos';
+import { routes } from '../../data/routes';
+---
+
+<section class="eventos-offerings section" aria-labelledby="eventos-offerings-title">
+  <div class="container">
+    <header class="section-header" data-reveal>
+      <p class="section-header__eyebrow">Qué incluye</p>
+      <h2 id="eventos-offerings-title">Del concepto a cada pieza impresa</h2>
+      <p>
+        Papelería, invitaciones, seating plan, corners y señalización — diseñados desde cero y
+        alineados con la estética de tu celebración.
+      </p>
+    </header>
+
+    <div class="eventos-offerings__grid">
+      {
+        eventOfferings.map((offering) => (
+          <article class={`eventos-card eventos-card--${offering.accent}`} data-reveal>
+            <span class="eventos-card__icon" aria-hidden="true">
+              {offering.icon}
+            </span>
+            <h3>{offering.title}</h3>
+            <p>{offering.description}</p>
+            <ul class="eventos-card__features">
+              {offering.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="eventos-offerings__cta" data-reveal>
+      <Button href={routes.contact} variant="primary">Cuéntame tu evento</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .eventos-offerings {
+    background: var(--color-bg-soft);
+    padding-top: 0;
+  }
+
+  .eventos-offerings__grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .eventos-card {
+    padding: 2rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform var(--transition-bounce),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .eventos-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .eventos-card--lila:hover {
+    border-color: var(--color-lila);
+  }
+
+  .eventos-card--rosa:hover {
+    border-color: var(--color-rosa);
+  }
+
+  .eventos-card--menta:hover {
+    border-color: var(--color-menta);
+  }
+
+  .eventos-card--naranja:hover {
+    border-color: var(--color-naranja);
+  }
+
+  .eventos-card--azul:hover {
+    border-color: var(--color-azul);
+  }
+
+  .eventos-card--amarillo:hover {
+    border-color: var(--color-amarillo);
+  }
+
+  .eventos-card__icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.375rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .eventos-card--lila .eventos-card__icon {
+    background: rgba(196, 181, 253, 0.35);
+    color: var(--color-lila-strong);
+  }
+
+  .eventos-card--rosa .eventos-card__icon {
+    background: rgba(249, 168, 212, 0.35);
+    color: var(--color-rosa-strong);
+  }
+
+  .eventos-card--menta .eventos-card__icon {
+    background: rgba(232, 220, 200, 0.5);
+    color: var(--color-menta-strong);
+  }
+
+  .eventos-card--naranja .eventos-card__icon {
+    background: rgba(240, 200, 168, 0.4);
+    color: var(--color-naranja-strong);
+  }
+
+  .eventos-card--azul .eventos-card__icon {
+    background: rgba(200, 216, 240, 0.45);
+    color: var(--color-azul-strong);
+  }
+
+  .eventos-card--amarillo .eventos-card__icon {
+    background: rgba(240, 228, 184, 0.5);
+    color: var(--color-amarillo-strong);
+  }
+
+  .eventos-card h3 {
+    margin: 0 0 0.75rem;
+    color: var(--color-text);
+  }
+
+  .eventos-card > p {
+    margin: 0 0 1.25rem;
+    font-size: 0.96875rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  .eventos-card__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .eventos-card__features li {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border-radius: var(--radius-full);
+  }
+
+  .eventos-offerings__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .eventos-offerings__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .eventos-offerings__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

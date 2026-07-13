@@ -213,18 +213,17 @@ const categoryLabels = {
 
   @media (min-width: 768px) {
     .inspiration-teaser__grid {
-      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
     }
 
     .inspiration-teaser__item--featured {
       grid-column: auto;
-      grid-row: span 2;
     }
 
+    .inspiration-teaser__figure,
     .inspiration-teaser__item--featured .inspiration-teaser__figure {
-      aspect-ratio: auto;
-      min-height: 100%;
+      aspect-ratio: 3 / 2;
     }
   }
 </style>

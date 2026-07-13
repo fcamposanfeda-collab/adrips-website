@@ -6,6 +6,7 @@ export const mainNav: NavLink[] = [
   { label: 'Sobre mí', href: routes.about },
   { label: 'Proyectos', href: routes.projects },
   { label: 'Servicios', href: routes.services },
+  { label: 'Eventos', href: routes.events },
   { label: 'Contacto', href: routes.contact },
 ];
 

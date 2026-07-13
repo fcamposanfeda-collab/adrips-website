@@ -4,5 +4,6 @@ export const routes = {
   inspiration: '/inspiracion',
   projects: '/proyectos',
   services: '/servicios',
+  events: '/organizacion-eventos',
   contact: '/contacto',
 } as const;

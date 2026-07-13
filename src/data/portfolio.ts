@@ -90,7 +90,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 'farmacia',
-    title: 'Farmacia Salud+',
+    title: 'Botica García Condado',
     category: 'Desarrollo web · SEO local',
     description:
       'Web para farmacia con catálogo de servicios, SEO local y estructura pensada para captar reservas. Proyecto personal en curso.',

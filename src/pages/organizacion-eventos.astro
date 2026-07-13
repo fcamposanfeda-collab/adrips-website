@@ -1,0 +1,24 @@
+---
+import { getPageMeta } from '../data/pages-meta';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/sections/PageIntro.astro';
+import EventosOfferings from '../components/sections/EventosOfferings.astro';
+import EventosProcess from '../components/sections/EventosProcess.astro';
+import AzureaTeaser from '../components/sections/AzureaTeaser.astro';
+import { eventosMeta } from '../data/eventos';
+
+const meta = getPageMeta('/organizacion-eventos');
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <PageIntro
+    wide
+    eyebrow={eventosMeta.eyebrow}
+    title={eventosMeta.title}
+    description={eventosMeta.lead}
+    descriptionExtra={eventosMeta.leadExtra}
+  />
+  <EventosOfferings />
+  <EventosProcess />
+  <AzureaTeaser />
+</BaseLayout>

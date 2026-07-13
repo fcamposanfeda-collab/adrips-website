@@ -26,6 +26,11 @@ export const pagesMeta = {
     description:
       'SEO y posicionamiento web, Google Ads, diseño web, redes sociales, Social Ads y estrategia inbound. Presupuesto personalizado.',
   },
+  '/organizacion-eventos': {
+    title: `Organización de eventos | ${brand.name} — Adriana Pérez Salmerón`,
+    description:
+      'Papelería, invitaciones, seating plan, corners y señalización diseñados desde cero para bodas y celebraciones. Todo personalizable — con Azurea Catering para la parte gastronómica.',
+  },
   '/contacto': {
     title: `Contacto | ${brand.name} — Adriana Pérez Salmerón`,
     description:

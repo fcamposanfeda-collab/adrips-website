@@ -25,7 +25,7 @@ export const inspirationMeta = {
   eyebrow: 'Inspiración',
   title: 'De dónde salen los colores',
   lead:
-    'Una de las cosas que más me llenan es parar a mirar un atardecer o una flor en su punto justo.',
+    'Una de las cosas que más me llenan es parar a mirar un atardecer o una flor en el camino.',
   leadExtra:
     'No es solo un hobby: es de donde nace buena parte de la paleta de Adrips.',
   paletteNote:

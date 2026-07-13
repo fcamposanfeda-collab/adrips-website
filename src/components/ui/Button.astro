@@ -4,12 +4,17 @@ interface Props {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'md' | 'lg';
   class?: string;
+  external?: boolean;
 }
 
-const { href, variant = 'primary', size = 'md', class: className } = Astro.props;
+const { href, variant = 'primary', size = 'md', class: className, external = false } = Astro.props;
 ---
 
-<a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}>
+<a
+  href={href}
+  class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}
+  {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
+>
   <slot />
 </a>
 
