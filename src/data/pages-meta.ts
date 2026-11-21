@@ -2,7 +2,7 @@ import { brand } from './brand';
 
 export const pagesMeta = {
   '/': {
-    title: `${brand.name} — Diseño web profesional que consigue clientes | Adriana Pérez Salmerón`,
+    title: `Diseño web en Ciudad Real que consigue clientes | ${brand.name}`,
     description:
       'Diseño y desarrollo de páginas web a medida para negocios y marcas personales: bonitas, rápidas, optimizadas para Google y pensadas para vender. Presupuesto cerrado.',
   },
