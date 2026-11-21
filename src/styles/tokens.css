@@ -10,6 +10,9 @@
   --ink: #22151b;
   --ink-2: #3b2a31;
   --ink-soft: #4c3a41;
+  /* Fondo oscuro de secciones, botones y tarjetas destacadas (ciruela suave) */
+  --plum: #4a3340;
+  --plum-2: #563c4a;
   --muted: #6b5960;
   --paper: #fbf6f4;
   --paper-2: #f6ebe8;
@@ -60,7 +63,7 @@
   --color-primary-hover: var(--accent-hover);
   --color-accent: var(--lavender);
   --color-accent-hover: #b6a1e0;
-  --color-footer-bg: var(--ink);
+  --color-footer-bg: var(--plum);
 
   /* Tipografía */
   --font-primary: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
