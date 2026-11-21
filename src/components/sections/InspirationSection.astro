@@ -16,6 +16,7 @@ const { showIntro = true } = Astro.props;
 const categoryLabels: Record<InspirationCategory, string> = {
   atardecer: 'Atardecer',
   flores: 'Flores',
+  mar: 'Mar',
 };
 ---
 
@@ -72,6 +73,7 @@ const categoryLabels: Record<InspirationCategory, string> = {
                     <img
                       class="inspiration__photo"
                       src={photo.src}
+                      style={photo.position ? `object-position: ${photo.position}` : undefined}
                       alt={photo.alt}
                       width="640"
                       height="800"
@@ -283,6 +285,10 @@ const categoryLabels: Record<InspirationCategory, string> = {
 
   .inspiration__item--flores .inspiration__tag {
     background: rgba(200, 176, 224, 0.45);
+  }
+
+  .inspiration__item--mar .inspiration__tag {
+    background: rgba(240, 228, 184, 0.45);
   }
 
   @media (min-width: 768px) {
