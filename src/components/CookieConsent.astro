@@ -1,7 +1,7 @@
 <div class="cookie-banner" id="cookie-banner" role="dialog" aria-labelledby="cookie-title" hidden>
-  <div class="cookie-banner__inner container">
+  <div class="cookie-banner__inner">
     <p id="cookie-title">
-      Usamos cookies técnicas y, con tu consentimiento, analíticas. Consulta nuestra
+      Uso cookies técnicas y, con tu consentimiento, analíticas. Más información en la
       <a href="/politica-de-cookies">política de cookies</a>.
     </p>
     <div class="cookie-banner__actions">
@@ -16,33 +16,33 @@
 <style>
   .cookie-banner {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
     z-index: 200;
-    background: var(--color-footer-bg);
+    max-width: 26rem;
+    padding: 1.25rem;
+    background: var(--ink);
     color: var(--color-on-dark);
-    padding-block: 1rem;
-    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-float);
   }
 
   .cookie-banner__inner {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
+    padding: 0 !important;
   }
 
   .cookie-banner p {
     margin: 0;
     font-size: 0.875rem;
-    max-width: 40rem;
     line-height: 1.5;
+    color: rgba(251, 244, 236, 0.85);
   }
 
   .cookie-banner a {
-    color: var(--color-lila);
+    color: var(--color-on-dark);
     text-decoration: underline;
   }
 
@@ -52,19 +52,21 @@
   }
 
   .cookie-banner__btn {
-    padding: 0.5rem 1rem;
+    flex: 1;
+    padding: 0.625rem 1rem;
     font-size: 0.875rem;
     font-weight: 600;
     border-radius: var(--radius-full);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(251, 244, 236, 0.28);
     background: transparent;
     color: var(--color-on-dark);
     cursor: pointer;
   }
 
   .cookie-banner__btn--primary {
-    background: var(--color-lila-strong);
-    border-color: var(--color-lila-strong);
+    background: var(--paper);
+    border-color: var(--paper);
+    color: var(--ink);
   }
 </style>
 
@@ -72,17 +74,26 @@
   const KEY = 'aps-cookie-consent';
   const banner = document.getElementById('cookie-banner');
 
-  if (banner && !localStorage.getItem(KEY)) {
+  let stored: string | null = null;
+  try {
+    stored = localStorage.getItem(KEY);
+  } catch {}
+
+  if (banner && !stored) {
     banner.hidden = false;
   }
 
   document.querySelector('[data-cookie-accept]')?.addEventListener('click', () => {
-    localStorage.setItem(KEY, 'accepted');
+    try {
+      localStorage.setItem(KEY, 'accepted');
+    } catch {}
     if (banner) banner.hidden = true;
   });
 
   document.querySelector('[data-cookie-reject]')?.addEventListener('click', () => {
-    localStorage.setItem(KEY, 'rejected');
+    try {
+      localStorage.setItem(KEY, 'rejected');
+    } catch {}
     if (banner) banner.hidden = true;
   });
 </script>

@@ -1,59 +1,93 @@
 :root {
-  /* Paleta Adrips — rosa empolvado, crema, coral y lavanda */
-  --color-brand-pink: #d4a5a5;
-  --color-brand-pink-deep: #b88484;
-  --color-brand-cream: #f0e4b8;
+  /*
+   * Sistema visual Adrips 2026
+   * Base cálida y editorial (papel + tinta ciruela) con un único acento fuerte
+   * (rosa terracota) y la paleta original (rosa empolvado, crema, lavanda)
+   * reservada para fondos suaves y detalles.
+   */
+
+  /* Núcleo */
+  --ink: #22151b;
+  --ink-2: #3b2a31;
+  --ink-soft: #4c3a41;
+  --muted: #6b5960;
+  --paper: #faf6f1;
+  --paper-2: #f3ebe2;
+  --paper-3: #ece1d5;
+  --white: #fffdfb;
+  --line: #e5d9cd;
+  --line-strong: #d6c6b7;
+
+  /* Acentos */
+  --accent: #b84f47;
+  --accent-hover: #9a3e37;
+  --accent-soft: #f6dcd6;
+  --accent-light: #e88d80;
+  --blush: #ebcac4;
+  --rose: #d4a5a5;
+  --cream: #f1e3b9;
+  --lavender: #c9b8ec;
+  --lavender-deep: #6e57a8;
+  --sage: #cfd9c6;
+
+  /* Alias heredados (componentes existentes) */
+  --color-brand-pink: var(--rose);
+  --color-brand-pink-deep: var(--accent);
+  --color-brand-cream: var(--cream);
   --color-brand-cream-deep: #e5d4a0;
-  --color-brand-coral: #e8a8a0;
-  --color-brand-lavender: #c8b0e0;
+  --color-brand-coral: var(--accent-light);
+  --color-brand-lavender: var(--lavender);
+  --color-text: var(--ink);
+  --color-muted: var(--muted);
+  --color-bg: var(--paper);
+  --color-bg-soft: var(--paper-2);
+  --color-surface: var(--white);
+  --color-border: var(--line);
+  --color-on-dark: #fbf4ec;
+  --color-lila: var(--lavender);
+  --color-lila-strong: var(--lavender-deep);
+  --color-rosa: var(--blush);
+  --color-rosa-strong: var(--accent);
+  --color-menta: var(--sage);
+  --color-menta-strong: #8fa283;
+  --color-naranja: #f4d3bd;
+  --color-naranja-strong: #c9835c;
+  --color-azul: #cfdaf0;
+  --color-azul-strong: #5d72a8;
+  --color-amarillo: var(--cream);
+  --color-amarillo-strong: #c9a94f;
+  --color-primary: var(--accent);
+  --color-primary-hover: var(--accent-hover);
+  --color-accent: var(--lavender);
+  --color-accent-hover: #b6a1e0;
+  --color-footer-bg: var(--ink);
 
-  /* Texto y fondos */
-  --color-text: #4a3232;
-  --color-muted: #7a5c5c;
-  --color-bg: #faf0f0;
-  --color-bg-soft: #f5e6e6;
-  --color-surface: #fffcfa;
-  --color-border: #edd4d4;
-  --color-on-dark: #fff8f0;
+  /* Tipografía */
+  --font-primary: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-heading: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-brand: var(--font-heading);
+  --font-tagline: var(--font-primary);
 
-  /* Alias pasteles (compatibilidad con componentes existentes) */
-  --color-lila: var(--color-brand-lavender);
-  --color-lila-strong: #a890c8;
-  --color-rosa: #e8b8b8;
-  --color-rosa-strong: var(--color-brand-pink);
-  --color-menta: #e8dcc8;
-  --color-menta-strong: #d4c4a8;
-  --color-naranja: #f0c8a8;
-  --color-naranja-strong: #e0a888;
-  --color-azul: #c8d8f0;
-  --color-azul-strong: #a8c0e0;
-  --color-amarillo: var(--color-brand-cream);
-  --color-amarillo-strong: var(--color-brand-cream-deep);
-
-  /* CTAs */
-  --color-primary: var(--color-brand-pink-deep);
-  --color-primary-hover: #a07070;
-  --color-accent: var(--color-brand-lavender);
-  --color-accent-hover: #b098d0;
-
-  --color-footer-bg: #b88484;
-
-  --font-primary: 'Montserrat', system-ui, sans-serif;
-  --font-heading: 'Rozha One', Georgia, serif;
-  --font-brand: 'Rozha One', Georgia, serif;
-  --font-tagline: 'Montserrat', system-ui, sans-serif;
-
-  --container-max: 1140px;
-  --section-padding-mobile: 3rem;
-  --section-padding-desktop: 5rem;
-  --header-height: 5rem;
-  --radius-sm: 1rem;
-  --radius-md: 1.25rem;
+  /* Layout */
+  --container-max: 1240px;
+  --section-padding-mobile: 4.5rem;
+  --section-padding-desktop: 7.5rem;
+  --header-height: 4.5rem;
+  --radius-xs: 0.5rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1.125rem;
   --radius-lg: 1.75rem;
+  --radius-xl: 2.5rem;
   --radius-full: 9999px;
-  --shadow-soft: 0 4px 24px rgba(74, 50, 50, 0.06);
-  --shadow-card: 0 8px 32px rgba(184, 132, 132, 0.12);
-  --shadow-hover: 0 16px 48px rgba(184, 132, 132, 0.2);
+
+  /* Profundidad */
+  --shadow-soft: 0 1px 2px rgba(34, 21, 27, 0.04), 0 4px 16px rgba(34, 21, 27, 0.05);
+  --shadow-card: 0 1px 2px rgba(34, 21, 27, 0.05), 0 12px 32px -8px rgba(34, 21, 27, 0.12);
+  --shadow-hover: 0 2px 4px rgba(34, 21, 27, 0.05), 0 24px 56px -12px rgba(34, 21, 27, 0.22);
+  --shadow-float: 0 30px 80px -20px rgba(34, 21, 27, 0.35);
+
+  /* Movimiento */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --transition-fast: 180ms ease;
-  --transition-bounce: 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-bounce: 420ms var(--ease-out);
 }

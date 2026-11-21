@@ -1,134 +1,153 @@
 ---
+/** Bloque «Sobre mí» de la home: persona real detrás de la marca */
+import Button from '../ui/Button.astro';
+import { owner } from '../../data/owner';
 import { routes } from '../../data/routes';
 
-const links = [
-  {
-    href: routes.about,
-    title: 'Sobre mí',
-    description: 'Quién soy, cómo trabajo y qué me inspira.',
-    accent: 'rosa',
-  },
-  {
-    href: routes.projects,
-    title: 'Proyectos',
-    description: 'Casos y trabajos en los que he participado.',
-    accent: 'menta',
-  },
-  {
-    href: routes.services,
-    title: 'Servicios',
-    description: 'SEO, SEM, web, RRSS y estrategia digital 360º.',
-    accent: 'lila',
-  },
-  {
-    href: routes.contact,
-    title: 'Contacto',
-    description: 'Cuéntame tu idea y hablamos sin compromiso.',
-    accent: 'naranja',
-  },
+const facts = [
+  { value: `${owner.yearsExperience}+`, label: 'años en marketing digital' },
+  { value: '+40K', label: 'usuarios en la app de Exaccta' },
+  { value: '500K', label: 'espectadores en una campaña viral' },
 ];
 ---
 
-<section class="teaser section" aria-labelledby="teaser-title">
-  <div class="container">
-    <h2 id="teaser-title" class="visually-hidden">Explora el sitio</h2>
-    <div class="teaser__grid">
-      {
-        links.map((link) => (
-          <a href={link.href} class={`teaser-card teaser-card--${link.accent}`} data-reveal>
-            <h3>{link.title}</h3>
-            <p>{link.description}</p>
-            <span class="teaser-card__arrow" aria-hidden="true">
-              →
-            </span>
-          </a>
-        ))
-      }
+<section class="about-teaser section" aria-labelledby="about-teaser-title">
+  <div class="container about-teaser__grid">
+    <div class="about-teaser__media" data-reveal>
+      <img
+        class="about-teaser__photo"
+        src={owner.photos.portrait.src}
+        alt={owner.photos.portrait.alt}
+        width="960"
+        height="1200"
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        class="about-teaser__sticker"
+        src={owner.photos.illustration.src}
+        alt=""
+        width="280"
+        height="324"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="about-teaser__content">
+      <p class="eyebrow" data-reveal>Quién está detrás</p>
+      <h2 id="about-teaser-title" data-reveal data-reveal-delay="1">
+        Soy {owner.firstName}. Diseño webs <em>con cabeza de marketer.</em>
+      </h2>
+      <div class="about-teaser__text" data-reveal data-reveal-delay="2">
+        <p>
+          Llevo más de cinco años en marketing digital: he liderado departamentos, lanzado productos y
+          construido funnels de captación en SaaS, fintech y B2B. Además, me formé en diseño gráfico.
+        </p>
+        <p>
+          Por eso mis webs no se quedan en bonitas: cada sección tiene un propósito y cada botón un
+          objetivo. Trabajas directamente conmigo, de principio a fin.
+        </p>
+      </div>
+
+      <dl class="about-teaser__facts" data-reveal data-reveal-delay="3">
+        {
+          facts.map((f) => (
+            <div>
+              <dt>{f.label}</dt>
+              <dd>{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <div data-reveal data-reveal-delay="4">
+        <Button href={routes.about} variant="outline" arrow>Conóceme mejor</Button>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .teaser {
-    background: var(--color-bg-soft);
-  }
-
-  .teaser__grid {
+  .about-teaser__grid {
     display: grid;
-    gap: 1rem;
+    gap: 3.5rem;
+    align-items: center;
   }
 
-  .teaser-card {
+  .about-teaser__media {
     position: relative;
-    display: block;
-    padding: 1.75rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
-    transition:
-      transform var(--transition-bounce),
-      box-shadow var(--transition-fast),
-      border-color var(--transition-fast);
+    max-width: 28rem;
+    margin-inline: auto;
+    width: 100%;
   }
 
-  .teaser-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
+  .about-teaser__photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
   }
 
-  .teaser-card--lila:hover {
-    border-color: var(--color-lila);
-  }
-
-  .teaser-card--rosa:hover {
-    border-color: var(--color-rosa);
-  }
-
-  .teaser-card--menta:hover {
-    border-color: var(--color-menta);
-  }
-
-  .teaser-card--naranja:hover {
-    border-color: var(--color-naranja);
-  }
-
-  .teaser-card h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1.25rem;
-  }
-
-  .teaser-card p {
-    margin: 0;
-    font-size: 0.9375rem;
-    color: var(--color-muted);
-    line-height: 1.65;
-    padding-right: 2rem;
-  }
-
-  .teaser-card__arrow {
+  .about-teaser__sticker {
     position: absolute;
-    right: 1.5rem;
-    bottom: 1.5rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-lila-strong);
-    transition: transform var(--transition-fast);
+    right: -1rem;
+    bottom: -2rem;
+    width: 38%;
+    padding: 0.5rem 0.5rem 0;
+    background: var(--paper);
+    border-radius: 50% 50% var(--radius-lg) var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    rotate: 4deg;
   }
 
-  .teaser-card:hover .teaser-card__arrow {
-    transform: translateX(4px);
+  .about-teaser__content h2 {
+    margin: 0 0 1.5rem;
   }
 
-  @media (min-width: 640px) {
-    .teaser__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .about-teaser__text p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 1.0625rem;
   }
 
-  @media (min-width: 992px) {
-    .teaser__grid {
-      grid-template-columns: repeat(4, 1fr);
+  .about-teaser__facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0 2.25rem;
+    padding-block: 1.5rem;
+    border-block: 1px solid var(--line);
+  }
+
+  .about-teaser__facts div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 0.375rem;
+  }
+
+  .about-teaser__facts dd {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  .about-teaser__facts dt {
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    color: var(--muted);
+  }
+
+  @media (min-width: 900px) {
+    .about-teaser__grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 6rem;
     }
   }
 </style>

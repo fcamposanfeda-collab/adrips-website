@@ -1,6 +1,12 @@
-# Chispa Digital — Agencia de marketing digital
+# Adrips — Diseño web y marketing
 
-Landing page en **Astro** para agencia de marketing digital: desarrollo web, SEO, SEM, RRSS y contenidos.
+Web de Adrips (Adriana Pérez Salmerón) en **Astro**: diseño y desarrollo web a medida + marketing digital.
+
+## Identidad
+
+- Logotipo: `src/components/brand/LogoMark.astro` (SVG inline) y `public/branding/adrips-logo*.svg`
+- Tipografías: Fraunces (títulos) + Manrope (texto), vía Google Fonts
+- Colores: `src/styles/tokens.css` (tinta ciruela `--ink`, papel `--paper`, acento terracota `--accent`)
 
 ## Desarrollo
 
@@ -16,9 +22,10 @@ Abre [http://localhost:4321](http://localhost:4321)
 | Archivo | Qué cambiar |
 |---------|-------------|
 | `src/data/site.ts` | Nombre de marca, email, dominio |
-| `src/styles/tokens.css` | Colores pastel |
+| `src/styles/tokens.css` | Colores y tipografía |
+| `src/data/home.ts` | Textos de la home: ventajas, proceso, FAQ |
 | `src/data/services.ts` | Servicios y descripciones |
-| `src/data/portfolio.ts` | Proyectos del portfolio |
+| `src/data/portfolio.ts` | Proyectos (para publicar uno: captura en `public/images/proyectos/`, campo `image`, enlace y `status: 'live'`) |
 | `src/data/pricing.ts` | Planes y precios |
 | `astro.config.mjs` | URL del dominio (SEO + sitemap) |
 
@@ -46,8 +53,6 @@ npm run preview
 
 ## Pendiente
 
-- [ ] Nombre definitivo de marca y logo
 - [ ] Dominio y email corporativo
 - [ ] Capturas reales en portfolio
-- [ ] Imagen OG (`public/images/og-default.jpg`)
 - [ ] Google Analytics (tras consentimiento cookies)

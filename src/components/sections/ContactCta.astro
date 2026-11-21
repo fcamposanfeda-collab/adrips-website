@@ -3,52 +3,66 @@ import ContactForm from '../forms/ContactForm.astro';
 import { contact } from '../../data/site';
 
 interface Props {
+  /** En la página de contacto el H1 lo pone la propia página */
   compact?: boolean;
   formId?: string;
 }
 
 const { compact = false, formId = 'contact' } = Astro.props;
+const benefits = ['Te respondo yo, no un bot', 'Presupuesto claro y sin letra pequeña', 'Primera conversación sin compromiso'];
 ---
 
 <section
   id="contacto"
-  class:list={['contact', 'section', { 'contact--compact': compact }]}
-  {...(!compact && { 'aria-labelledby': 'contact-title' })}
+  class:list={['contact', 'section', 'surface-dark', 'grain', { 'contact--compact': compact }]}
+  aria-labelledby={compact ? undefined : 'contact-title'}
+  aria-label={compact ? 'Formulario de contacto' : undefined}
 >
   <div class="container contact__grid">
     <div class="contact__info">
       {
         !compact && (
           <>
-            <p class="section-header__eyebrow">Contacto</p>
-            <h2 id="contact-title">¿Hablamos de tu proyecto?</h2>
+            <p class="eyebrow">Contacto</p>
+            <h2 id="contact-title">
+              ¿Hablamos de <em>tu web?</em>
+            </h2>
             <p class="contact__lead">
-              Escríbeme con calma: cuéntame qué tienes en mente y te respondo yo personalmente. Sin
-              formularios eternos ni respuestas automáticas.
+              Cuéntame qué tienes en mente. En menos de 24 h te respondo con ideas y los siguientes pasos.
             </p>
           </>
         )
       }
-      <div class="contact__details">
-        <p>
-          <strong>Email</strong><br />
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>
-        </p>
+
+      <ul class="contact__benefits">
         {
-          contact.phoneDisplay && (
-            <p>
-              <strong>Teléfono</strong><br />
-              <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>
-            </p>
+          benefits.map((b) => (
+            <li>
+              <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                <path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {b}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="contact__channels">
+        <a href={`mailto:${contact.email}`} class="contact__channel">
+          <span class="contact__channel-label">Email</span>
+          <span>{contact.email}</span>
+        </a>
+        {
+          contact.whatsapp && (
+            <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" class="contact__channel">
+              <span class="contact__channel-label">WhatsApp</span>
+              <span>{contact.phoneDisplay} ↗</span>
+            </a>
           )
         }
       </div>
-      <ul class="contact__benefits">
-        <li>Te respondo yo, no un bot</li>
-        <li>Presupuesto claro y sin letra pequeña</li>
-        <li>Primera conversación sin compromiso</li>
-      </ul>
     </div>
+
     <div class="contact__form-wrap">
       <ContactForm formId={formId} />
     </div>
@@ -56,90 +70,94 @@ const { compact = false, formId = 'contact' } = Astro.props;
 </section>
 
 <style>
-  .contact {
-    background: linear-gradient(
-      160deg,
-      var(--color-footer-bg) 0%,
-      #a07070 55%,
-      var(--color-brand-pink-deep) 100%
-    );
-    color: var(--color-on-dark);
-  }
-
-  .contact--compact {
-    padding-top: 0;
-  }
-
   .contact__grid {
     display: grid;
-    gap: 2.5rem;
+    gap: 3rem;
     align-items: start;
   }
 
-  .contact__info .section-header__eyebrow {
-    background: rgba(240, 228, 184, 0.25);
-    color: var(--color-brand-cream);
-  }
-
   .contact h2 {
-    margin: 0 0 1rem;
-    color: var(--color-on-dark);
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin: 0 0 1.25rem;
   }
 
   .contact__lead {
-    margin: 0 0 1.5rem;
-    opacity: 0.9;
-    font-size: 1.0625rem;
-    line-height: 1.7;
-  }
-
-  .contact__details {
-    margin-bottom: 1.5rem;
-  }
-
-  .contact__details p {
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  .contact__details a {
-    color: var(--color-brand-cream);
-    font-weight: 500;
+    margin: 0 0 2rem;
+    max-width: 30rem;
+    font-size: 1.125rem;
+    color: rgba(251, 244, 236, 0.75);
   }
 
   .contact__benefits {
     display: grid;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
   }
 
   .contact__benefits li {
-    position: relative;
-    padding-left: 1.5rem;
-    font-size: 0.9375rem;
-    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(251, 244, 236, 0.9);
   }
 
-  .contact__benefits li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--color-brand-coral);
+  .contact__benefits svg {
+    flex-shrink: 0;
+    color: var(--accent-light);
+  }
+
+  .contact__channels {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .contact__channel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(251, 244, 236, 0.14);
+    border-radius: var(--radius-md);
+    transition:
+      border-color var(--transition-fast),
+      background var(--transition-fast);
+    word-break: break-word;
+  }
+
+  .contact__channel:hover {
+    border-color: rgba(251, 244, 236, 0.4);
+    background: rgba(251, 244, 236, 0.04);
+  }
+
+  .contact__channel-label {
+    font-size: 0.75rem;
     font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(251, 244, 236, 0.5);
   }
 
   .contact__form-wrap {
-    padding: 2rem;
-    background: var(--color-surface);
-    color: var(--color-text);
+    padding: 2rem 1.5rem;
+    background: var(--paper);
+    color: var(--ink);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-float);
+  }
+
+  @media (min-width: 600px) {
+    .contact__form-wrap {
+      padding: 2.5rem;
+    }
+
+    .contact__channels {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   @media (min-width: 992px) {
     .contact__grid {
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      gap: 5rem;
     }
   }
 </style>

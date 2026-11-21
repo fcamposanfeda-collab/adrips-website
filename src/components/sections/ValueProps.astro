@@ -1,0 +1,76 @@
+---
+import { pillars } from '../../data/home';
+---
+
+<section class="values-props section surface-dark grain" aria-labelledby="vp-title">
+  <div class="container">
+    <header class="section-header section-header--split" data-reveal>
+      <div>
+        <p class="eyebrow">Por qué Adrips</p>
+        <h2 id="vp-title">Tu web es tu mejor comercial. <em>O el peor.</em></h2>
+      </div>
+      <p>
+        Una web bonita que no vende es un gasto. Una que transmite confianza, se entiende en cinco segundos
+        y guía hacia el contacto es una inversión. Esa es la diferencia de diseñar con cabeza de marketing.
+      </p>
+    </header>
+
+    <ol class="vp__list">
+      {
+        pillars.map((p, i) => (
+          <li class="vp__item" data-reveal data-reveal-delay={String(i + 1)}>
+            <span class="vp__num">{p.number}</span>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .vp__list {
+    display: grid;
+    gap: 1px;
+    background: rgba(251, 244, 236, 0.12);
+    border: 1px solid rgba(251, 244, 236, 0.12);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .vp__item {
+    padding: 2.25rem 2rem 2.5rem;
+    background: var(--ink);
+    transition: background var(--transition-fast);
+  }
+
+  .vp__item:hover {
+    background: #2a1b22;
+  }
+
+  .vp__num {
+    display: inline-block;
+    margin-bottom: 3rem;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--accent-light);
+  }
+
+  .vp__item h3 {
+    margin: 0 0 0.875rem;
+  }
+
+  .vp__item p {
+    margin: 0;
+    color: rgba(251, 244, 236, 0.7);
+    font-size: 1rem;
+  }
+
+  @media (min-width: 900px) {
+    .vp__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

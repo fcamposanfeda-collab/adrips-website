@@ -1,55 +1,66 @@
 ---
 import Button from '../ui/Button.astro';
-import { owner } from '../../data/owner';
+import ProjectCover from '../ui/ProjectCover.astro';
 import { routes } from '../../data/routes';
+import { owner } from '../../data/owner';
+import { heroPoints } from '../../data/home';
+import { webProjects } from '../../data/portfolio';
 
-const { hero } = owner.photos;
+const [front, back] = webProjects;
 ---
 
-<section class="hero section" aria-labelledby="hero-title">
-  <div class="hero__blobs" aria-hidden="true">
-    <span class="hero__blob hero__blob--lila"></span>
-    <span class="hero__blob hero__blob--rosa"></span>
-    <span class="hero__blob hero__blob--menta"></span>
-    <span class="hero__blob hero__blob--amarillo"></span>
-  </div>
-
-  <div class="container hero__layout">
-    <div class="hero__content" data-reveal>
-      <h1 id="hero-title" class="hero__title">
-        <span class="hero__greeting-line">
-          <span class="hero__greeting-prefix">¡Hola!</span>
-          <span class="hero__greeting-name">Soy {owner.firstName}</span>
-        </span>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="eyebrow hero__eyebrow" data-reveal>Diseño web · Marketing digital</p>
+      <h1 id="hero-title" class="hero__title" data-reveal data-reveal-delay="1">
+        Webs que hacen que <em>te elijan</em>.
       </h1>
-
-      <p class="hero__headline">
-        <span class="text-gradient">{owner.headline}</span>
+      <p class="lead hero__lead" data-reveal data-reveal-delay="2">
+        Diseño y desarrollo webs a medida para negocios que quieren verse profesionales y conseguir más
+        clientes. Con criterio de marketing desde el primer boceto: bonitas, rápidas y pensadas para
+        vender.
       </p>
-
-      <p class="hero__subtitle">{owner.intro}</p>
-
-      <div class="hero__actions">
-        <Button href={routes.projects} variant="primary" size="lg">Ver mis proyectos</Button>
-        <Button href={routes.contact} variant="secondary" size="lg">Escríbeme</Button>
+      <div class="hero__actions" data-reveal data-reveal-delay="3">
+        <Button href={routes.contact} variant="primary" size="lg" arrow>Pide tu propuesta</Button>
+        <Button href={routes.projects} variant="outline" size="lg">Ver proyectos</Button>
       </div>
+      <ul class="hero__points" data-reveal data-reveal-delay="4">
+        {
+          heroPoints.map((p) => (
+            <li>
+              <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                <path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {p}
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
-    <figure class="hero__visual" data-reveal data-reveal-delay="2">
-      <div class="hero__portrait-wrap" aria-hidden="true">
-        <span class="hero__sparkle hero__sparkle--lavender"></span>
-        <span class="hero__sparkle hero__sparkle--cream"></span>
-        <span class="hero__sparkle hero__sparkle--coral"></span>
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero__stack">
+        {back && <div class="hero__card hero__card--back"><ProjectCover project={back} /></div>}
+        {front && <div class="hero__card hero__card--front"><ProjectCover project={front} size="lg" eager /></div>}
       </div>
-      <img
-        class="hero__photo hero__photo--illustration"
-        src={hero.src}
-        alt={hero.alt}
-        width="560"
-        height="560"
-        fetchpriority="high"
-      />
-    </figure>
+
+      <div class="hero__chip hero__chip--person">
+        <img src={owner.photos.portrait.src} alt="" width="48" height="48" loading="eager" />
+        <div>
+          <strong>Hola, soy {owner.firstName}</strong>
+          <span>Diseño tu web y te ayudo a que funcione</span>
+        </div>
+      </div>
+
+      <div class="hero__chip hero__chip--stat">
+        <span class="hero__chip-star">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 1c.6 6.6 4.4 10.4 11 11-6.6.6-10.4 4.4-11 11-.6-6.6-4.4-10.4-11-11C7.6 11.4 11.4 7.6 12 1z" fill="currentColor" /></svg>
+        </span>
+        <span><strong>Diseño + marketing</strong> en un mismo proyecto</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -57,191 +68,200 @@ const { hero } = owner.photos;
   .hero {
     position: relative;
     overflow: hidden;
-    min-height: clamp(32rem, 88vh, 44rem);
-    display: flex;
-    align-items: center;
-    padding-top: 2rem;
+    padding-block: 3.5rem 5rem;
   }
 
-  .hero__blobs {
+  .hero__glow {
     position: absolute;
-    inset: 0;
+    inset: -20% -10% auto auto;
+    width: min(70rem, 120vw);
+    aspect-ratio: 1;
+    background:
+      radial-gradient(closest-side at 60% 40%, rgba(235, 202, 196, 0.75), transparent 70%),
+      radial-gradient(closest-side at 30% 70%, rgba(201, 184, 236, 0.4), transparent 70%);
+    filter: blur(20px);
     pointer-events: none;
   }
 
-  .hero__blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.55;
-  }
-
-  .hero__blob--lila {
-    width: 22rem;
-    height: 22rem;
-    top: -4rem;
-    right: -6rem;
-    background: var(--color-lila);
-  }
-
-  .hero__blob--rosa {
-    width: 18rem;
-    height: 18rem;
-    bottom: 10%;
-    left: -4rem;
-    background: var(--color-rosa);
-  }
-
-  .hero__blob--menta {
-    width: 14rem;
-    height: 14rem;
-    top: 30%;
-    right: 20%;
-    background: var(--color-menta);
-  }
-
-  .hero__blob--amarillo {
-    width: 10rem;
-    height: 10rem;
-    bottom: 20%;
-    right: 5%;
-    background: var(--color-amarillo);
-  }
-
-  .hero__layout {
+  .hero__grid {
     position: relative;
-    z-index: 1;
     display: grid;
-    gap: 2.5rem;
+    gap: 3.5rem;
     align-items: center;
   }
 
+  .hero__eyebrow {
+    margin-bottom: 1.5rem;
+  }
+
   .hero__title {
-    margin: 0 0 0.75rem;
-    line-height: 1.1;
+    margin: 0 0 1.5rem;
+    max-width: 12ch;
   }
 
-  .hero__greeting-line {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.35em;
-    font-family: var(--font-heading);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
-    line-height: 1.1;
-    color: var(--color-brand-coral);
-    letter-spacing: 0.01em;
-  }
-
-  .hero__greeting-prefix,
-  .hero__greeting-name {
-    color: inherit;
-    font: inherit;
-  }
-
-  .hero__headline {
-    margin: 0 0 1.25rem;
-    font-family: var(--font-heading);
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
-    font-weight: 800;
-    line-height: 1.2;
-  }
-
-  .hero__subtitle {
-    margin: 0 0 2rem;
-    font-size: clamp(1.0625rem, 2.5vw, 1.2rem);
-    color: var(--color-muted);
-    max-width: 34rem;
-    line-height: 1.75;
+  .hero__lead {
+    margin: 0 0 2.25rem;
+    max-width: 36rem;
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
   }
 
+  .hero__points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  .hero__points li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero__points svg {
+    color: var(--accent);
+  }
+
+  /* Composición visual */
   .hero__visual {
     position: relative;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 20rem;
+    padding: 1rem 0 3rem;
   }
 
-  .hero__portrait-wrap {
-    position: absolute;
-    inset: -0.5rem;
-    pointer-events: none;
-  }
-
-  .hero__sparkle {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.85;
-  }
-
-  .hero__sparkle--lavender {
-    top: 8%;
-    left: 4%;
-    width: 0.65rem;
-    height: 0.65rem;
-    background: var(--color-brand-lavender);
-    box-shadow: 0 0 12px rgba(200, 176, 224, 0.6);
-  }
-
-  .hero__sparkle--cream {
-    top: 18%;
-    right: 2%;
-    width: 0.5rem;
-    height: 0.5rem;
-    background: var(--color-brand-cream-deep);
-  }
-
-  .hero__sparkle--coral::before {
-    content: '✦';
-    position: absolute;
-    top: 72%;
-    right: 6%;
-    font-size: 1.125rem;
-    color: var(--color-brand-coral);
-    opacity: 0.75;
-  }
-
-  .hero__photo {
+  .hero__stack {
     position: relative;
-    z-index: 1;
-    width: min(100%, 22rem);
-    max-width: 28rem;
-    height: auto;
-    aspect-ratio: auto;
-    object-fit: contain;
-    object-position: center;
+    aspect-ratio: 5 / 4;
   }
 
-  .hero__photo--illustration {
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    background: transparent;
-    filter: drop-shadow(0 20px 40px rgba(184, 132, 132, 0.18));
-    transition: transform var(--transition-bounce);
+  .hero__card {
+    position: absolute;
+    width: 82%;
   }
 
-  .hero__visual:hover .hero__photo--illustration {
-    transform: translateY(-4px) rotate(-1deg);
+  .hero__card--back {
+    top: 0;
+    right: 0;
+    rotate: 3deg;
+    opacity: 0.95;
+    animation: float-y 9s ease-in-out infinite;
+  }
+
+  .hero__card--front {
+    left: 0;
+    bottom: 0;
+    rotate: -2deg;
+    box-shadow: var(--shadow-float);
+    border-radius: var(--radius-md);
+    animation: float-y 8s ease-in-out -3s infinite;
+  }
+
+  .hero__card--back :global(.cover),
+  .hero__card--front :global(.cover) {
+    transform: none;
+  }
+
+  .hero__chip {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem 0.75rem 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    background: rgba(255, 253, 251, 0.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+  }
+
+  .hero__chip strong {
+    display: block;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .hero__chip span {
+    color: var(--muted);
+  }
+
+  .hero__chip--person {
+    right: -0.5rem;
+    bottom: 0;
+    max-width: 17rem;
+  }
+
+  .hero__chip--person img {
+    width: 3rem;
+    height: 3rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 30% 20%;
+  }
+
+  .hero__chip--stat {
+    left: -0.5rem;
+    top: 8%;
+    padding: 0.625rem 1rem 0.625rem 0.625rem;
+  }
+
+  .hero__chip--stat strong {
+    display: inline;
+  }
+
+  .hero__chip-star {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    color: var(--white) !important;
+    background: var(--accent);
+  }
+
+  @media (max-width: 599px) {
+    .hero__chip--stat {
+      display: none;
+    }
+
+    .hero__chip--person {
+      right: 0;
+      left: 0;
+      margin-inline: auto;
+      width: fit-content;
+    }
   }
 
   @media (min-width: 992px) {
-    .hero__layout {
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 3rem;
+    .hero {
+      padding-block: 5rem 7rem;
     }
 
-    .hero__photo {
-      width: min(100%, 26rem);
-      max-width: 30rem;
+    .hero__grid {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 4rem;
+    }
+
+    .hero__visual {
+      padding: 0 0 2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__card--back,
+    .hero__card--front {
+      animation: none;
     }
   }
 </style>

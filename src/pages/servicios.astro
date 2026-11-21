@@ -3,8 +3,10 @@ import { getPageMeta } from '../data/pages-meta';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/sections/PageIntro.astro';
 import ServicesGrid from '../components/sections/ServicesGrid.astro';
-import MethodologySection from '../components/sections/MethodologySection.astro';
-import PersonalQuote from '../components/sections/PersonalQuote.astro';
+import ProcessSection from '../components/sections/ProcessSection.astro';
+import PricingSection from '../components/sections/PricingSection.astro';
+import FaqSection from '../components/sections/FaqSection.astro';
+import ContactCta from '../components/sections/ContactCta.astro';
 
 const meta = getPageMeta('/servicios');
 ---
@@ -12,10 +14,13 @@ const meta = getPageMeta('/servicios');
 <BaseLayout title={meta.title} description={meta.description}>
   <PageIntro
     eyebrow="Servicios"
-    title="Lo que puedo hacer por tu marca"
-    description="SEO, SEM, diseño web, redes sociales, publicidad digital y estrategia inbound — marketing digital 360º con enfoque en resultados y trato personal."
+    title="Una web profesional"
+    emphasis="y el marketing que la hace rendir"
+    description="Diseño y desarrollo webs y landing pages a medida. Y si quieres que además te traigan clientes, me encargo del SEO, las campañas y la estrategia."
   />
-  <ServicesGrid compact />
-  <MethodologySection />
-  <PersonalQuote />
+  <ServicesGrid detailed />
+  <ProcessSection />
+  <PricingSection />
+  <FaqSection />
+  <ContactCta formId="services-contact" />
 </BaseLayout>

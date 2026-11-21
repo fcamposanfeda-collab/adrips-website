@@ -3,6 +3,7 @@ import { getPageMeta } from '../data/pages-meta';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/sections/PageIntro.astro';
 import PortfolioSection from '../components/sections/PortfolioSection.astro';
+import ContactCta from '../components/sections/ContactCta.astro';
 
 const meta = getPageMeta('/proyectos');
 ---
@@ -10,8 +11,10 @@ const meta = getPageMeta('/proyectos');
 <BaseLayout title={meta.title} description={meta.description}>
   <PageIntro
     eyebrow="Proyectos"
-    title="Trabajos y campañas que cuentan historias"
-    description="Desde Exaccta Xpens hasta activaciones virales como #ElWallpaperDeIbai en Finetwork — con enlaces a webs, redes y prensa."
+    title="Webs y campañas"
+    emphasis="con resultados"
+    description="Proyectos de diseño web a medida y casos reales de marketing digital. Los casos web completos se publican a medida que se lanzan."
   />
-  <PortfolioSection compact />
+  <PortfolioSection />
+  <ContactCta formId="projects-contact" />
 </BaseLayout>

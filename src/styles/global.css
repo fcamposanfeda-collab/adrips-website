@@ -11,19 +11,31 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
 }
 
 body {
   margin: 0;
   font-family: var(--font-primary);
-  font-size: 1rem;
-  color: var(--color-text);
-  background: var(--color-bg);
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
   overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-img {
+::selection {
+  background: var(--accent);
+  color: var(--white);
+}
+
+img,
+svg,
+video {
   max-width: 100%;
   height: auto;
   display: block;
@@ -34,7 +46,8 @@ a {
   text-decoration: none;
 }
 
-ul {
+ul,
+ol {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -58,7 +71,7 @@ button {
 
 @media (min-width: 768px) {
   .container {
-    padding-inline: 1.5rem;
+    padding-inline: 2rem;
   }
 
   .section {
@@ -66,45 +79,97 @@ button {
   }
 }
 
+/* Cabeceras de sección: alineadas a la izquierda, ritmo editorial */
 .section-header {
-  text-align: center;
-  max-width: 42rem;
-  margin: 0 auto 2.75rem;
+  max-width: 46rem;
+  margin: 0 0 3rem;
 }
 
-.section-header__eyebrow {
-  display: inline-block;
-  margin: 0 0 0.75rem;
-  padding: 0.375rem 0.875rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+.section-header--center {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.section-header--split {
+  max-width: none;
+  display: grid;
+  gap: 1.25rem;
+  align-items: end;
+}
+
+@media (min-width: 900px) {
+  .section-header--split {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.section-header__eyebrow,
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 1.25rem;
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-brand-pink-deep);
-  background: rgba(240, 228, 184, 0.45);
-  border-radius: var(--radius-full);
+  color: var(--accent);
+}
+
+.section-header__eyebrow::before,
+.eyebrow::before {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
 }
 
 .section-header h2 {
-  margin: 0 0 0.875rem;
-  color: var(--color-text);
+  margin: 0 0 1rem;
 }
 
 .section-header p {
   margin: 0;
-  color: var(--color-muted);
-  font-size: 1.0625rem;
+  color: var(--muted);
+  font-size: 1.125rem;
 }
 
+/* Superficies */
+.surface-dark {
+  background: var(--ink);
+  color: var(--color-on-dark);
+}
+
+.surface-dark h2,
+.surface-dark h3 {
+  color: var(--color-on-dark);
+}
+
+.surface-dark .eyebrow,
+.surface-dark .section-header__eyebrow {
+  color: var(--accent-light);
+}
+
+.surface-dark .section-header p {
+  color: rgba(251, 244, 236, 0.72);
+}
+
+.surface-soft {
+  background: var(--paper-2);
+}
+
+/* Utilidades */
 .skip-link {
   position: absolute;
   top: 0.75rem;
   left: 0.75rem;
   z-index: 300;
   padding: 0.625rem 1rem;
-  font-weight: 500;
-  color: var(--color-on-dark);
-  background: var(--color-primary);
+  font-weight: 600;
+  color: var(--white);
+  background: var(--ink);
   border-radius: var(--radius-sm);
   transform: translateY(-200%);
   transition: transform var(--transition-fast);
@@ -127,6 +192,23 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-brand-lavender);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Grano sutil para dar textura de papel a las secciones oscuras */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

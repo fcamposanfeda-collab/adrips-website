@@ -2,20 +2,28 @@
 import { getPageMeta } from '../data/pages-meta';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
-import HomeTeaser from '../components/sections/HomeTeaser.astro';
+import TrustStrip from '../components/sections/TrustStrip.astro';
 import PortfolioTeaser from '../components/sections/PortfolioTeaser.astro';
-import PersonalQuote from '../components/sections/PersonalQuote.astro';
-import InspirationTeaser from '../components/sections/InspirationTeaser.astro';
+import ValueProps from '../components/sections/ValueProps.astro';
+import ServicesGrid from '../components/sections/ServicesGrid.astro';
+import ProcessSection from '../components/sections/ProcessSection.astro';
+import HomeTeaser from '../components/sections/HomeTeaser.astro';
+import FaqSection from '../components/sections/FaqSection.astro';
+import ContactCta from '../components/sections/ContactCta.astro';
 import { owner } from '../data/owner';
 
 const meta = getPageMeta('/');
 ---
 
 <BaseLayout title={meta.title} description={meta.description}>
-  <link rel="preload" as="image" href={owner.photos.hero.src} slot="head" />
+  <link rel="preload" as="image" href={owner.photos.portrait.src} slot="head" />
   <Hero />
-  <HomeTeaser />
+  <TrustStrip />
   <PortfolioTeaser />
-  <PersonalQuote />
-  <InspirationTeaser />
+  <ValueProps />
+  <ServicesGrid />
+  <ProcessSection />
+  <HomeTeaser />
+  <FaqSection />
+  <ContactCta formId="home-contact" />
 </BaseLayout>

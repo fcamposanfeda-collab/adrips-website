@@ -2,9 +2,9 @@
 export const owner = {
   firstName: 'Adriana',
   fullName: 'Adriana Pérez Salmerón',
-  role: 'Especialista en marketing digital',
+  role: 'Diseñadora web y especialista en marketing digital',
   yearsExperience: 5,
-  headline: 'Especializada en marketing digital 360º con estrategia, datos y creatividad',
+  headline: 'Diseño webs con cabeza de marketing: bonitas, rápidas y pensadas para vender',
   intro:
     'Te acompaño de cerca para llevar tu marca al siguiente nivel: estrategia con sentido, creatividad con criterio y resultados que funcionan desde el primer mes.',
   bio: [
@@ -19,6 +19,14 @@ export const owner = {
     interests: ['Atardeceres', 'Flores', 'Viajar', 'Aprender'],
   },
   photos: {
+    portrait: {
+      src: '/images/adriana-retrato.webp',
+      alt: 'Adriana Pérez Salmerón sonriendo frente al mar al atardecer',
+    },
+    illustration: {
+      src: '/images/adriana-ilustracion.webp',
+      alt: 'Ilustración de Adriana Pérez Salmerón',
+    },
     hero: {
       src: '/images/adriana-ilustracion-hero.png',
       alt: 'Ilustración de Adriana Pérez Salmerón — marketing digital con estilo creativo',

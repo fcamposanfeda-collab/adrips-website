@@ -1,98 +1,72 @@
-/* Animaciones suaves — inspiradas en portfolios con movimiento (reveal + float) */
+/* Movimiento: aparición al hacer scroll y pequeños detalles. Siempre respeta reduced-motion. */
 
-@keyframes blob-float {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(0, -18px) scale(1.04);
-  }
-}
-
-@keyframes fade-in-up {
+@keyframes marquee {
   from {
-    opacity: 0;
-    transform: translateY(1.25rem);
+    transform: translateX(0);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%);
   }
 }
 
-@keyframes gentle-pulse {
+@keyframes float-y {
   0%,
   100% {
-    opacity: 0.5;
+    transform: translateY(0);
   }
   50% {
-    opacity: 0.75;
+    transform: translateY(-10px);
   }
 }
 
-.hero__blob {
-  animation: blob-float 9s ease-in-out infinite;
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.hero__blob--rosa {
-  animation-delay: -2s;
-  animation-duration: 11s;
-}
-
-.hero__blob--menta {
-  animation-delay: -4s;
-  animation-duration: 10s;
-}
-
-.hero__blob--amarillo {
-  animation-delay: -1s;
-  animation-duration: 8s;
-}
-
-[data-reveal] {
+/* Solo se ocultan si hay JS: evita contenido invisible sin JavaScript */
+.js [data-reveal] {
   opacity: 0;
-  transform: translateY(1.25rem);
+  transform: translateY(1.5rem);
   transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
 }
 
-[data-reveal].is-visible {
+.js [data-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 [data-reveal-delay='1'] {
-  transition-delay: 0.1s;
+  transition-delay: 0.08s !important;
 }
 
 [data-reveal-delay='2'] {
-  transition-delay: 0.2s;
+  transition-delay: 0.16s !important;
 }
 
 [data-reveal-delay='3'] {
-  transition-delay: 0.3s;
+  transition-delay: 0.24s !important;
 }
 
-.portfolio-card__visual--pulse::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.35), transparent 60%);
-  animation: gentle-pulse 4s ease-in-out infinite;
-  pointer-events: none;
+[data-reveal-delay='4'] {
+  transition-delay: 0.32s !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__blob,
-  .portfolio-card__visual--pulse::after {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 
-  [data-reveal] {
+  .js [data-reveal] {
     opacity: 1;
     transform: none;
-    transition: none;
   }
 }

@@ -3,14 +3,18 @@ import { routes } from './routes';
 export type NavLink = { label: string; href: string };
 
 export const mainNav: NavLink[] = [
-  { label: 'Sobre mí', href: routes.about },
   { label: 'Proyectos', href: routes.projects },
   { label: 'Servicios', href: routes.services },
-  { label: 'Eventos', href: routes.events },
+  { label: 'Sobre mí', href: routes.about },
   { label: 'Contacto', href: routes.contact },
 ];
 
-export const footerNav: NavLink[] = [...mainNav];
+/** Eventos e Inspiración salen del menú principal para no diluir la oferta web */
+export const footerNav: NavLink[] = [
+  ...mainNav,
+  { label: 'Papelería para eventos', href: routes.events },
+  { label: 'Inspiración', href: routes.inspiration },
+];
 
 export const legalNav = [
   { label: 'Aviso legal', href: '/aviso-legal' },

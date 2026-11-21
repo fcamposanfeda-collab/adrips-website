@@ -1,0 +1,113 @@
+---
+import { processSteps } from '../../data/home';
+---
+
+<section id="proceso" class="process section surface-soft" aria-labelledby="process-title">
+  <div class="container">
+    <header class="section-header section-header--split" data-reveal>
+      <div>
+        <p class="eyebrow">Cómo trabajamos</p>
+        <h2 id="process-title">Claro desde el principio, <em>sin sorpresas</em></h2>
+      </div>
+      <p>
+        Sabes en todo momento en qué punto está tu web, qué toca después y qué necesito de ti. Hablas
+        siempre conmigo, no con un intermediario.
+      </p>
+    </header>
+
+    <ol class="process__list">
+      {
+        processSteps.map((s, i) => (
+          <li class="process__step" data-reveal data-reveal-delay={String(i + 1)}>
+            <div class="process__head">
+              <span class="process__num">{s.step}</span>
+              <span class="process__time">{s.duration}</span>
+            </div>
+            <h3>{s.title}</h3>
+            <p>{s.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process__list {
+    display: grid;
+    gap: 1rem;
+    counter-reset: step;
+  }
+
+  .process__step {
+    position: relative;
+    padding: 1.75rem 1.75rem 2rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+  }
+
+  .process__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .process__num {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--ink);
+    border-radius: 50%;
+  }
+
+  .process__step:first-child .process__num {
+    background: var(--accent);
+  }
+
+  .process__time {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .process__step h3 {
+    margin: 0 0 0.625rem;
+    font-size: 1.375rem;
+  }
+
+  .process__step p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 640px) {
+    .process__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .process__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .process__step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 3.1rem;
+      right: -1rem;
+      width: 1rem;
+      height: 1px;
+      background: var(--line-strong);
+    }
+  }
+</style>

@@ -70,14 +70,17 @@ const honeypotId = `${formId}-company`;
       id={messageId}
       name="mensaje"
       rows="5"
-      placeholder="¿Qué necesitas? Web, SEO, campañas..."
+      placeholder="Qué hace tu negocio, qué necesitas (web nueva, rediseño, SEO…) y para cuándo"
       required
     ></textarea>
   </div>
 
   <p class="contact-form__status" id={statusId} role="status" aria-live="polite" hidden data-form-status></p>
 
-  <button type="submit" class="contact-form__submit">Enviar mensaje</button>
+  <button type="submit" class="contact-form__submit">Enviar mensaje →</button>
+  <p class="contact-form__note">
+    Tus datos solo se usan para responderte. <a href="/politica-de-privacidad">Política de privacidad</a>.
+  </p>
 </form>
 
 <style>
@@ -100,59 +103,105 @@ const honeypotId = `${formId}-company`;
   }
 
   .contact-form__label {
-    font-size: 0.9375rem;
-    font-weight: 500;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink);
   }
 
   .contact-form__required {
-    color: var(--color-rosa-strong);
+    margin-left: 0.125rem;
+    color: var(--accent);
   }
 
   .contact-form__input {
     width: 100%;
-    padding: 0.875rem 1rem;
+    padding: 0.9375rem 1rem;
     font: inherit;
-    border: 1px solid var(--color-border);
+    font-size: 1rem;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
     border-radius: var(--radius-sm);
-    background: var(--color-bg);
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    background: var(--white);
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  .contact-form__input::placeholder {
+    color: #9b8a90;
+  }
+
+  .contact-form__input:hover {
+    border-color: var(--muted);
   }
 
   .contact-form__input:focus {
     outline: none;
-    border-color: var(--color-lila-strong);
-    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+    border-color: var(--ink);
+    box-shadow: 0 0 0 4px rgba(184, 79, 71, 0.14);
   }
 
   .contact-form__textarea {
     resize: vertical;
-    min-height: 8rem;
+    min-height: 8.5rem;
+  }
+
+  .contact-form__status {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    border-radius: var(--radius-sm);
   }
 
   .contact-form__status[data-type='success'] {
-    color: #15803d;
+    color: #2f5a29;
+    background: #e3eddd;
   }
 
   .contact-form__status[data-type='error'] {
-    color: #dc2626;
+    color: #8a2a22;
+    background: var(--accent-soft);
   }
 
   .contact-form__submit {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
     width: 100%;
-    padding: 0.875rem 1.5rem;
+    padding: 1.0625rem 1.5rem;
     font-weight: 600;
-    font-size: 0.9375rem;
-    color: var(--color-on-dark);
-    background: linear-gradient(135deg, var(--color-lila-strong), var(--color-rosa-strong));
+    font-size: 1rem;
+    color: var(--white);
+    background: var(--accent);
     border: none;
     border-radius: var(--radius-full);
     cursor: pointer;
-    transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
+    box-shadow: 0 10px 24px -10px rgba(184, 79, 71, 0.7);
+    transition:
+      transform var(--transition-bounce),
+      background var(--transition-fast);
   }
 
   .contact-form__submit:hover {
+    background: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(167, 139, 250, 0.35);
+  }
+
+  .contact-form__submit:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .contact-form__note {
+    margin: -0.25rem 0 0;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .contact-form__note a {
+    text-decoration: underline;
   }
 </style>
 
