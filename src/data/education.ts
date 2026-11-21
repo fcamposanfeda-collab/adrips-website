@@ -37,6 +37,7 @@ export const courses: Course[] = [
 export const tools = [
   'Google Ads',
   'Meta Ads',
+  'Meta Business Suite',
   'Google Analytics 4',
   'Google Search Console',
   'Google Tag Manager',
