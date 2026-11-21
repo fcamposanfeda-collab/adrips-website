@@ -1,0 +1,99 @@
+---
+/** Botón flotante de WhatsApp (solo móvil y tablet). Aparece al hacer scroll. */
+import { contact } from '../../data/site';
+
+const text = encodeURIComponent('Hola Adriana, vengo de tu web y me gustaría hablar sobre mi proyecto.');
+---
+
+{
+  contact.whatsapp && (
+    <a
+      class="wa-float"
+      href={`https://wa.me/${contact.whatsapp}?text=${text}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Escríbeme por WhatsApp"
+      data-wa-float
+    >
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M16.04 3C9.1 3 3.47 8.6 3.47 15.5c0 2.2.58 4.35 1.69 6.25L3.4 28.2l6.63-1.73a12.6 12.6 0 0 0 6 1.52h.01c6.93 0 12.56-5.6 12.56-12.5C28.6 8.6 22.97 3 16.04 3Zm0 22.86h-.01a10.4 10.4 0 0 1-5.3-1.45l-.38-.22-3.93 1.03 1.05-3.82-.25-.39a10.32 10.32 0 0 1-1.6-5.51c0-5.73 4.68-10.39 10.43-10.39 5.75 0 10.42 4.66 10.42 10.4 0 5.72-4.68 10.38-10.43 10.38Zm5.72-7.78c-.31-.16-1.85-.91-2.14-1.01-.29-.11-.5-.16-.71.15-.21.31-.81 1.01-1 1.22-.18.21-.37.23-.68.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.56-1.85-1.74-2.16-.18-.31-.02-.48.14-.63.14-.14.31-.36.47-.54.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.71-1.7-.97-2.33-.26-.61-.52-.53-.71-.54h-.6c-.21 0-.55.08-.84.39-.29.31-1.1 1.07-1.1 2.61s1.13 3.03 1.28 3.24c.16.21 2.22 3.38 5.37 4.74.75.32 1.34.52 1.8.66.75.24 1.44.2 1.98.12.6-.09 1.85-.75 2.11-1.48.26-.73.26-1.35.18-1.48-.07-.13-.28-.21-.6-.36Z"
+        />
+      </svg>
+      <span class="wa-float__label">WhatsApp</span>
+    </a>
+  )
+}
+
+<style>
+  .wa-float {
+    position: fixed;
+    right: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.125rem 0.75rem 0.875rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: #fff;
+    background: #1f8f55;
+    border-radius: var(--radius-full);
+    box-shadow: 0 12px 28px -10px rgba(31, 60, 40, 0.55);
+    opacity: 0;
+    transform: translateY(1rem);
+    pointer-events: none;
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease;
+  }
+
+  .wa-float.is-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* Sin JS, siempre visible */
+  :global(html:not(.js)) .wa-float {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* No tapar el aviso de cookies */
+  :global(body:has(#cookie-banner:not([hidden]))) .wa-float {
+    display: none;
+  }
+
+  @media (min-width: 992px) {
+    .wa-float {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-float {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLElement>('[data-wa-float]');
+  if (btn) {
+    const contactSection = document.getElementById('contacto');
+    let contactVisible = false;
+    const update = () => btn.classList.toggle('is-visible', window.scrollY > 320 && !contactVisible);
+    if (contactSection && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        contactVisible = entry.isIntersecting;
+        update();
+      }).observe(contactSection);
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+</script>

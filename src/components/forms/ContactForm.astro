@@ -4,9 +4,32 @@ import { owner } from '../../data/owner';
 
 interface Props {
   formId?: string;
+  /** contact = presupuesto completo · audit = revisión gratuita (web + email) */
+  variant?: 'contact' | 'audit';
 }
 
-const { formId = 'contact' } = Astro.props;
+const { formId = 'contact', variant = 'contact' } = Astro.props;
+const isAudit = variant === 'audit';
+const urlId = `${formId}-web`;
+
+/** Opciones en botones: se rellenan con un toque y cualifican el contacto */
+const choiceGroups = [
+  {
+    name: 'necesidad',
+    legend: '¿Qué necesitas?',
+    options: ['Web nueva', 'Rediseño', 'Aparecer en Google', 'Publicidad', 'Redes sociales', 'Otro'],
+  },
+  {
+    name: 'presupuesto',
+    legend: 'Presupuesto orientativo',
+    options: ['Menos de 500 €', '500 – 1.000 €', '1.000 – 2.500 €', 'Más de 2.500 €', 'Aún no lo sé'],
+  },
+  {
+    name: 'plazo',
+    legend: '¿Para cuándo?',
+    options: ['Lo antes posible', 'En 1 – 2 meses', 'Sin prisa'],
+  },
+];
 const { endpoint: formEndpoint, web3formsAccessKey: web3formsKey } = formConfig;
 const nameId = `${formId}-nombre`;
 const emailId = `${formId}-email`;
@@ -30,9 +53,35 @@ const honeypotId = `${formId}-company`;
   </div>
 
   {web3formsKey && <input type="hidden" name="access_key" value={web3formsKey} />}
-  <input type="hidden" name="subject" value={`Nuevo mensaje — ${owner.fullName}`} />
+  <input
+    type="hidden"
+    name="subject"
+    value={isAudit ? `Revisión gratuita de web — ${owner.fullName}` : `Nuevo mensaje — ${owner.fullName}`}
+  />
+  <input type="hidden" name="tipo_solicitud" value={isAudit ? 'Revisión gratuita' : 'Contacto / presupuesto'} />
   <input type="hidden" name="from_name" value={`Web ${owner.fullName}`} />
 
+  {
+    isAudit && (
+      <div class="contact-form__field">
+        <label class="contact-form__label" for={urlId}>
+          Tu web<span class="contact-form__required">*</span>
+        </label>
+        <input
+          class="contact-form__input"
+          type="text"
+          id={urlId}
+          name="web"
+          inputmode="url"
+          autocomplete="url"
+          placeholder="tunegocio.com"
+          required
+        />
+      </div>
+    )
+  }
+
+  {!isAudit && (
   <div class="contact-form__field">
     <label class="contact-form__label" for={nameId}>
       Nombre<span class="contact-form__required">*</span>
@@ -46,6 +95,7 @@ const honeypotId = `${formId}-company`;
       required
     />
   </div>
+  )}
 
   <div class="contact-form__field">
     <label class="contact-form__label" for={emailId}>
@@ -61,23 +111,43 @@ const honeypotId = `${formId}-company`;
     />
   </div>
 
-  <div class="contact-form__field">
-    <label class="contact-form__label" for={messageId}>
-      Cuéntame tu proyecto<span class="contact-form__required">*</span>
-    </label>
-    <textarea
-      class="contact-form__input contact-form__textarea"
-      id={messageId}
-      name="mensaje"
-      rows="5"
-      placeholder="Qué hace tu negocio, qué necesitas (web nueva, rediseño, SEO…) y para cuándo"
-      required
-    ></textarea>
-  </div>
+  {
+    !isAudit &&
+      choiceGroups.map((group) => (
+        <fieldset class="contact-form__choices">
+          <legend class="contact-form__label">{group.legend}</legend>
+          <div class="contact-form__chips">
+            {group.options.map((option) => (
+              <label class="contact-form__chip">
+                <input type="radio" name={group.name} value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      ))
+  }
+
+  {
+    !isAudit && (
+      <div class="contact-form__field">
+        <label class="contact-form__label" for={messageId}>
+          Cuéntame algo más <span class="contact-form__optional">(opcional)</span>
+        </label>
+        <textarea
+          class="contact-form__input contact-form__textarea"
+          id={messageId}
+          name="mensaje"
+          rows="3"
+          placeholder="A qué se dedica tu negocio, si ya tienes web, alguna idea que te guste…"
+        />
+      </div>
+    )
+  }
 
   <p class="contact-form__status" id={statusId} role="status" aria-live="polite" hidden data-form-status></p>
 
-  <button type="submit" class="contact-form__submit">Enviar mensaje →</button>
+  <button type="submit" class="contact-form__submit">{isAudit ? 'Quiero mi revisión gratis →' : 'Enviar mensaje →'}</button>
   <p class="contact-form__note">
     Tus datos solo se usan para responderte. <a href="/politica-de-privacidad">Política de privacidad</a>.
   </p>
@@ -143,7 +213,74 @@ const honeypotId = `${formId}-company`;
 
   .contact-form__textarea {
     resize: vertical;
-    min-height: 8.5rem;
+    min-height: 6rem;
+  }
+
+  .contact-form__optional {
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .contact-form__choices {
+    display: grid;
+    gap: 0.625rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  .contact-form__choices legend {
+    padding: 0;
+    margin-bottom: 0.625rem;
+  }
+
+  .contact-form__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .contact-form__chip {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .contact-form__chip input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+
+  .contact-form__chip span {
+    display: inline-block;
+    padding: 0.5rem 0.9375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-full);
+    transition:
+      background var(--transition-fast),
+      border-color var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  .contact-form__chip:hover span {
+    border-color: var(--accent);
+  }
+
+  .contact-form__chip input:checked + span {
+    color: var(--white);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .contact-form__chip input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
   .contact-form__status {
@@ -224,6 +361,11 @@ const honeypotId = `${formId}-company`;
       const honeypot = form.querySelector('input[name="company"]');
       if (honeypot instanceof HTMLInputElement && honeypot.value.trim()) return;
 
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
       if (form.dataset.formConfigured !== 'true') {
         showStatus(
           form,
@@ -245,7 +387,13 @@ const honeypotId = `${formId}-company`;
         });
         if (!response.ok) throw new Error('Network error');
         form.reset();
-        showStatus(form, '¡Mensaje enviado! Te responderé en menos de 24 h.', 'success');
+        showStatus(
+          form,
+          form.querySelector('input[name="web"]')
+            ? '¡Recibido! En menos de 48 h te envío la revisión de tu web.'
+            : '¡Mensaje enviado! Te responderé en menos de 24 h.',
+          'success',
+        );
       } catch {
         showStatus(form, 'Error al enviar. Inténtalo de nuevo o escríbeme por email.', 'error');
       } finally {
