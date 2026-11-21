@@ -41,5 +41,7 @@ export const tools = [
   'Email marketing',
   'CRM',
   'Figma',
+  'Cursor',
+  'IA generativa (ChatGPT, Claude)',
   'Excel',
 ] as const;
