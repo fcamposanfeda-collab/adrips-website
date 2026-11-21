@@ -12,6 +12,7 @@
     "check:forms": "node --env-file=.env scripts/check-form-env.mjs"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.4.7",
     "sharp": "^0.35.2"

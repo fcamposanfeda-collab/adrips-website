@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageIntro from '../../../components/sections/PageIntro.astro';
+import BlogList from '../../../components/blog/BlogList.astro';
+import ContactCta from '../../../components/sections/ContactCta.astro';
+import { getPublishedPosts, categorySlug } from '../../../data/blog';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const categories = [...new Set(posts.map((p) => p.data.category))];
+  return categories.map((category) => ({
+    params: { category: categorySlug(category) },
+    props: { category, posts: posts.filter((p) => p.data.category === category) },
+  }));
+}
+
+const { category, posts } = Astro.props;
+---
+
+<BaseLayout
+  title={`${category}: artículos y guías | Blog de Adrips`}
+  description={`Artículos sobre ${category.toLowerCase()} para pymes y marcas personales: guías prácticas, tendencias y ejemplos aplicables.`}
+>
+  <PageIntro eyebrow="Blog" title="Artículos de" emphasis={category} />
+  <BlogList posts={posts} activeCategory={category} />
+  <ContactCta formId="contact-blog-cat" />
+</BaseLayout>

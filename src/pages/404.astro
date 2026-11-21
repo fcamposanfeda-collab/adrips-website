@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import { routes } from '../data/routes';
+---
+
+<BaseLayout title="Página no encontrada | Adrips" description="La página que buscas no existe o ha cambiado de dirección.">
+  <section class="section nf">
+    <div class="container nf__inner">
+      <p class="eyebrow">Error 404</p>
+      <h1>Esta página se ha ido <em>con el atardecer</em></h1>
+      <p class="lead">Puede que el enlace haya cambiado. Te dejo por dónde seguir:</p>
+      <div class="nf__actions">
+        <Button href="/" variant="primary" arrow>Ir al inicio</Button>
+        <Button href={routes.services} variant="outline">Ver servicios</Button>
+        <Button href={routes.blog} variant="outline">Leer el blog</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf__inner {
+    max-width: 44rem;
+    padding-block: 3rem;
+  }
+
+  .nf h1 {
+    margin: 0 0 1.25rem;
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+  }
+
+  .nf__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+</style>
