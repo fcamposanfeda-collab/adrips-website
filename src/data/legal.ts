@@ -2,12 +2,13 @@
  * Datos legales del titular del sitio (LSSI / RGPD).
  */
 export const legal = {
-  lastUpdated: 'julio 2026',
+  lastUpdated: 'noviembre 2026',
 
   /** Identificación del responsable (LSSI / RGPD) */
-  nif: '05718916N',
-  address: 'Paseo Carlos Eraña 10',
-  postalCode: '13004',
+  holder: 'Arascam Gestión Integral, S.L.',
+  nif: 'B19475961',
+  address: 'Ctra. de Toledo, 26 (Hotel Cumbria)',
+  postalCode: '13005',
   city: 'Ciudad Real',
   province: 'Ciudad Real',
   country: 'España',
@@ -15,7 +16,7 @@ export const legal = {
 
   /** Datos registrales (LSSI art. 10) */
   registryInfo:
-    'Actividad desarrollada en régimen de autónoma. No inscrita en el Registro Mercantil.',
+    'Inscrita en el Registro Mercantil de Ciudad Real, hoja CR-34498, inscripción 1.ª.',
 
   /** Jurisdicción para litigios */
   jurisdiction: 'Ciudad Real',

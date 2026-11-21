@@ -21,7 +21,7 @@ const meta = getPageMeta('/aviso-legal');
 
     <h2>1. Titular del sitio web</h2>
     <ul>
-      <li><strong>Denominación / titular:</strong> {owner.fullName}</li>
+      <li><strong>Denominación / titular:</strong> {legal.holder}</li>
       <li><strong>Marca comercial:</strong> {brand.name}</li>
       <li><strong>NIF:</strong> {legal.nif}</li>
       <li>
@@ -67,14 +67,14 @@ const meta = getPageMeta('/aviso-legal');
       <li>Reproducir, copiar, distribuir o transformar los contenidos sin autorización expresa del titular.</li>
     </ul>
     <p>
-      {owner.fullName} se reserva el derecho a denegar o retirar el acceso al sitio, sin previo aviso, a
+      {legal.holder} se reserva el derecho a denegar o retirar el acceso al sitio, sin previo aviso, a
       usuarios que incumplan estas condiciones.
     </p>
 
     <h2>4. Propiedad intelectual e industrial</h2>
     <p>
       Los contenidos de este sitio web — textos, imágenes, diseño gráfico, código fuente, logotipos, marcas y
-      demás elementos — son propiedad de {owner.fullName} o de terceros que han autorizado su uso, y están
+      demás elementos — son propiedad de {legal.holder} o de terceros que han autorizado su uso, y están
       protegidos por la legislación española e internacional en materia de propiedad intelectual e industrial.
     </p>
     <p>
@@ -91,7 +91,7 @@ const meta = getPageMeta('/aviso-legal');
     <h2>5. Responsabilidad</h2>
     <h3>5.1. Contenidos</h3>
     <p>
-      {owner.fullName} se esfuerza por mantener la información del sitio actualizada y exacta, pero no garantiza
+      {legal.holder} se esfuerza por mantener la información del sitio actualizada y exacta, pero no garantiza
       la ausencia de errores ni la disponibilidad ininterrumpida del servicio. El titular no será responsable de
       daños derivados del uso de la información publicada, de interrupciones del servicio o de la presencia de
       virus u otros elementos lesivos introducidos por terceros.
@@ -99,7 +99,7 @@ const meta = getPageMeta('/aviso-legal');
 
     <h3>5.2. Enlaces externos</h3>
     <p>
-      El sitio puede incluir enlaces a páginas de terceros. {owner.fullName} no controla ni asume responsabilidad
+      El sitio puede incluir enlaces a páginas de terceros. {legal.holder} no controla ni asume responsabilidad
       por los contenidos, políticas de privacidad o prácticas de sitios ajenos. El acceso a enlaces externos es
       bajo tu propia responsabilidad.
     </p>
@@ -132,14 +132,14 @@ const meta = getPageMeta('/aviso-legal');
 
     <h2>8. Legislación aplicable y jurisdicción</h2>
     <p>
-      Las relaciones entre {owner.fullName} y el usuario se regirán por la normativa española vigente. Para la
+      Las relaciones entre {legal.holder} y el usuario se regirán por la normativa española vigente. Para la
       resolución de controversias, las partes se someten a los juzgados y tribunales de {legal.jurisdiction},
       salvo que la normativa de consumidores y usuarios establezca otro fuero imperativo.
     </p>
 
     <h2>9. Modificaciones</h2>
     <p>
-      {owner.fullName} se reserva el derecho de modificar este aviso legal para adaptarlo a cambios legislativos,
+      {legal.holder} se reserva el derecho de modificar este aviso legal para adaptarlo a cambios legislativos,
       en el sitio web o en la actividad profesional. La versión publicada en esta página será la vigente en cada
       momento.
     </p>
