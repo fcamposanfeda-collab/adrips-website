@@ -17,16 +17,19 @@ const choiceGroups = [
   {
     name: 'necesidad',
     legend: '¿Qué necesitas?',
+    multiple: true,
     options: ['Web nueva', 'Rediseño', 'Aparecer en Google', 'Publicidad', 'Redes sociales', 'Otro'],
   },
   {
     name: 'presupuesto',
     legend: 'Presupuesto orientativo',
+    multiple: true,
     options: ['Menos de 500 €', '500 – 1.000 €', '1.000 – 2.500 €', 'Más de 2.500 €', 'Aún no lo sé'],
   },
   {
     name: 'plazo',
     legend: '¿Para cuándo?',
+    multiple: false,
     options: ['Lo antes posible', 'En 1 – 2 meses', 'Sin prisa'],
   },
 ];
@@ -115,14 +118,26 @@ const honeypotId = `${formId}-company`;
     !isAudit &&
       choiceGroups.map((group) => (
         <fieldset class="contact-form__choices">
-          <legend class="contact-form__label">{group.legend}</legend>
+          <legend class="contact-form__label">
+            {group.legend}
+            {group.multiple && <span class="contact-form__optional"> (puedes elegir varias)</span>}
+          </legend>
+          {/* Las casillas múltiples se envían juntas en un campo oculto: «Web nueva, Aparecer en Google» */}
+          {group.multiple && <input type="hidden" name={group.name} value="" data-choice-target={group.name} />}
           <div class="contact-form__chips">
-            {group.options.map((option) => (
-              <label class="contact-form__chip">
-                <input type="radio" name={group.name} value={option} />
-                <span>{option}</span>
-              </label>
-            ))}
+            {group.options.map((option) =>
+              group.multiple ? (
+                <label class="contact-form__chip">
+                  <input type="checkbox" value={option} data-choice-group={group.name} />
+                  <span>{option}</span>
+                </label>
+              ) : (
+                <label class="contact-form__chip">
+                  <input type="radio" name={group.name} value={option} />
+                  <span>{option}</span>
+                </label>
+              ),
+            )}
           </div>
         </fieldset>
       ))
@@ -360,6 +375,15 @@ const honeypotId = `${formId}-company`;
 
       const honeypot = form.querySelector('input[name="company"]');
       if (honeypot instanceof HTMLInputElement && honeypot.value.trim()) return;
+
+      form.querySelectorAll<HTMLInputElement>('[data-choice-target]').forEach((hidden) => {
+        const name = hidden.dataset.choiceTarget;
+        hidden.value = Array.from(
+          form.querySelectorAll<HTMLInputElement>(`input[data-choice-group="${name}"]:checked`),
+        )
+          .map((box) => box.value)
+          .join(', ');
+      });
 
       if (!form.checkValidity()) {
         form.reportValidity();
