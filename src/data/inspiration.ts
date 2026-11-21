@@ -43,11 +43,11 @@ export const inspirationCategories: { id: InspirationCategory | 'todas'; label: 
 
 export const inspirationPhotos: InspirationPhoto[] = [
   {
-    id: 'margarita-atardecer',
-    category: 'flores',
-    src: '/images/inspiracion/margarita-atardecer.webp',
-    alt: 'Mano sosteniendo una margarita contra un cielo azul al atardecer',
-    caption: 'Una margarita y el sol bajando.',
+    id: 'cielo-lila',
+    category: 'atardecer',
+    src: '/images/inspiracion/cielo-lila.webp',
+    alt: 'Cielo lila y rosa sobre el horizonte al atardecer',
+    caption: 'Lila, rosa y melocotón.',
   },
   {
     id: 'cerezo-playa',
@@ -120,10 +120,10 @@ export const inspirationPhotos: InspirationPhoto[] = [
     caption: 'Margaritas con luz de última hora.',
   },
   {
-    id: 'playa-arena-rosa',
-    category: 'mar',
-    src: '/images/inspiracion/playa-arena-rosa.webp',
-    alt: 'Playa de arena rosa con agua turquesa',
-    caption: 'Arena rosa y agua turquesa.',
+    id: 'luna-nubes-rosas',
+    category: 'atardecer',
+    src: '/images/inspiracion/luna-nubes-rosas.webp',
+    alt: 'Luna creciente entre nubes rosas y azules',
+    caption: 'Luna entre nubes rosas.',
   },
 ];
