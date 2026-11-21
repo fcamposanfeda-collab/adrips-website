@@ -43,14 +43,6 @@ export const inspirationCategories: { id: InspirationCategory | 'todas'; label: 
 
 export const inspirationPhotos: InspirationPhoto[] = [
   {
-    id: 'atardecer-adriana',
-    category: 'atardecer',
-    src: '/images/inspiracion/adriana-atardecer.webp',
-    position: '18% center',
-    alt: 'Adriana Pérez Salmerón con un atardecer de fondo',
-    caption: 'Atardecer en la costa: luz dorada y calma.',
-  },
-  {
     id: 'margarita-atardecer',
     category: 'flores',
     src: '/images/inspiracion/margarita-atardecer.webp',
@@ -100,13 +92,6 @@ export const inspirationPhotos: InspirationPhoto[] = [
     caption: 'Coral y melocotón sobre el agua.',
   },
   {
-    id: 'flores-amarillas',
-    category: 'flores',
-    src: '/images/inspiracion/flores-amarillas.webp',
-    alt: 'Flores amarillas en primer plano con fondo natural',
-    caption: 'Amarillo vivo en pleno invierno.',
-  },
-  {
     id: 'pasarela-atardecer',
     category: 'atardecer',
     src: '/images/inspiracion/pasarela-atardecer.webp',
@@ -140,12 +125,5 @@ export const inspirationPhotos: InspirationPhoto[] = [
     src: '/images/inspiracion/playa-arena-rosa.webp',
     alt: 'Playa de arena rosa con agua turquesa',
     caption: 'Arena rosa y agua turquesa.',
-  },
-  {
-    id: 'cartel-atardecer',
-    category: 'atardecer',
-    src: '/images/inspiracion/cartel-atardecer.webp',
-    alt: 'Cartel junto al agua bajo un cielo rosa y violeta',
-    caption: 'Recordatorio: parar también es avanzar.',
   },
 ];

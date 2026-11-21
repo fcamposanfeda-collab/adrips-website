@@ -3,8 +3,6 @@ import ImageLightbox from '../ui/ImageLightbox.astro';
 import {
   inspirationMeta,
   inspirationPhotos,
-  inspirationCategories,
-  type InspirationCategory,
 } from '../../data/inspiration';
 
 interface Props {
@@ -13,11 +11,6 @@ interface Props {
 
 const { showIntro = true } = Astro.props;
 
-const categoryLabels: Record<InspirationCategory, string> = {
-  atardecer: 'Atardecer',
-  flores: 'Flores',
-  mar: 'Mar',
-};
 ---
 
 <section class="inspiration section" aria-labelledby="inspiration-title">
@@ -30,21 +23,6 @@ const categoryLabels: Record<InspirationCategory, string> = {
       )
     }
 
-    <div class="inspiration__filters" role="tablist" aria-label="Filtrar fotos" data-reveal>
-      {
-        inspirationCategories.map((cat, index) => (
-          <button
-            type="button"
-            class:list={['inspiration__filter', { 'is-active': index === 0 }]}
-            role="tab"
-            aria-selected={index === 0 ? 'true' : 'false'}
-            data-filter={cat.id}
-          >
-            {cat.label}
-          </button>
-        ))
-      }
-    </div>
 
     <ul class="inspiration__grid" data-inspiration-grid>
       {
@@ -53,7 +31,6 @@ const categoryLabels: Record<InspirationCategory, string> = {
             class:list={[
               'inspiration__item',
               `inspiration__item--${photo.category}`,
-              { 'inspiration__item--tall': index % 3 === 0 },
             ]}
             data-category={photo.category}
             data-reveal
@@ -67,7 +44,7 @@ const categoryLabels: Record<InspirationCategory, string> = {
                     class="inspiration__photo-btn"
                     data-lightbox-src={photo.src}
                     data-lightbox-alt={photo.alt}
-                    data-lightbox-caption={photo.caption ?? ''}
+                    data-lightbox-caption=""
                     aria-label={`Ampliar imagen: ${photo.alt}`}
                   >
                     <img
@@ -90,10 +67,6 @@ const categoryLabels: Record<InspirationCategory, string> = {
                   </div>
                 )
               }
-              <figcaption class="inspiration__caption">
-                <span class="inspiration__tag">{categoryLabels[photo.category]}</span>
-                {photo.caption && <p>{photo.caption}</p>}
-              </figcaption>
             </figure>
           </li>
         ))
@@ -103,27 +76,6 @@ const categoryLabels: Record<InspirationCategory, string> = {
   <ImageLightbox />
 </section>
 
-<script>
-  const filters = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
-  const items = document.querySelectorAll<HTMLElement>('[data-inspiration-grid] .inspiration__item');
-
-  filters.forEach((button) => {
-    button.addEventListener('click', () => {
-      const filter = button.dataset.filter;
-
-      filters.forEach((btn) => {
-        const active = btn === button;
-        btn.classList.toggle('is-active', active);
-        btn.setAttribute('aria-selected', String(active));
-      });
-
-      items.forEach((item) => {
-        const show = filter === 'todas' || item.dataset.category === filter;
-        item.hidden = !show;
-      });
-    });
-  });
-</script>
 
 <style>
   .inspiration {
@@ -151,35 +103,8 @@ const categoryLabels: Record<InspirationCategory, string> = {
     border-radius: var(--radius-lg);
   }
 
-  .inspiration__filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-  }
 
-  .inspiration__filter {
-    padding: 0.5rem 1rem;
-    font-family: inherit;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--color-muted);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    transition:
-      color var(--transition-fast),
-      background var(--transition-fast),
-      border-color var(--transition-fast);
-  }
 
-  .inspiration__filter:hover,
-  .inspiration__filter.is-active {
-    color: var(--color-text);
-    background: rgba(240, 228, 184, 0.5);
-    border-color: var(--color-brand-cream-deep);
-  }
 
   .inspiration__grid {
     display: grid;
@@ -194,15 +119,11 @@ const categoryLabels: Record<InspirationCategory, string> = {
     margin: 0;
   }
 
-  .inspiration__item--tall .inspiration__figure {
-    aspect-ratio: 3 / 4;
-  }
-
   .inspiration__figure {
     position: relative;
     margin: 0;
     height: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
@@ -251,45 +172,11 @@ const categoryLabels: Record<InspirationCategory, string> = {
     transform: scale(1.04);
   }
 
-  .inspiration__caption {
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    padding: 2.5rem 1rem 1rem;
-    background: linear-gradient(to top, rgba(74, 50, 50, 0.72), transparent);
-    color: var(--color-on-dark);
-  }
 
-  .inspiration__caption p {
-    margin: 0.35rem 0 0;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    opacity: 0.95;
-  }
 
-  .inspiration__tag {
-    display: inline-block;
-    padding: 0.2rem 0.625rem;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    background: rgba(255, 252, 250, 0.2);
-    border-radius: var(--radius-full);
-    backdrop-filter: blur(4px);
-  }
 
-  .inspiration__item--atardecer .inspiration__tag {
-    background: rgba(232, 168, 160, 0.45);
-  }
 
-  .inspiration__item--flores .inspiration__tag {
-    background: rgba(200, 176, 224, 0.45);
-  }
 
-  .inspiration__item--mar .inspiration__tag {
-    background: rgba(240, 228, 184, 0.45);
-  }
 
   @media (min-width: 768px) {
     .inspiration__grid {
@@ -297,13 +184,5 @@ const categoryLabels: Record<InspirationCategory, string> = {
       gap: 1.25rem;
     }
 
-    .inspiration__item--tall {
-      grid-row: span 2;
-    }
-
-    .inspiration__item--tall .inspiration__figure {
-      aspect-ratio: auto;
-      min-height: 100%;
-    }
   }
 </style>
