@@ -1,17 +1,26 @@
 import { routes } from './routes';
+import { services, serviceHref } from './services';
 
-export type NavLink = { label: string; href: string };
+export type NavLink = {
+  label: string;
+  href: string;
+  children?: { label: string; href: string; summary?: string; icon?: string; badge?: string }[];
+};
 
 export const mainNav: NavLink[] = [
   { label: 'Proyectos', href: routes.projects },
-  { label: 'Servicios', href: routes.services },
+  {
+    label: 'Servicios',
+    href: routes.services,
+    children: services.map((s) => ({ label: s.title, href: serviceHref(s), summary: s.summary, icon: s.icon, badge: s.badge })),
+  },
   { label: 'Sobre mí', href: routes.about },
   { label: 'Contacto', href: routes.contact },
 ];
 
 /** Eventos e Inspiración salen del menú principal para no diluir la oferta web */
 export const footerNav: NavLink[] = [
-  ...mainNav,
+  ...mainNav.map(({ label, href }) => ({ label, href })),
   { label: 'Papelería para eventos', href: routes.events },
   { label: 'Inspiración', href: routes.inspiration },
 ];

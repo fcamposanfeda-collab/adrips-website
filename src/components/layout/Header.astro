@@ -5,6 +5,8 @@ import { routes } from '../../data/routes';
 import { isActiveNav } from '../../utils/nav';
 import Button from '../ui/Button.astro';
 import LogoMark from '../brand/LogoMark.astro';
+import Icon from '../ui/Icon.astro';
+import type { ServiceIcon } from '../../data/services';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -19,14 +21,43 @@ const currentPath = Astro.url.pathname;
       <ul class="site-header__list">
         {
           mainNav.map((item, i) => (
-            <li style={`--i:${i}`}>
+            <li style={`--i:${i}`} class:list={{ 'has-sub': !!item.children }} data-sub={item.children ? '' : undefined}>
               <a
                 href={item.href}
                 class:list={['site-header__link', { 'is-active': isActiveNav(item.href, currentPath) }]}
-                aria-current={isActiveNav(item.href, currentPath) ? 'page' : undefined}
+                aria-current={currentPath.replace(/\/$/, '') === item.href ? 'page' : undefined}
               >
                 {item.label}
               </a>
+              {item.children && (
+                <>
+                  <button type="button" class="site-header__sub-toggle" aria-expanded="false" aria-label={`Ver ${item.label.toLowerCase()}`} data-sub-toggle>
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+                      <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </button>
+                  <div class="site-header__panel">
+                    <ul class="site-header__sub">
+                      {item.children.map((c) => (
+                        <li>
+                          <a href={c.href} class:list={['site-header__sublink', { 'is-active': currentPath.replace(/\/$/, '') === c.href }]}>
+                            {c.icon && (
+                              <span class="site-header__subicon">
+                                <Icon name={c.icon as ServiceIcon} size={20} />
+                              </span>
+                            )}
+                            <span>
+                              <strong>{c.label}{c.badge && <em class="site-header__badge">{c.badge}</em>}</strong>
+                              {c.summary && <small>{c.summary}</small>}
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    <a href={item.href} class="site-header__panel-all">Ver todos los servicios →</a>
+                  </div>
+                </>
+              )}
             </li>
           ))
         }
@@ -67,6 +98,31 @@ const currentPath = Astro.url.pathname;
   });
   menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
 
+  // Submenú Servicios: hover en escritorio (CSS) + botón para teclado, táctil y móvil
+  document.querySelectorAll<HTMLButtonElement>('[data-sub-toggle]').forEach((btn) => {
+    const li = btn.closest<HTMLElement>('[data-sub]');
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      li?.classList.toggle('is-sub-open', open);
+    });
+    li?.addEventListener('focusout', (e) => {
+      if (window.innerWidth >= 900 && !li.contains(e.relatedTarget as Node)) {
+        btn.setAttribute('aria-expanded', 'false');
+        li.classList.remove('is-sub-open');
+      }
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth < 900) return;
+    document.querySelectorAll<HTMLElement>('[data-sub].is-sub-open').forEach((li) => {
+      if (!li.contains(e.target as Node)) {
+        li.classList.remove('is-sub-open');
+        li.querySelector('[data-sub-toggle]')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
   const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -78,7 +134,7 @@ const currentPath = Astro.url.pathname;
     top: 0;
     z-index: 100;
     height: var(--header-height);
-    background: rgba(250, 246, 241, 0.78);
+    background: rgba(251, 246, 244, 0.78);
     backdrop-filter: saturate(1.4) blur(14px);
     -webkit-backdrop-filter: saturate(1.4) blur(14px);
     border-bottom: 1px solid transparent;
@@ -89,7 +145,7 @@ const currentPath = Astro.url.pathname;
 
   .site-header.is-scrolled {
     border-bottom-color: var(--line);
-    background: rgba(250, 246, 241, 0.9);
+    background: rgba(251, 246, 244, 0.9);
   }
 
   .site-header__inner {
@@ -178,6 +234,148 @@ const currentPath = Astro.url.pathname;
     transform: translateY(-3.75px) rotate(-45deg);
   }
 
+  /* Submenú */
+  .has-sub {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .site-header__sub-toggle {
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-left: -0.625rem;
+    padding: 0;
+    color: var(--ink-soft);
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    transition: transform 300ms var(--ease-out);
+  }
+
+  .is-sub-open > .site-header__sub-toggle {
+    transform: rotate(180deg);
+  }
+
+  .site-header__sub {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .site-header__sublink {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast);
+  }
+
+  .site-header__sublink:hover,
+  .site-header__sublink.is-active {
+    background: var(--paper-2);
+  }
+
+  .site-header__sublink strong {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .site-header__badge {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.6875rem;
+    font-style: normal;
+    font-weight: 700;
+    vertical-align: 0.1em;
+    color: var(--white);
+    background: var(--accent);
+    border-radius: var(--radius-full);
+  }
+
+  .site-header__sublink small {
+    display: block;
+    margin-top: 0.125rem;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  .site-header__subicon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .site-header__panel-all {
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.875rem 0.75rem 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent);
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 900px) {
+    .site-header__panel {
+      position: absolute;
+      top: calc(100% + 0.75rem);
+      left: 50%;
+      width: 40rem;
+      padding: 0.75rem;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-hover);
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, 6px);
+      transition:
+        opacity 220ms var(--ease-out),
+        transform 220ms var(--ease-out),
+        visibility 0s linear 220ms;
+    }
+
+    /* Puente invisible para no perder el hover al bajar al panel */
+    .site-header__panel::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -0.875rem;
+      height: 0.875rem;
+    }
+
+    .has-sub:hover > .site-header__panel,
+    .has-sub.is-sub-open > .site-header__panel {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+      transition:
+        opacity 220ms var(--ease-out),
+        transform 220ms var(--ease-out);
+    }
+
+    .has-sub:hover > .site-header__sub-toggle {
+      transform: rotate(180deg);
+    }
+
+    .site-header__sub {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
   @media (min-width: 900px) {
     .site-header__toggle {
       display: none;
@@ -231,6 +429,50 @@ const currentPath = Astro.url.pathname;
     .site-header__nav.is-open .site-header__list li {
       transform: none;
       opacity: 1;
+    }
+
+    .has-sub {
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .site-header__sub-toggle {
+      width: 2.75rem;
+      height: 2.75rem;
+      margin: 0;
+      border: 1px solid var(--line-strong);
+    }
+
+    .site-header__panel {
+      display: none;
+      width: 100%;
+      padding-bottom: 1rem;
+    }
+
+    .is-sub-open > .site-header__panel {
+      display: block;
+    }
+
+    .site-header__sublink {
+      padding: 0.5rem 0;
+    }
+
+    .site-header__sublink small,
+    .site-header__subicon {
+      display: none;
+    }
+
+    .site-header__sublink strong {
+      font-size: 1.0625rem;
+      font-weight: 500;
+    }
+
+    .site-header__panel-all {
+      padding-inline: 0;
+    }
+
+    .site-header__nav {
+      overflow-y: auto;
     }
 
     .site-header__link {
