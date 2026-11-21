@@ -4,7 +4,7 @@
  * y aparece en el desplegable del menú, en la home y en /servicios.
  * Para editar textos de una página, cambia aquí sus campos: no hace falta tocar el diseño.
  */
-export type ServiceIcon = 'layout' | 'search' | 'target' | 'chart' | 'chat' | 'pen' | 'code' | 'compass';
+export type ServiceIcon = 'layout' | 'search' | 'target' | 'chart' | 'chat' | 'pen' | 'code' | 'compass' | 'sparkle';
 
 export type ServiceStep = { title: string; text: string };
 export type ServiceFaq = { q: string; a: string };
@@ -19,6 +19,8 @@ export type Service = {
   /** Párrafo para la página /servicios */
   description: string;
   icon: ServiceIcon;
+  /** Etiqueta destacada (p. ej. «Nuevo») en menú y tarjetas */
+  badge?: string;
   /** Página del servicio */
   page: {
     metaTitle: string;
@@ -116,6 +118,49 @@ export const services: Service[] = [
       ],
       faqs: [
         { q: '¿Cuándo se ven resultados?', a: 'El SEO es una estrategia a medio plazo: depende de la competencia del sector y del punto de partida de tu web. En la auditoría te doy una previsión realista.' },
+      ],
+    },
+  },
+  {
+    id: 'ia',
+    slug: 'posicionamiento-en-ia',
+    title: 'Posicionamiento en IA',
+    summary: 'Que ChatGPT, Gemini y Perplexity recomienden tu negocio.',
+    description:
+      'Optimización para buscadores con inteligencia artificial (GEO): contenidos, datos estructurados y autoridad de marca para que las IA te citen y te recomienden cuando alguien pregunta por lo que ofreces.',
+    icon: 'sparkle',
+    badge: 'Nuevo',
+    features: ['ChatGPT y Perplexity', 'Gemini y resúmenes de IA de Google', 'Datos estructurados', 'Contenido citable', 'Auditoría de visibilidad en IA'],
+    page: {
+      metaTitle: 'Posicionamiento en IA (GEO): aparece en ChatGPT y Gemini | Adrips',
+      metaDescription:
+        'Posicionamiento en motores de búsqueda con inteligencia artificial (GEO): optimiza tu web y tu marca para aparecer y ser recomendado en ChatGPT, Gemini, Perplexity y los resúmenes con IA de Google.',
+      heading: 'Posicionamiento en IA',
+      emphasis: 'para que te recomienden',
+      lead: 'Cada vez más personas ya no buscan en Google: le preguntan a ChatGPT, Gemini o Perplexity qué contratar. Si tu negocio no aparece en esas respuestas, no existe para ellos. Preparo tu web y tu marca para que las IA te entiendan, te citen y te recomienden.',
+      includes: [
+        { title: 'Auditoría de visibilidad en IA', text: 'Compruebo qué responden ChatGPT, Gemini, Perplexity y los resúmenes con IA de Google cuando alguien pregunta por tu sector y tu zona.' },
+        { title: 'Contenido que las IA citan', text: 'Respuestas claras a las preguntas reales de tus clientes, con estructura, datos y un formato fácil de citar.' },
+        { title: 'Datos estructurados', text: 'Schema.org para que las IA entiendan quién eres, qué ofreces, dónde y a qué precio.' },
+        { title: 'Autoridad de marca', text: 'Menciones, reseñas y presencia en fuentes de confianza: las señales en las que se apoyan las IA para recomendar.' },
+        { title: 'SEO técnico para rastreadores de IA', text: 'Web rápida, accesible y con la configuración adecuada para que los rastreadores de IA puedan leerla.' },
+        { title: 'Seguimiento', text: 'Revisión periódica de cómo apareces en las respuestas de IA y ajustes según los resultados.' },
+      ],
+      outcomes: [
+        'Aparecer cuando alguien pregunta a una IA por lo que haces',
+        'Adelantarte a una competencia que aún no lo trabaja',
+        'Reforzar también tu SEO en Google',
+        'Una marca que las IA entienden y describen bien',
+      ],
+      steps: [
+        { title: 'Auditoría', text: 'Analizo cómo te ven hoy las principales IA y tu competencia.' },
+        { title: 'Optimización', text: 'Ajusto contenidos, datos estructurados y señales de marca.' },
+        { title: 'Seguimiento', text: 'Mido tu presencia en las respuestas y la mejoro mes a mes.' },
+      ],
+      faqs: [
+        { q: '¿Qué es el posicionamiento en IA o GEO?', a: 'GEO (Generative Engine Optimization) es el conjunto de técnicas para que los buscadores con inteligencia artificial, como ChatGPT, Gemini, Perplexity o los resúmenes con IA de Google, encuentren tu negocio, lo entiendan y lo mencionen en sus respuestas.' },
+        { q: '¿Sustituye al SEO tradicional?', a: 'No, lo complementa. Una buena base SEO ayuda a que las IA te encuentren, y lo que se trabaja para las IA (contenido claro, datos estructurados, autoridad) también mejora tu posicionamiento en Google.' },
+        { q: '¿Se puede garantizar aparecer en ChatGPT?', a: 'Nadie puede garantizarlo: las respuestas de las IA cambian y no dependen de una sola web. Lo que sí se puede es aumentar mucho las probabilidades trabajando las señales en las que se basan, y medir la evolución.' },
       ],
     },
   },

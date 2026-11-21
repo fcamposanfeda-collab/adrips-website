@@ -47,7 +47,7 @@ const currentPath = Astro.url.pathname;
                               </span>
                             )}
                             <span>
-                              <strong>{c.label}</strong>
+                              <strong>{c.label}{c.badge && <em class="site-header__badge">{c.badge}</em>}</strong>
                               {c.summary && <small>{c.summary}</small>}
                             </span>
                           </a>
@@ -283,6 +283,19 @@ const currentPath = Astro.url.pathname;
     font-size: 0.9375rem;
     font-weight: 700;
     color: var(--ink);
+  }
+
+  .site-header__badge {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.6875rem;
+    font-style: normal;
+    font-weight: 700;
+    vertical-align: 0.1em;
+    color: var(--white);
+    background: var(--accent);
+    border-radius: var(--radius-full);
   }
 
   .site-header__sublink small {

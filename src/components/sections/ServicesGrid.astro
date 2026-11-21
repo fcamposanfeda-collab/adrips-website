@@ -46,8 +46,13 @@ const list = services.filter((s) => s.slug !== exclude);
     <ul class:list={['services__grid', { 'services__grid--compact': !!exclude }]}>
       {
         list.map((s, i) => (
-          <li data-reveal data-reveal-delay={String((i % 3) + 1)}>
-            <a href={serviceHref(s)} class:list={['svc-card', { 'svc-card--dark': i === 0 && !exclude }]}>
+          <li
+            data-reveal
+            data-reveal-delay={String((i % 3) + 1)}
+            class:list={{ 'svc-li--first': i === 0 && !exclude, 'svc-li--wide': !!s.badge && !exclude }}
+          >
+            <a href={serviceHref(s)} class:list={['svc-card', { 'svc-card--dark': i === 0 && !exclude, 'svc-card--new': !!s.badge }]}>
+              {s.badge && <span class="svc-card__badge">{s.badge}</span>}
               <div class="svc-card__top">
                 <span class="svc-card__icon">
                   <Icon name={s.icon} size={24} />
@@ -137,6 +142,31 @@ const list = services.filter((s) => s.slug !== exclude);
     border-radius: 50%;
     background: radial-gradient(closest-side, rgba(227, 169, 174, 0.35), transparent);
     pointer-events: none;
+  }
+
+  .svc-card--new {
+    border-color: var(--blush);
+    background:
+      radial-gradient(circle at 100% 0%, rgba(201, 184, 236, 0.45), transparent 55%),
+      radial-gradient(circle at 0% 100%, rgba(239, 205, 208, 0.7), transparent 60%),
+      var(--white);
+  }
+
+  .svc-card--new .svc-card__icon {
+    color: var(--white);
+    background: linear-gradient(135deg, var(--accent), var(--lavender-deep));
+  }
+
+  .svc-card__badge {
+    position: absolute;
+    top: 2rem;
+    right: 4.75rem;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--accent);
+    border-radius: var(--radius-full);
   }
 
   .svc-card__top {
@@ -242,6 +272,10 @@ const list = services.filter((s) => s.slug !== exclude);
     .services__grid {
       grid-template-columns: 1fr 1fr;
     }
+
+    .svc-li--first {
+      grid-column: span 2;
+    }
   }
 
   @media (min-width: 1000px) {
@@ -249,8 +283,13 @@ const list = services.filter((s) => s.slug !== exclude);
       grid-template-columns: repeat(3, 1fr);
     }
 
+    .svc-li--first,
+    .svc-li--wide {
+      grid-column: span 2;
+    }
+
     .services__grid--compact {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
 
     .services__grid--compact .svc-card {

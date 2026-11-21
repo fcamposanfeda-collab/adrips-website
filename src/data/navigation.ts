@@ -4,7 +4,7 @@ import { services, serviceHref } from './services';
 export type NavLink = {
   label: string;
   href: string;
-  children?: { label: string; href: string; summary?: string; icon?: string }[];
+  children?: { label: string; href: string; summary?: string; icon?: string; badge?: string }[];
 };
 
 export const mainNav: NavLink[] = [
@@ -12,7 +12,7 @@ export const mainNav: NavLink[] = [
   {
     label: 'Servicios',
     href: routes.services,
-    children: services.map((s) => ({ label: s.title, href: serviceHref(s), summary: s.summary, icon: s.icon })),
+    children: services.map((s) => ({ label: s.title, href: serviceHref(s), summary: s.summary, icon: s.icon, badge: s.badge })),
   },
   { label: 'Sobre mí', href: routes.about },
   { label: 'Contacto', href: routes.contact },
