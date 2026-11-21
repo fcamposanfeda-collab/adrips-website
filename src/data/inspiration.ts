@@ -50,18 +50,18 @@ export const inspirationPhotos: InspirationPhoto[] = [
     caption: 'Una margarita y el sol bajando.',
   },
   {
-    id: 'nubes-rosas',
-    category: 'atardecer',
-    src: '/images/inspiracion/nubes-rosas.webp',
-    alt: 'Cielo cubierto de nubes rosas y lavanda',
-    caption: 'El rosa empolvado, tal cual.',
-  },
-  {
     id: 'cerezo-playa',
     category: 'flores',
     src: '/images/inspiracion/cerezo-playa.webp',
     alt: 'Ramas de cerezo en flor frente al mar al atardecer',
     caption: 'Flor de cerezo y mar en calma.',
+  },
+  {
+    id: 'nubes-rosas',
+    category: 'atardecer',
+    src: '/images/inspiracion/nubes-rosas.webp',
+    alt: 'Cielo cubierto de nubes rosas y lavanda',
+    caption: 'El rosa empolvado, tal cual.',
   },
   {
     id: 'cueva-playa-lila',
@@ -85,18 +85,18 @@ export const inspirationPhotos: InspirationPhoto[] = [
     caption: 'Luna nueva y flores silvestres.',
   },
   {
-    id: 'playa-rosa-atardecer',
-    category: 'mar',
-    src: '/images/inspiracion/playa-rosa-atardecer.webp',
-    alt: 'Olas suaves en la orilla con el sol poniéndose en un cielo rosa',
-    caption: 'Coral y melocotón sobre el agua.',
-  },
-  {
     id: 'pasarela-atardecer',
     category: 'atardecer',
     src: '/images/inspiracion/pasarela-atardecer.webp',
     alt: 'Pasarela de madera entre dunas bajo un cielo rosa y violeta',
     caption: 'Un camino hacia el arrebol.',
+  },
+  {
+    id: 'playa-rosa-atardecer',
+    category: 'mar',
+    src: '/images/inspiracion/playa-rosa-atardecer.webp',
+    alt: 'Olas suaves en la orilla con el sol poniéndose en un cielo rosa',
+    caption: 'Coral y melocotón sobre el agua.',
   },
   {
     id: 'arcoiris-rosa',
@@ -106,18 +106,18 @@ export const inspirationPhotos: InspirationPhoto[] = [
     caption: 'Arcoíris en un cielo de algodón.',
   },
   {
-    id: 'margaritas-mar',
-    category: 'flores',
-    src: '/images/inspiracion/margaritas-mar.webp',
-    alt: 'Margaritas en primer plano con el sol poniéndose sobre el mar',
-    caption: 'Margaritas con luz de última hora.',
-  },
-  {
     id: 'nubes-violeta',
     category: 'atardecer',
     src: '/images/inspiracion/nubes-violeta.webp',
     alt: 'Nubes violetas sobre un valle al anochecer',
     caption: 'Violeta, ciruela y naranja.',
+  },
+  {
+    id: 'margaritas-mar',
+    category: 'flores',
+    src: '/images/inspiracion/margaritas-mar.webp',
+    alt: 'Margaritas en primer plano con el sol poniéndose sobre el mar',
+    caption: 'Margaritas con luz de última hora.',
   },
   {
     id: 'playa-arena-rosa',
