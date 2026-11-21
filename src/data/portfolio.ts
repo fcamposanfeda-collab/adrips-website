@@ -36,6 +36,36 @@ export type PortfolioItem = {
  */
 export const portfolioItems: PortfolioItem[] = [
   {
+    id: 'los-collados',
+    title: 'Finca Los Collados',
+    kind: 'web',
+    category: 'Web · Turismo rural',
+    description:
+      'Web trilingüe (español, inglés y francés) para una finca de turismo rural en el Campo de Montiel, Ciudad Real: alojamiento, caza, empresas y eventos, con reserva directa en Booking.com y WhatsApp.',
+    status: 'live',
+    tone: 'sage',
+    featured: true,
+    domain: 'loscolladosdesanmiguel.com',
+    image: '/images/proyectos/los-collados.webp',
+    tags: ['Diseño y desarrollo', 'Multidioma', 'Reservas'],
+    links: [{ label: 'Ver web', href: 'https://loscolladosdesanmiguel.com/', type: 'web' }],
+  },
+  {
+    id: 'azurea-catering',
+    title: 'Azurea Catering',
+    kind: 'web',
+    category: 'Web · SEO local',
+    description:
+      'Web para un catering de bodas, comuniones y eventos de empresa en Ciudad Real: páginas por servicio y por zona, blog y una solicitud de presupuesto pensada para captar clientes.',
+    status: 'live',
+    tone: 'cream',
+    featured: true,
+    domain: 'azureacatering.com',
+    image: '/images/proyectos/azurea-catering.webp',
+    tags: ['Diseño y desarrollo', 'SEO local', 'Captación'],
+    links: [{ label: 'Ver web', href: 'https://azureacatering.com/', type: 'web' }],
+  },
+  {
     id: 'carom-vintage',
     title: 'Carom Vintage',
     kind: 'web',
