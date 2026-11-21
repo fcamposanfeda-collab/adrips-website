@@ -7,9 +7,9 @@
    */
 
   /* Núcleo */
-  --ink: #22151b;
-  --ink-2: #3b2a31;
-  --ink-soft: #4c3a41;
+  --ink: #4a3340;
+  --ink-2: #563c4a;
+  --ink-soft: #5e4653;
   /* Fondo oscuro de secciones, botones y tarjetas destacadas (ciruela suave) */
   --plum: #4a3340;
   --plum-2: #563c4a;
@@ -84,10 +84,10 @@
   --radius-full: 9999px;
 
   /* Profundidad */
-  --shadow-soft: 0 1px 2px rgba(34, 21, 27, 0.04), 0 4px 16px rgba(34, 21, 27, 0.05);
-  --shadow-card: 0 1px 2px rgba(34, 21, 27, 0.05), 0 12px 32px -8px rgba(34, 21, 27, 0.12);
-  --shadow-hover: 0 2px 4px rgba(34, 21, 27, 0.05), 0 24px 56px -12px rgba(34, 21, 27, 0.22);
-  --shadow-float: 0 30px 80px -20px rgba(34, 21, 27, 0.35);
+  --shadow-soft: 0 1px 2px rgba(74, 51, 64, 0.04), 0 4px 16px rgba(74, 51, 64, 0.05);
+  --shadow-card: 0 1px 2px rgba(74, 51, 64, 0.05), 0 12px 32px -8px rgba(74, 51, 64, 0.12);
+  --shadow-hover: 0 2px 4px rgba(74, 51, 64, 0.05), 0 24px 56px -12px rgba(74, 51, 64, 0.22);
+  --shadow-float: 0 30px 80px -20px rgba(74, 51, 64, 0.35);
 
   /* Movimiento */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
