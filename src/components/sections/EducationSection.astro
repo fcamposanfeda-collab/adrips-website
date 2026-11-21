@@ -15,9 +15,9 @@ import { degrees, courses, tools } from '../../data/education';
           degrees.map((degree) => (
             <li class="education-item">
               <h3>{degree.title}</h3>
-              <p>
-                {degree.school} · {degree.year}
-              </p>
+              {(degree.school || degree.year) && (
+                <p>{[degree.school, degree.year].filter(Boolean).join(' · ')}</p>
+              )}
             </li>
           ))
         }
