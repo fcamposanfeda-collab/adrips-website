@@ -3,7 +3,7 @@
  * Nombre propio + marketing digital 360º.
  */
 export const brand = {
-  name: 'Adrips',
+  name: 'Adrips Marketing',
   shortName: 'Adrips',
   tagline: 'Diseño web y marketing',
   story:

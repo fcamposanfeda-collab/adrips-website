@@ -12,7 +12,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
   '@id': `${site.url}/blog#blog`,
-  name: 'Blog de Adrips',
+  name: 'Blog de Adrips Marketing',
   url: `${site.url}/blog`,
   inLanguage: 'es',
   publisher: { '@id': `${site.url}/#person` },
@@ -26,11 +26,11 @@ const schema = {
 ---
 
 <BaseLayout
-  title="Blog de marketing digital, SEO y diseño web | Adrips"
+  title="Blog de marketing digital, SEO y diseño web | Adrips Marketing"
   description="Guías prácticas de SEO, posicionamiento en IA, diseño web y marketing digital para pymes y marcas personales. Un artículo nuevo cada lunes."
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
-  <link rel="alternate" type="application/rss+xml" title="Blog de Adrips" href="/rss.xml" slot="head" />
+  <link rel="alternate" type="application/rss+xml" title="Blog de Adrips Marketing" href="/rss.xml" slot="head" />
   <PageIntro
     eyebrow="Blog"
     title="Marketing que se entiende y"
