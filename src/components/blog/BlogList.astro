@@ -1,0 +1,122 @@
+---
+import PostCard from './PostCard.astro';
+import { categorySlug, type Post } from '../../data/blog';
+import { blogCategories } from '../../content.config';
+
+interface Props {
+  posts: Post[];
+  activeCategory?: string;
+  /** Destaca el primer artículo (solo en la portada del blog) */
+  featureFirst?: boolean;
+}
+
+const { posts, activeCategory, featureFirst = false } = Astro.props;
+const used = new Set(posts.map((p) => p.data.category));
+const allPostsCategories = blogCategories.filter((c) => used.has(c) || c === activeCategory);
+const [first, ...rest] = posts;
+---
+
+<section class="section blog-list" aria-label="Artículos">
+  <div class="container">
+    <nav class="blog-cats" aria-label="Categorías del blog">
+      <a href="/blog" aria-current={!activeCategory ? 'page' : undefined}>Todo</a>
+      {
+        allPostsCategories.map((c) => (
+          <a href={`/blog/categoria/${categorySlug(c)}`} aria-current={c === activeCategory ? 'page' : undefined}>
+            {c}
+          </a>
+        ))
+      }
+    </nav>
+
+    {posts.length === 0 && <p class="blog-empty">Pronto habrá artículos en esta categoría.</p>}
+
+    {
+      featureFirst && first ? (
+        <>
+          <div class="blog-featured" data-reveal>
+            <PostCard post={first} featured headingLevel="h2" />
+          </div>
+          <ul class="blog-grid">
+            {rest.map((p) => (
+              <li data-reveal>
+                <PostCard post={p} headingLevel="h2" />
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <ul class="blog-grid">
+          {posts.map((p) => (
+            <li data-reveal>
+              <PostCard post={p} headingLevel="h2" />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .blog-list {
+    padding-top: 1rem;
+  }
+
+  .blog-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .blog-cats a {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+  }
+
+  .blog-cats a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .blog-cats a[aria-current='page'] {
+    color: var(--white);
+    background: var(--plum);
+    border-color: var(--plum);
+  }
+
+  .blog-featured {
+    margin-bottom: 1rem;
+  }
+
+  .blog-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .blog-grid > li {
+    display: flex;
+  }
+
+  .blog-empty {
+    color: var(--muted);
+  }
+
+  @media (min-width: 700px) {
+    .blog-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .blog-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -15,6 +15,7 @@ export const mainNav: NavLink[] = [
     children: services.map((s) => ({ label: s.title, href: serviceHref(s), summary: s.summary, icon: s.icon, badge: s.badge })),
   },
   { label: 'Sobre mí', href: routes.about },
+  { label: 'Blog', href: routes.blog },
   { label: 'Contacto', href: routes.contact },
 ];
 

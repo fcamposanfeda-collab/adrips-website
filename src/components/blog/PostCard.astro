@@ -1,0 +1,115 @@
+---
+import { postHref, formatDate, readingMinutes, categorySlug, type Post } from '../../data/blog';
+
+interface Props {
+  post: Post;
+  featured?: boolean;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { post, featured = false, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+const { title, description, category, pubDate } = post.data;
+---
+
+<article class:list={['post-card', { 'post-card--featured': featured }]}>
+  <div class="post-card__meta">
+    <a class="post-card__cat" href={`/blog/categoria/${categorySlug(category)}`}>{category}</a>
+    <span><time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time> · {readingMinutes(post.body)} min</span>
+  </div>
+  <Heading class="post-card__title"><a href={postHref(post)}>{title}</a></Heading>
+  <p class="post-card__desc">{description}</p>
+  <span class="post-card__more" aria-hidden="true">
+    Leer artículo
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+  </span>
+</article>
+
+<style>
+  .post-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.75rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    transition:
+      transform var(--transition-bounce),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--blush);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .post-card--featured {
+    padding: 2.25rem;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(233, 168, 155, 0.35), transparent 55%),
+      radial-gradient(circle at 0% 100%, rgba(201, 184, 236, 0.35), transparent 60%),
+      var(--white);
+  }
+
+  .post-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .post-card__cat {
+    position: relative;
+    z-index: 1;
+    padding: 0.3rem 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: var(--radius-full);
+  }
+
+  .post-card__title {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.2;
+  }
+
+  .post-card--featured .post-card__title {
+    font-size: clamp(1.625rem, 3vw, 2.25rem);
+  }
+
+  .post-card__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .post-card__desc {
+    margin: 0 0 1.5rem;
+    color: var(--muted);
+    font-size: 0.9875rem;
+  }
+
+  .post-card__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .post-card:hover .post-card__more {
+    color: var(--accent);
+  }
+</style>

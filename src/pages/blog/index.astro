@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/sections/PageIntro.astro';
+import BlogList from '../../components/blog/BlogList.astro';
+import ContactCta from '../../components/sections/ContactCta.astro';
+import { getPublishedPosts, postHref } from '../../data/blog';
+import { site } from '../../data/site';
+
+const posts = await getPublishedPosts();
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': `${site.url}/blog#blog`,
+  name: 'Blog de Adrips',
+  url: `${site.url}/blog`,
+  inLanguage: 'es',
+  publisher: { '@id': `${site.url}/#person` },
+  blogPost: posts.slice(0, 10).map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    url: `${site.url}${postHref(p)}`,
+    datePublished: p.data.pubDate.toISOString(),
+  })),
+};
+---
+
+<BaseLayout
+  title="Blog de marketing digital, SEO y diseño web | Adrips"
+  description="Guías prácticas de SEO, posicionamiento en IA, diseño web y marketing digital para pymes y marcas personales. Un artículo nuevo cada lunes."
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  <link rel="alternate" type="application/rss+xml" title="Blog de Adrips" href="/rss.xml" slot="head" />
+  <PageIntro
+    eyebrow="Blog"
+    title="Marketing que se entiende y"
+    emphasis="se aplica"
+    description="Lo que está cambiando en SEO, IA, diseño web y publicidad, explicado para que lo puedas usar en tu negocio. Un artículo nuevo cada lunes."
+  />
+  <BlogList posts={posts} featureFirst />
+  <ContactCta formId="contact-blog" />
+</BaseLayout>
