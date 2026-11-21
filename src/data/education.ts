@@ -28,12 +28,12 @@ export const degrees: Degree[] = [
 ];
 
 export const courses: Course[] = [
-  { title: 'Curso de IA para la creación web y posicionamiento', note: 'Domestika · 2026' },
-  { title: 'Curso de Figma: diseño de aplicaciones', note: 'Domestika · 2024' },
+  { title: 'Curso de IA para la creación web y posicionamiento' },
+  { title: 'Curso de diseño de aplicaciones' },
   { title: 'Marketing digital, SEO, SEM y analítica web' },
   { title: 'Planificación de contenido y RRSS' },
   { title: 'Microsoft Office Specialist — Excel' },
-  { title: 'Curso de diseño UX/UI', note: 'En curso' },
+  { title: 'Curso de diseño UX/UI' },
   { title: 'Inglés', note: 'Nivel B2' },
 ];
 
