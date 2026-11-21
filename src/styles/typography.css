@@ -71,3 +71,45 @@ h3 em {
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
+
+/*
+ * Estrella del logotipo en lugar del punto de la «i» en h1 y h2.
+ * Las «i» se envuelven en build (src/integrations/star-i.mjs). Medidas para Fraunces:
+ * ascendente 0,978em, altura x 0,447em, punto de la «i» entre ~0,50 y 0,66em.
+ */
+.istar {
+  position: relative;
+}
+
+.istar__i {
+  /* Recorta el punto: deja visible solo lo que queda por debajo de ~0,49em sobre la línea base */
+  clip-path: polygon(-50% 0.49em, 150% 0.49em, 150% 200%, -50% 200%);
+}
+
+.istar::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0.235em;
+  width: 0.3em;
+  height: 0.3em;
+  margin-left: -0.15em;
+  background: var(--istar-color, #c27e89);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.9 9 15 11.1 24 12 15 12.9 12.9 15 12 24 11.1 15 9 12.9 0 12 9 11.1 11.1 9 12 0Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.9 9 15 11.1 24 12 15 12.9 12.9 15 12 24 11.1 15 9 12.9 0 12 9 11.1 11.1 9 12 0Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+
+/* En cursiva la «i» va inclinada: la estrella se desplaza con ella */
+em .istar::after {
+  margin-left: -0.06em;
+  --istar-color: var(--ink);
+}
+
+.surface-dark .istar::after {
+  --istar-color: var(--accent-light);
+}
+
+.surface-dark em .istar::after {
+  --istar-color: var(--color-on-dark);
+}
