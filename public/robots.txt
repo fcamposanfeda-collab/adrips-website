@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://adripsmarketing.com/sitemap-index.xml
+Sitemap: https://adripsmarketing.com/sitemap.xml
