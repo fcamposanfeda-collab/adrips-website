@@ -46,7 +46,7 @@ h3 em {
   font-style: italic;
   font-weight: 400;
   font-variation-settings: 'SOFT' 100, 'WONK' 1;
-  color: var(--accent);
+  color: var(--accent-em);
 }
 
 .surface-dark h1 em,
