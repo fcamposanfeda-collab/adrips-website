@@ -138,7 +138,7 @@ button {
 
 /* Superficies */
 .surface-dark {
-  background: var(--ink);
+  background: var(--plum);
   color: var(--color-on-dark);
 }
 
@@ -169,7 +169,7 @@ button {
   padding: 0.625rem 1rem;
   font-weight: 600;
   color: var(--white);
-  background: var(--ink);
+  background: var(--plum);
   border-radius: var(--radius-sm);
   transform: translateY(-200%);
   transition: transform var(--transition-fast);
