@@ -50,7 +50,7 @@ export const services: Service[] = [
     icon: 'layout',
     features: ['Diseño UI a medida', 'Webs corporativas', 'Landing pages', 'Adaptada a móvil', 'SEO técnico de base'],
     page: {
-      metaTitle: 'Desarrollo web a medida | Adrips',
+      metaTitle: 'Desarrollo web a medida | Adrips Marketing',
       metaDescription:
         'Diseño y desarrollo de páginas web y landing pages a medida: rápidas, adaptadas a móvil, optimizadas para Google y pensadas para conseguir clientes.',
       heading: 'Desarrollo web',
@@ -91,7 +91,7 @@ export const services: Service[] = [
     icon: 'search',
     features: ['Auditoría SEO', 'SEO on-page', 'SEO local', 'Contenidos', 'Informes mensuales'],
     page: {
-      metaTitle: 'Posicionamiento SEO | Adrips',
+      metaTitle: 'Posicionamiento SEO | Adrips Marketing',
       metaDescription:
         'Posicionamiento SEO para aparecer en Google: auditoría, SEO técnico y de contenidos, SEO local y seguimiento mensual de resultados.',
       heading: 'Posicionamiento SEO',
@@ -132,7 +132,7 @@ export const services: Service[] = [
     badge: 'Nuevo',
     features: ['ChatGPT y Perplexity', 'Gemini y resúmenes de IA de Google', 'Datos estructurados', 'Contenido citable', 'Auditoría de visibilidad en IA'],
     page: {
-      metaTitle: 'Posicionamiento en IA (GEO): aparece en ChatGPT y Gemini | Adrips',
+      metaTitle: 'Posicionamiento en IA (ChatGPT y Gemini) | Adrips Marketing',
       metaDescription:
         'Posicionamiento en motores de búsqueda con inteligencia artificial (GEO): optimiza tu web y tu marca para aparecer y ser recomendado en ChatGPT, Gemini, Perplexity y los resúmenes con IA de Google.',
       heading: 'Posicionamiento en IA',
@@ -174,7 +174,7 @@ export const services: Service[] = [
     icon: 'target',
     features: ['Google Ads', 'Search y Performance Max', 'Remarketing', 'Medición de conversiones', 'Optimización semanal'],
     page: {
-      metaTitle: 'Posicionamiento SEM y Google Ads | Adrips',
+      metaTitle: 'Posicionamiento SEM y Google Ads | Adrips Marketing',
       metaDescription:
         'Gestión de campañas de Google Ads: búsqueda, Performance Max y remarketing, con medición de conversiones y optimización continua.',
       heading: 'Posicionamiento SEM',
@@ -214,7 +214,7 @@ export const services: Service[] = [
     icon: 'chart',
     features: ['Google Analytics 4', 'Tag Manager', 'Cuadros de mando', 'Informes', 'Embudos de conversión'],
     page: {
-      metaTitle: 'Análisis de datos y analítica web | Adrips',
+      metaTitle: 'Análisis de datos y analítica web | Adrips Marketing',
       metaDescription:
         'Analítica web y análisis de datos de marketing: configuración de Google Analytics 4, medición de conversiones, cuadros de mando e informes claros.',
       heading: 'Análisis de datos',
@@ -254,7 +254,7 @@ export const services: Service[] = [
     icon: 'chat',
     features: ['Estrategia de contenidos', 'Calendario editorial', 'Community management', 'Meta Ads', 'Informes'],
     page: {
-      metaTitle: 'Gestión de redes sociales | Adrips',
+      metaTitle: 'Gestión de redes sociales | Adrips Marketing',
       metaDescription:
         'Gestión de redes sociales para marcas y negocios: estrategia, calendario editorial, creación de contenido, community management y Meta Ads.',
       heading: 'Redes sociales',
@@ -294,7 +294,7 @@ export const services: Service[] = [
     icon: 'pen',
     features: ['Logotipo e identidad', 'Manual de marca', 'Creatividades', 'Papelería', 'Piezas impresas'],
     page: {
-      metaTitle: 'Diseño gráfico e identidad visual | Adrips',
+      metaTitle: 'Diseño gráfico e identidad visual | Adrips Marketing',
       metaDescription:
         'Diseño gráfico para marcas y negocios: logotipo, identidad visual, manual de marca, creatividades para redes y campañas, papelería e impresión.',
       heading: 'Diseño gráfico',

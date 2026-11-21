@@ -2,7 +2,7 @@ import { brand } from './brand';
 
 export const pagesMeta = {
   '/': {
-    title: `Diseño web en Ciudad Real que consigue clientes | ${brand.name}`,
+    title: `Diseño web y marketing en Ciudad Real | ${brand.name}`,
     description:
       'Diseño y desarrollo de páginas web a medida para negocios y marcas personales: bonitas, rápidas, optimizadas para Google y pensadas para vender. Presupuesto cerrado.',
   },
@@ -27,7 +27,7 @@ export const pagesMeta = {
       'Diseño y desarrollo web a medida, landing pages, SEO, Google Ads, Social Ads y estrategia digital. Presupuesto cerrado y trato directo.',
   },
   '/organizacion-eventos': {
-    title: `Organización de eventos | ${brand.name} — Adriana Pérez Salmerón`,
+    title: `Organización de eventos | ${brand.name}`,
     description:
       'Papelería, invitaciones, seating plan, corners y señalización diseñados desde cero para bodas y celebraciones. Todo personalizable — con Azurea Catering para la parte gastronómica.',
   },

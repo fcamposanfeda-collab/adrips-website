@@ -4,7 +4,7 @@ import { getPublishedPosts, postHref } from '../data/blog';
 export async function GET(context) {
   const posts = await getPublishedPosts();
   return rss({
-    title: 'Blog de Adrips',
+    title: 'Blog de Adrips Marketing',
     description: 'SEO, posicionamiento en IA, diseño web y marketing digital. Un artículo nuevo cada lunes.',
     site: context.site,
     customData: '<language>es-es</language>',
