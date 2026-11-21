@@ -3,6 +3,7 @@ import { getPageMeta } from '../data/pages-meta';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/sections/PageIntro.astro';
 import EventosOfferings from '../components/sections/EventosOfferings.astro';
+import EventosShowcase from '../components/sections/EventosShowcase.astro';
 import EventosProcess from '../components/sections/EventosProcess.astro';
 import AzureaTeaser from '../components/sections/AzureaTeaser.astro';
 import { eventosMeta } from '../data/eventos';
@@ -19,6 +20,7 @@ const meta = getPageMeta('/organizacion-eventos');
     descriptionExtra={eventosMeta.leadExtra}
   />
   <EventosOfferings />
+  <EventosShowcase />
   <EventosProcess />
   <AzureaTeaser />
 </BaseLayout>
