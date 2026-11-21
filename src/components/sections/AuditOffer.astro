@@ -1,0 +1,105 @@
+---
+/**
+ * Oferta de entrada sin compromiso: revisión gratuita de la web en 72 h.
+ * Capta a quien aún no está listo para pedir presupuesto.
+ */
+import ContactForm from '../forms/ContactForm.astro';
+
+const checks = [
+  'Primera impresión y confianza',
+  'Móvil y velocidad de carga',
+  'Google y botones de contacto',
+];
+---
+
+<section class="audit section" aria-labelledby="audit-title">
+  <div class="container audit__card" data-reveal>
+    <div class="audit__copy">
+      <p class="eyebrow">Revisión gratuita</p>
+      <h2 id="audit-title">¿Tu web no te trae clientes? <em>Te digo por qué.</em></h2>
+      <p class="audit__lead">
+        Déjame tu web y en menos de 72 h te envío una revisión breve con lo que está frenando tus contactos y
+        cómo arreglarlo. Gratis y sin compromiso.
+      </p>
+      <ul class="audit__checks">
+        {
+          checks.map((c) => (
+            <li>
+              <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                <path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {c}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="audit__form">
+      <ContactForm formId="audit" variant="audit" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .audit__card {
+    display: grid;
+    gap: 2rem;
+    padding-block: 2.5rem;
+    padding-inline: 1.5rem;
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(233, 168, 155, 0.35), transparent 60%),
+      radial-gradient(90% 80% at 0% 100%, rgba(191, 149, 191, 0.25), transparent 60%),
+      var(--accent-soft);
+    border-radius: var(--radius-lg);
+  }
+
+  .audit h2 {
+    margin: 0 0 1rem;
+  }
+
+  .audit__lead {
+    margin: 0 0 1.5rem;
+    max-width: 32rem;
+    font-size: 1.0625rem;
+  }
+
+  .audit__checks {
+    display: grid;
+    gap: 0.625rem;
+  }
+
+  .audit__checks li {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-weight: 500;
+  }
+
+  .audit__checks svg {
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  .audit__form {
+    padding: 1.75rem 1.5rem;
+    background: var(--paper);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-float);
+    align-self: center;
+  }
+
+  @media (min-width: 600px) {
+    .audit__card {
+      padding: 3rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .audit__card {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 4rem;
+    }
+  }
+</style>
