@@ -69,7 +69,7 @@ const schema = {
 };
 ---
 
-<BaseLayout title={`${title} | Adrips`} description={description} ogType="article" publishedTime={pubDate} modifiedTime={updatedDate}>
+<BaseLayout title={`${title} | Adrips`.length <= 65 ? `${title} | Adrips` : title} description={description} ogType="article" publishedTime={pubDate} modifiedTime={updatedDate}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
 
   <article class="post">
