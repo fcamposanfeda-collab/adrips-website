@@ -3,13 +3,14 @@ import { degrees, courses, tools } from '../../data/education';
 ---
 
 <section class="education section" aria-labelledby="education-title">
-  <div class="container education__grid">
-    <div class="education__col">
-      <header>
-        <p class="section-header__eyebrow">Formación</p>
-        <h2 id="education-title">Estudios y cursos</h2>
-      </header>
+  <div class="container">
+    <header class="education__header">
+      <p class="section-header__eyebrow">Formación</p>
+      <h2 id="education-title">Estudios y cursos</h2>
+    </header>
 
+    <div class="education__grid">
+    <div class="education__col">
       <ul class="education__degrees">
         {
           degrees.map((degree) => (
@@ -25,7 +26,7 @@ import { degrees, courses, tools } from '../../data/education';
     </div>
 
     <div class="education__col">
-      <h3 class="education__subtitle">Complementos y idiomas</h3>
+      <h3 class="education__subtitle">Complementos e idiomas</h3>
       <ul class="education__courses">
         {
           courses.map((course) => (
@@ -42,6 +43,7 @@ import { degrees, courses, tools } from '../../data/education';
         {tools.map((tool) => <li>{tool}</li>)}
       </ul>
     </div>
+    </div>
   </div>
 </section>
 
@@ -55,7 +57,7 @@ import { degrees, courses, tools } from '../../data/education';
     gap: 2.5rem;
   }
 
-  .education__col header h2 {
+  .education__header h2 {
     margin: 0 0 1.5rem;
     text-align: left;
     font-size: clamp(1.5rem, 3vw, 2rem);
