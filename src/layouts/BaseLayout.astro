@@ -14,9 +14,9 @@ interface Props {
 
 const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, site.url);
-const ogImageURL = new URL(owner.photos.hero.src, site.url).href;
+const ogImageURL = new URL('/images/og-adrips.jpg', site.url).href;
 const fontHref =
-  'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Rozha+One&display=swap';
+  'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Manrope:wght@400;500;600;700&display=swap';
 ---
 
 <!doctype html>
@@ -27,9 +27,11 @@ const fontHref =
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
     <meta name="author" content={owner.fullName} />
-    <meta name="theme-color" content="#d4a5a5" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#faf6f1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <link rel="canonical" href={canonicalURL} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,7 +43,9 @@ const fontHref =
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:image:alt" content={owner.photos.hero.alt} />
+    <meta property="og:image:alt" content="Adrips — Diseño web y marketing" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImageURL} />
     <meta name="twitter:title" content={title} />

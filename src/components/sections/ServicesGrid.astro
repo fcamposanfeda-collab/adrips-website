@@ -1,46 +1,49 @@
 ---
+import Icon from '../ui/Icon.astro';
 import Button from '../ui/Button.astro';
-import { services } from '../../data/services';
+import { primaryServices, growthServices } from '../../data/services';
 import { routes } from '../../data/routes';
 
 interface Props {
-  compact?: boolean;
+  /** Versión de la página Servicios: muestra la lista completa de lo que incluye */
+  detailed?: boolean;
 }
 
-const { compact = false } = Astro.props;
+const { detailed = false } = Astro.props;
 ---
 
-<section
-  id="servicios"
-  class:list={['services', 'section', { 'services--compact': compact }]}
-  {...(!compact && { 'aria-labelledby': 'services-title' })}
->
+<section id="servicios" class="services section" aria-labelledby="services-title">
   <div class="container">
     {
-      !compact && (
-        <header class="section-header">
-          <p class="section-header__eyebrow">Servicios</p>
-          <h2 id="services-title">Marketing digital 360º</h2>
+      !detailed && (
+        <header class="section-header section-header--split" data-reveal>
+          <div>
+            <p class="eyebrow">Servicios</p>
+            <h2 id="services-title">
+              Tu web, <em>y todo lo que la hace funcionar</em>
+            </h2>
+          </div>
           <p>
-            SEO, Google Ads, web, redes y estrategia integral — lo que necesitas para crecer online,
-            con trato directo y sin intermediarios.
+            El centro es tu web. Alrededor, el marketing que le trae visitas y las convierte en clientes. Lo
+            contratas por separado o todo junto.
           </p>
         </header>
       )
     }
+    {detailed && <h2 id="services-title" class="visually-hidden">Servicios</h2>}
 
-    <div class="services__grid">
+    <div class="services__primary">
       {
-        services.map((service) => (
-          <article class={`service-card service-card--${service.accent}`}>
-            <span class="service-card__icon" aria-hidden="true">
-              {service.icon}
-            </span>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-            <ul class="service-card__features">
-              {service.features.map((feature) => (
-                <li>{feature}</li>
+        primaryServices.map((s, i) => (
+          <article class:list={['svc-feature', { 'svc-feature--dark': i === 0 }]} data-reveal data-reveal-delay={String(i + 1)}>
+            <div class="svc-feature__icon">
+              <Icon name={s.icon} size={26} />
+            </div>
+            <h3>{s.title}</h3>
+            <p>{detailed ? s.description : s.summary}</p>
+            <ul class="svc-feature__tags">
+              {(detailed ? s.features : s.features.slice(0, 4)).map((f) => (
+                <li>{f}</li>
               ))}
             </ul>
           </article>
@@ -48,153 +51,234 @@ const { compact = false } = Astro.props;
       }
     </div>
 
-    <div class="services__cta">
-      <Button href={routes.contact} variant="primary">Cuéntame tu idea</Button>
-      <Button href={routes.projects} variant="outline">Ver mis proyectos</Button>
+    <div class="services__growth" data-reveal>
+      <p class="services__growth-title">Para que tu web crezca</p>
+      <ul class="services__list">
+        {
+          growthServices.map((s) => (
+            <li class="svc-row">
+              <span class="svc-row__icon">
+                <Icon name={s.icon} size={22} />
+              </span>
+              <div class="svc-row__body">
+                <h3>{s.title}</h3>
+                <p>{detailed ? s.description : s.summary}</p>
+                {detailed && (
+                  <ul class="svc-row__features">
+                    {s.features.map((f) => (
+                      <li>{f}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
     </div>
+
+    {
+      !detailed && (
+        <div class="services__footer" data-reveal>
+          <Button href={routes.services} variant="outline" arrow>
+            Ver servicios en detalle
+          </Button>
+        </div>
+      )
+    }
   </div>
 </section>
 
 <style>
-  .services {
-    background: var(--color-bg-soft);
-  }
-
-  .services--compact {
-    padding-top: 0;
-  }
-
-  .services__grid {
+  .services__primary {
     display: grid;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
   }
 
-  /* Tarjetas con hover suave — personaliza colores por servicio */
-  .service-card {
-    padding: 2rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+  .svc-feature {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2.25rem 2rem;
+    background: var(--white);
+    border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
+    overflow: hidden;
     transition:
       transform var(--transition-bounce),
-      box-shadow var(--transition-fast),
-      border-color var(--transition-fast);
+      box-shadow var(--transition-fast);
   }
 
-  .service-card:hover {
-    transform: translateY(-6px);
+  .svc-feature:hover {
+    transform: translateY(-4px);
     box-shadow: var(--shadow-hover);
   }
 
-  .service-card--lila:hover {
-    border-color: var(--color-lila);
+  .svc-feature--dark {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--color-on-dark);
   }
 
-  .service-card--rosa:hover {
-    border-color: var(--color-rosa);
+  .svc-feature--dark::after {
+    content: '';
+    position: absolute;
+    right: -6rem;
+    top: -6rem;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(232, 141, 128, 0.35), transparent);
+    pointer-events: none;
   }
 
-  .service-card--menta:hover {
-    border-color: var(--color-menta);
-  }
-
-  .service-card__icon {
+  .svc-feature__icon {
     display: grid;
     place-items: center;
-    width: 3rem;
-    height: 3rem;
-    margin-bottom: 1.25rem;
-    font-size: 1.375rem;
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-bottom: 2.5rem;
     border-radius: var(--radius-sm);
+    color: var(--accent);
+    background: var(--accent-soft);
   }
 
-  .service-card--lila .service-card__icon {
-    background: rgba(196, 181, 253, 0.35);
-    color: var(--color-lila-strong);
+  .svc-feature--dark .svc-feature__icon {
+    color: var(--ink);
+    background: var(--accent-light);
   }
 
-  .service-card--rosa .service-card__icon {
-    background: rgba(249, 168, 212, 0.35);
-    color: var(--color-rosa-strong);
-  }
-
-  .service-card--menta .service-card__icon {
-    background: rgba(232, 220, 200, 0.5);
-    color: var(--color-menta-strong);
-  }
-
-  .service-card--naranja .service-card__icon {
-    background: rgba(240, 200, 168, 0.4);
-    color: var(--color-naranja-strong);
-  }
-
-  .service-card--azul .service-card__icon {
-    background: rgba(200, 216, 240, 0.45);
-    color: var(--color-azul-strong);
-  }
-
-  .service-card--amarillo .service-card__icon {
-    background: rgba(240, 228, 184, 0.5);
-    color: var(--color-amarillo-strong);
-  }
-
-  .service-card--naranja:hover {
-    border-color: var(--color-naranja);
-  }
-
-  .service-card--azul:hover {
-    border-color: var(--color-azul);
-  }
-
-  .service-card--amarillo:hover {
-    border-color: var(--color-amarillo);
-  }
-
-  .service-card h3 {
+  .svc-feature h3 {
     margin: 0 0 0.75rem;
-    color: var(--color-text);
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
   }
 
-  .service-card > p {
-    margin: 0 0 1.25rem;
-    font-size: 0.96875rem;
-    color: var(--color-muted);
-    line-height: 1.7;
+  .svc-feature--dark h3 {
+    color: var(--color-on-dark);
   }
 
-  .service-card__features {
+  .svc-feature p {
+    margin: 0 0 1.75rem;
+    color: var(--muted);
+    max-width: 34rem;
+  }
+
+  .svc-feature--dark p {
+    color: rgba(251, 244, 236, 0.72);
+  }
+
+  .svc-feature__tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-top: auto;
   }
 
-  .service-card__features li {
+  .svc-feature__tags li {
     padding: 0.375rem 0.75rem;
     font-size: 0.8125rem;
     font-weight: 500;
-    color: var(--color-text);
-    background: var(--color-bg);
     border-radius: var(--radius-full);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
   }
 
-  .services__cta {
+  .svc-feature--dark .svc-feature__tags li {
+    border-color: rgba(251, 244, 236, 0.18);
+    color: rgba(251, 244, 236, 0.86);
+  }
+
+  .services__growth {
+    padding: 2rem;
+    background: var(--paper-2);
+    border-radius: var(--radius-lg);
+  }
+
+  .services__growth-title {
+    margin: 0 0 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .services__list {
+    display: grid;
+  }
+
+  .svc-row {
+    display: flex;
+    gap: 1.25rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .svc-row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0.25rem;
+  }
+
+  .svc-row__icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--accent);
+  }
+
+  .svc-row h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.25rem;
+  }
+
+  .svc-row p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  .svc-row__features {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+    gap: 0.375rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+
+  .svc-row__features li::before {
+    content: '·';
+    margin-right: 0.375rem;
+    color: var(--accent);
+  }
+
+  .services__footer {
     margin-top: 2.5rem;
   }
 
   @media (min-width: 768px) {
-    .services__grid {
-      grid-template-columns: repeat(2, 1fr);
+    .services__primary {
+      grid-template-columns: 1.3fr 1fr;
     }
-  }
 
-  @media (min-width: 1100px) {
-    .services__grid {
-      grid-template-columns: repeat(3, 1fr);
+    .services__growth {
+      padding: 2.5rem 3rem;
+    }
+
+    .services__list {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 3rem;
+    }
+
+    .svc-row:nth-last-child(2) {
+      border-bottom: 0;
+      padding-bottom: 0.25rem;
     }
   }
 </style>

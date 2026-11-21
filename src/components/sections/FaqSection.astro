@@ -1,0 +1,137 @@
+---
+import { faqs } from '../../data/home';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<section class="faq section" aria-labelledby="faq-title">
+  <div class="container faq__grid">
+    <header class="faq__header" data-reveal>
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2 id="faq-title">Lo que suele preguntarse <em>antes de empezar</em></h2>
+      <p>¿Tienes otra duda? Escríbeme y te respondo personalmente.</p>
+    </header>
+
+    <div class="faq__list" data-reveal data-reveal-delay="1">
+      {
+        faqs.map((f, i) => (
+          <details class="faq__item" open={i === 0}>
+            <summary>
+              <span>{f.q}</span>
+              <span class="faq__icon" aria-hidden="true" />
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</section>
+
+<style>
+  .faq__grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .faq__header h2 {
+    margin: 0 0 1rem;
+  }
+
+  .faq__header p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .faq__item:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .faq__item summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: 1.5rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__item summary:hover {
+    color: var(--accent);
+  }
+
+  .faq__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    transition:
+      transform 300ms var(--ease-out),
+      background var(--transition-fast);
+  }
+
+  .faq__icon::before,
+  .faq__icon::after {
+    content: '';
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 10px;
+    height: 1.5px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+  }
+
+  .faq__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(45deg);
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--white);
+  }
+
+  .faq__item p {
+    margin: -0.25rem 0 1.5rem;
+    max-width: 40rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 900px) {
+    .faq__grid {
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 5rem;
+    }
+
+    .faq__header {
+      position: sticky;
+      top: calc(var(--header-height) + 2rem);
+      align-self: start;
+    }
+  }
+</style>

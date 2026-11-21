@@ -4,34 +4,88 @@ export type PortfolioLink = {
   type: 'web' | 'social' | 'press' | 'app';
 };
 
+/** Paleta de la portada generada (mientras no haya capturas reales) */
+export type CoverTone = 'rose' | 'ink' | 'cream' | 'lavender' | 'sage' | 'terracotta';
+
 export type PortfolioItem = {
   id: string;
   title: string;
+  /** web = proyecto de diseño/desarrollo web · marketing = caso de campaña/estrategia */
+  kind: 'web' | 'marketing';
   employer?: string;
   category: string;
   description: string;
   role?: string;
   period?: string;
-  status: 'live' | 'coming-soon' | 'creative';
-  accent: 'lila' | 'rosa' | 'menta' | 'naranja' | 'azul';
+  status: 'live' | 'in-progress' | 'coming-soon';
+  tone: CoverTone;
   featured?: boolean;
+  /** Dominio que se muestra en la barra del navegador de la portada */
+  domain?: string;
+  /** Captura real (ruta en /public). Si existe, sustituye a la portada generada. */
+  image?: string;
+  tags?: string[];
   metrics?: string[];
   links: PortfolioLink[];
 };
 
+/**
+ * Proyectos web. Para publicar uno:
+ * 1. Añade la captura en /public/images/proyectos/<id>.webp (1600×1000 aprox.)
+ * 2. Rellena `image`, `links` (web en vivo) y cambia `status` a 'live'.
+ */
 export const portfolioItems: PortfolioItem[] = [
+  {
+    id: 'carom-vintage',
+    title: 'Carom Vintage',
+    kind: 'web',
+    category: 'Diseño y desarrollo web',
+    description:
+      'Identidad digital y web a medida. Caso completo con proceso, decisiones de diseño y resultados muy pronto.',
+    status: 'coming-soon',
+    tone: 'terracotta',
+    featured: true,
+    tags: ['Diseño UI', 'Desarrollo', 'SEO'],
+    links: [],
+  },
+  {
+    id: 'inversound',
+    title: 'Inversound',
+    kind: 'web',
+    category: 'Diseño y desarrollo web',
+    description:
+      'Web corporativa pensada para generar confianza y contactos. Caso completo en preparación.',
+    status: 'coming-soon',
+    tone: 'ink',
+    featured: true,
+    tags: ['Web corporativa', 'Copy', 'Conversión'],
+    links: [],
+  },
+  {
+    id: 'farmacia',
+    title: 'Botica García Condado',
+    kind: 'web',
+    category: 'Web · SEO local',
+    description:
+      'Web para farmacia con catálogo de servicios, SEO local y una estructura pensada para captar reservas.',
+    status: 'in-progress',
+    tone: 'sage',
+    featured: true,
+    tags: ['SEO local', 'Reservas', 'Accesibilidad'],
+    links: [],
+  },
   {
     id: 'exaccta-xpens',
     title: 'Exaccta Xpens',
+    kind: 'marketing',
     employer: 'Exaccta',
-    category: 'Marketing B2B · SaaS · Funnels',
+    category: 'Marketing B2B · SaaS',
     role: 'Responsable de marketing',
     period: 'Actualidad',
     description:
       'Estrategia, contenido y campañas para la app de gestión de gastos corporativos: lanzamientos, RRSS, Google Ads, email marketing, web y reporting a dirección.',
     status: 'live',
-    accent: 'lila',
-    featured: true,
+    tone: 'lavender',
     metrics: ['+40.000 usuarios en la app', 'Web, CRM y funnels de captación'],
     links: [
       { label: 'Web Exaccta', href: 'https://exaccta.com/', type: 'web' },
@@ -46,7 +100,7 @@ export const portfolioItems: PortfolioItem[] = [
         type: 'app',
       },
       {
-        label: 'Nota en El Economista',
+        label: 'El Economista',
         href: 'https://www.eleconomista.es/empresas-finanzas/noticias/13389447/10/25/exaccta-xpens-la-app-que-ayuda-a-las-empresas-a-evitar-los-gastos-fantasma.html',
         type: 'press',
       },
@@ -55,15 +109,15 @@ export const portfolioItems: PortfolioItem[] = [
   {
     id: 'finetwork-ibai',
     title: '#ElWallpaperDeIbai',
+    kind: 'marketing',
     employer: 'Finetwork',
-    category: 'Activación viral · Twitch · RRSS',
+    category: 'Activación viral · Twitch',
     role: 'Analista de datos, RRSS y afiliación',
     period: '2021',
     description:
-      'Campaña viral durante el directo de Ibai del debut de Messi en el PSG: el wallpaper del stream escondía la promo en los nombres de carpetas. Acaparó la conversación en redes y superó los 100K seguidores en Instagram.',
+      'Campaña viral durante el directo de Ibai del debut de Messi en el PSG: el wallpaper del stream escondía la promo en los nombres de carpetas. Acaparó la conversación en redes.',
     status: 'live',
-    accent: 'rosa',
-    featured: true,
+    tone: 'rose',
     metrics: ['500K espectadores en Twitch', '+5.000 seguidores en 5 minutos'],
     links: [
       {
@@ -81,31 +135,15 @@ export const portfolioItems: PortfolioItem[] = [
         href: 'https://ipmark.com/finetwork-roba-atencion-puesta-en-messi-en-canal-ibai-llanos/',
         type: 'press',
       },
-      {
-        label: 'Instagram Finetwork',
-        href: 'https://www.instagram.com/finetwork/',
-        type: 'social',
-      },
     ],
   },
-  {
-    id: 'farmacia',
-    title: 'Botica García Condado',
-    category: 'Desarrollo web · SEO local',
-    description:
-      'Web para farmacia con catálogo de servicios, SEO local y estructura pensada para captar reservas. Proyecto personal en curso.',
-    status: 'coming-soon',
-    accent: 'menta',
-    links: [],
-  },
-  {
-    id: 'bocetos',
-    title: 'Bocetos creativos',
-    category: 'Diseño · Social media · Campañas',
-    description:
-      'Selección de bocetos y piezas creativas propias — creatividades, posts y conceptos visuales. Próximamente subiré una galería con ejemplos reales.',
-    status: 'creative',
-    accent: 'naranja',
-    links: [],
-  },
 ];
+
+export const webProjects = portfolioItems.filter((p) => p.kind === 'web');
+export const marketingCases = portfolioItems.filter((p) => p.kind === 'marketing');
+
+export const statusLabel: Record<PortfolioItem['status'], string> = {
+  live: 'Online',
+  'in-progress': 'En desarrollo',
+  'coming-soon': 'Próximamente',
+};

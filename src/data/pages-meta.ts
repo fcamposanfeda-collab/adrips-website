@@ -2,9 +2,9 @@ import { brand } from './brand';
 
 export const pagesMeta = {
   '/': {
-    title: `${brand.name} | Adriana Pérez Salmerón — Marketing Digital 360º`,
+    title: `${brand.name} — Diseño web profesional que consigue clientes | Adriana Pérez Salmerón`,
     description:
-      'SEO, Google Ads, diseño web, redes sociales y estrategia inbound. Marketing digital 360º con 5 años de experiencia en SaaS, fintech y B2B.',
+      'Diseño y desarrollo de páginas web a medida para negocios y marcas personales: bonitas, rápidas, optimizadas para Google y pensadas para vender. Presupuesto cerrado.',
   },
   '/sobre-mi': {
     title: `Sobre mí | ${brand.name} — Adriana Pérez Salmerón`,
@@ -19,12 +19,12 @@ export const pagesMeta = {
   '/proyectos': {
     title: `Proyectos | ${brand.name} — Adriana Pérez Salmerón`,
     description:
-      'Exaccta Xpens, campaña #ElWallpaperDeIbai (Finetwork), proyectos web y creativos — casos reales de marketing digital.',
+      'Proyectos de diseño web y casos de marketing digital: webs a medida, SEO local, Exaccta Xpens y la campaña #ElWallpaperDeIbai de Finetwork.',
   },
   '/servicios': {
-    title: `Servicios | ${brand.name} — Marketing Digital 360º`,
+    title: `Servicios de diseño web y marketing | ${brand.name}`,
     description:
-      'SEO y posicionamiento web, Google Ads, diseño web, redes sociales, Social Ads y estrategia inbound. Presupuesto personalizado.',
+      'Diseño y desarrollo web a medida, landing pages, SEO, Google Ads, Social Ads y estrategia digital. Presupuesto cerrado y trato directo.',
   },
   '/organizacion-eventos': {
     title: `Organización de eventos | ${brand.name} — Adriana Pérez Salmerón`,

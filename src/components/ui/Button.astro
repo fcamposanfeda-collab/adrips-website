@@ -1,13 +1,21 @@
 ---
 interface Props {
   href: string;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size?: 'md' | 'lg';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'light';
+  size?: 'sm' | 'md' | 'lg';
   class?: string;
   external?: boolean;
+  arrow?: boolean;
 }
 
-const { href, variant = 'primary', size = 'md', class: className, external = false } = Astro.props;
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className,
+  external = false,
+  arrow = false,
+} = Astro.props;
 ---
 
 <a
@@ -15,7 +23,16 @@ const { href, variant = 'primary', size = 'md', class: className, external = fal
   class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}
   {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
 >
-  <slot />
+  <span class="btn__label"><slot /></span>
+  {
+    arrow && (
+      <span class="btn__arrow" aria-hidden="true">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+    )
+  }
 </a>
 
 <style>
@@ -23,71 +40,116 @@ const { href, variant = 'primary', size = 'md', class: className, external = fal
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.625rem;
     font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1;
+    white-space: nowrap;
     border-radius: var(--radius-full);
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     transition:
       transform var(--transition-bounce),
-      background var(--transition-fast),
+      background-color var(--transition-fast),
       color var(--transition-fast),
       border-color var(--transition-fast),
       box-shadow var(--transition-fast);
   }
 
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn--sm {
+    padding: 0.625rem 1.125rem;
+    font-size: 0.875rem;
+  }
+
   .btn--md {
-    padding: 0.8125rem 1.625rem;
+    padding: 0.875rem 1.5rem;
     font-size: 0.9375rem;
   }
 
   .btn--lg {
-    padding: 1rem 2rem;
+    padding: 1.125rem 1.875rem;
     font-size: 1rem;
   }
 
+  .btn__arrow {
+    display: inline-grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: -0.5rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    transition: transform var(--transition-bounce);
+  }
+
+  .btn:hover .btn__arrow {
+    transform: translateX(3px);
+  }
+
   .btn--primary {
-    color: var(--color-on-dark);
-    background: linear-gradient(135deg, var(--color-brand-pink-deep), var(--color-brand-coral));
-    box-shadow: 0 4px 20px rgba(184, 132, 132, 0.35);
+    color: var(--white);
+    background: var(--accent);
+    box-shadow: 0 8px 24px -8px rgba(184, 79, 71, 0.6);
   }
 
   .btn--primary:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 28px rgba(184, 132, 132, 0.45);
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -10px rgba(184, 79, 71, 0.7);
   }
 
   .btn--secondary {
-    color: var(--color-text);
-    background: var(--color-brand-cream);
-    box-shadow: 0 4px 16px rgba(240, 228, 184, 0.4);
+    color: var(--white);
+    background: var(--ink);
   }
 
   .btn--secondary:hover {
-    transform: translateY(-3px) rotate(-1deg);
-    background: var(--color-brand-cream-deep);
-    color: var(--color-text);
+    background: var(--ink-2);
+    transform: translateY(-2px);
   }
 
   .btn--outline {
-    color: var(--color-text);
-    border-color: var(--color-border);
-    background: var(--color-surface);
+    color: var(--ink);
+    border-color: var(--line-strong);
+    background: transparent;
+  }
+
+  .btn--outline .btn__arrow {
+    background: var(--paper-2);
   }
 
   .btn--outline:hover {
-    border-color: var(--color-brand-lavender);
-    background: var(--color-bg-soft);
+    border-color: var(--ink);
+    background: var(--white);
     transform: translateY(-2px);
   }
 
   .btn--ghost {
     color: var(--color-on-dark);
-    border-color: rgba(255, 255, 255, 0.45);
+    border-color: rgba(251, 244, 236, 0.28);
     background: transparent;
   }
 
   .btn--ghost:hover {
-    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(251, 244, 236, 0.7);
+    background: rgba(251, 244, 236, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .btn--light {
+    color: var(--ink);
+    background: var(--paper);
+  }
+
+  .btn--light .btn__arrow {
+    background: var(--paper-3);
+  }
+
+  .btn--light:hover {
+    background: var(--white);
     transform: translateY(-2px);
   }
 </style>

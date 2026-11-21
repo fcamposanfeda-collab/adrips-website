@@ -2,72 +2,75 @@
 interface Props {
   eyebrow: string;
   title: string;
+  /** Parte del título que va en cursiva de acento */
+  emphasis?: string;
   description?: string;
   descriptionExtra?: string;
   wide?: boolean;
 }
 
-const { eyebrow, title, description, descriptionExtra, wide = false } = Astro.props;
+const { eyebrow, title, emphasis, description, descriptionExtra } = Astro.props;
 ---
 
-<header class:list={['page-intro', 'container', { 'page-intro--wide': wide }]} data-reveal>
-  <p class="page-intro__eyebrow">{eyebrow}</p>
-  <h1 class="page-intro__title">{title}</h1>
-  {
-    (description || descriptionExtra) && (
-      <div class="page-intro__copy">
-        {description && <p class="page-intro__desc">{description}</p>}
-        {descriptionExtra && <p class="page-intro__desc">{descriptionExtra}</p>}
-      </div>
-    )
-  }
+<header class="page-intro">
+  <div class="page-intro__glow" aria-hidden="true"></div>
+  <div class="container page-intro__inner">
+    <p class="eyebrow" data-reveal>{eyebrow}</p>
+    <h1 class="page-intro__title" data-reveal data-reveal-delay="1">
+      {title}{emphasis && <> <em>{emphasis}</em></>}
+    </h1>
+    {
+      (description || descriptionExtra) && (
+        <div class="page-intro__copy" data-reveal data-reveal-delay="2">
+          {description && <p class="lead">{description}</p>}
+          {descriptionExtra && <p class="lead">{descriptionExtra}</p>}
+        </div>
+      )
+    }
+  </div>
 </header>
 
 <style>
   .page-intro {
-    padding-top: 2rem;
-    padding-bottom: 1.5rem;
-    max-width: 42rem;
+    position: relative;
+    overflow: hidden;
+    padding-block: 4rem 3rem;
   }
 
-  .page-intro--wide {
-    max-width: var(--container-max);
-    text-align: left;
+  .page-intro__glow {
+    position: absolute;
+    right: -15rem;
+    top: -20rem;
+    width: 50rem;
+    height: 50rem;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(235, 202, 196, 0.7), transparent);
+    pointer-events: none;
   }
 
-  .page-intro--wide .page-intro__title,
-  .page-intro--wide .page-intro__copy {
-    max-width: none;
-    text-align: left;
+  .page-intro__inner {
+    position: relative;
+  }
+
+  .page-intro__title {
+    margin: 0 0 1.5rem;
+    max-width: 16ch;
+    font-size: clamp(2.5rem, 6.4vw, 4.75rem);
   }
 
   .page-intro__copy {
     display: grid;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    max-width: 40rem;
   }
 
-  .page-intro__eyebrow {
-    display: inline-block;
-    margin: 0 0 0.75rem;
-    padding: 0.375rem 0.875rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-lila-strong);
-    background: rgba(196, 181, 253, 0.2);
-    border-radius: var(--radius-full);
-  }
-
-  .page-intro__title {
-    margin: 0 0 0.75rem;
-    font-size: clamp(2rem, 5vw, 2.75rem);
-  }
-
-  .page-intro__desc {
+  .page-intro__copy p {
     margin: 0;
-    font-size: 1.0625rem;
-    color: var(--color-muted);
-    line-height: 1.75;
+  }
+
+  @media (min-width: 768px) {
+    .page-intro {
+      padding-block: 6rem 4rem;
+    }
   }
 </style>
