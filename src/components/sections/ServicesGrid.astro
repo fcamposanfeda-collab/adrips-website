@@ -1,21 +1,25 @@
 ---
 import Icon from '../ui/Icon.astro';
 import Button from '../ui/Button.astro';
-import { primaryServices, growthServices } from '../../data/services';
+import { services, serviceHref } from '../../data/services';
 import { routes } from '../../data/routes';
 
 interface Props {
-  /** Versión de la página Servicios: muestra la lista completa de lo que incluye */
+  /** Versión de la página Servicios: descripción larga y lo que incluye */
   detailed?: boolean;
+  /** Oculta un servicio (p. ej. el de la página actual) */
+  exclude?: string;
+  title?: string;
 }
 
-const { detailed = false } = Astro.props;
+const { detailed = false, exclude, title } = Astro.props;
+const list = services.filter((s) => s.slug !== exclude);
 ---
 
 <section id="servicios" class="services section" aria-labelledby="services-title">
   <div class="container">
     {
-      !detailed && (
+      !detailed && !title && (
         <header class="section-header section-header--split" data-reveal>
           <div>
             <p class="eyebrow">Servicios</p>
@@ -24,64 +28,56 @@ const { detailed = false } = Astro.props;
             </h2>
           </div>
           <p>
-            El centro es tu web. Alrededor, el marketing que le trae visitas y las convierte en clientes. Lo
-            contratas por separado o todo junto.
+            El centro es tu web. Alrededor, el marketing y el diseño que le traen visitas y las convierten en
+            clientes. Lo contratas por separado o todo junto.
           </p>
+        </header>
+      )
+    }
+    {
+      title && (
+        <header class="section-header" data-reveal>
+          <h2 id="services-title" class="services__small-title">{title}</h2>
         </header>
       )
     }
     {detailed && <h2 id="services-title" class="visually-hidden">Servicios</h2>}
 
-    <div class="services__primary">
+    <ul class:list={['services__grid', { 'services__grid--compact': !!exclude }]}>
       {
-        primaryServices.map((s, i) => (
-          <article class:list={['svc-feature', { 'svc-feature--dark': i === 0 }]} data-reveal data-reveal-delay={String(i + 1)}>
-            <div class="svc-feature__icon">
-              <Icon name={s.icon} size={26} />
-            </div>
-            <h3>{s.title}</h3>
-            <p>{detailed ? s.description : s.summary}</p>
-            <ul class="svc-feature__tags">
-              {(detailed ? s.features : s.features.slice(0, 4)).map((f) => (
-                <li>{f}</li>
-              ))}
-            </ul>
-          </article>
+        list.map((s, i) => (
+          <li data-reveal data-reveal-delay={String((i % 3) + 1)}>
+            <a href={serviceHref(s)} class:list={['svc-card', { 'svc-card--dark': i === 0 && !exclude }]}>
+              <div class="svc-card__top">
+                <span class="svc-card__icon">
+                  <Icon name={s.icon} size={24} />
+                </span>
+                <span class="svc-card__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" width="16" height="16" fill="none">
+                    <path d="M4 12L12 4M6 4h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </div>
+              <h3>{s.title}</h3>
+              <p>{detailed ? s.description : s.summary}</p>
+              {detailed && (
+                <ul class="svc-card__tags">
+                  {s.features.map((f) => (
+                    <li>{f}</li>
+                  ))}
+                </ul>
+              )}
+            </a>
+          </li>
         ))
       }
-    </div>
-
-    <div class="services__growth" data-reveal>
-      <p class="services__growth-title">Para que tu web crezca</p>
-      <ul class="services__list">
-        {
-          growthServices.map((s) => (
-            <li class="svc-row">
-              <span class="svc-row__icon">
-                <Icon name={s.icon} size={22} />
-              </span>
-              <div class="svc-row__body">
-                <h3>{s.title}</h3>
-                <p>{detailed ? s.description : s.summary}</p>
-                {detailed && (
-                  <ul class="svc-row__features">
-                    {s.features.map((f) => (
-                      <li>{f}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+    </ul>
 
     {
-      !detailed && (
+      !detailed && !exclude && (
         <div class="services__footer" data-reveal>
           <Button href={routes.services} variant="outline" arrow>
-            Ver servicios en detalle
+            Ver todos los servicios
           </Button>
         </div>
       )
@@ -90,38 +86,48 @@ const { detailed = false } = Astro.props;
 </section>
 
 <style>
-  .services__primary {
-    display: grid;
-    gap: 1.25rem;
-    margin-bottom: 1.25rem;
+  .services__small-title {
+    font-size: clamp(1.75rem, 3.4vw, 2.5rem);
   }
 
-  .svc-feature {
+  .services__grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .services__grid > li {
+    display: flex;
+  }
+
+  .svc-card {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 2.25rem 2rem;
+    width: 100%;
+    padding: 2rem 1.75rem;
     background: var(--white);
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition:
       transform var(--transition-bounce),
-      box-shadow var(--transition-fast);
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
   }
 
-  .svc-feature:hover {
+  .svc-card:hover {
     transform: translateY(-4px);
+    border-color: var(--blush);
     box-shadow: var(--shadow-hover);
   }
 
-  .svc-feature--dark {
+  .svc-card--dark {
     background: var(--ink);
     border-color: var(--ink);
     color: var(--color-on-dark);
   }
 
-  .svc-feature--dark::after {
+  .svc-card--dark::after {
     content: '';
     position: absolute;
     right: -6rem;
@@ -129,156 +135,134 @@ const { detailed = false } = Astro.props;
     width: 18rem;
     height: 18rem;
     border-radius: 50%;
-    background: radial-gradient(closest-side, rgba(232, 141, 128, 0.35), transparent);
+    background: radial-gradient(closest-side, rgba(227, 169, 174, 0.35), transparent);
     pointer-events: none;
   }
 
-  .svc-feature__icon {
+  .svc-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2.25rem;
+  }
+
+  .svc-card__icon {
     display: grid;
     place-items: center;
     width: 3.25rem;
     height: 3.25rem;
-    margin-bottom: 2.5rem;
     border-radius: var(--radius-sm);
     color: var(--accent);
     background: var(--accent-soft);
   }
 
-  .svc-feature--dark .svc-feature__icon {
+  .svc-card--dark .svc-card__icon {
     color: var(--ink);
     background: var(--accent-light);
   }
 
-  .svc-feature h3 {
-    margin: 0 0 0.75rem;
-    font-size: clamp(1.5rem, 2.6vw, 2rem);
+  .svc-card__arrow {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
+    transition:
+      transform var(--transition-bounce),
+      background var(--transition-fast),
+      color var(--transition-fast);
   }
 
-  .svc-feature--dark h3 {
+  .svc-card--dark .svc-card__arrow {
+    border-color: rgba(251, 244, 236, 0.25);
     color: var(--color-on-dark);
   }
 
-  .svc-feature p {
-    margin: 0 0 1.75rem;
-    color: var(--muted);
-    max-width: 34rem;
+  .svc-card:hover .svc-card__arrow {
+    transform: rotate(45deg);
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
   }
 
-  .svc-feature--dark p {
+  .svc-card h3 {
+    margin: 0 0 0.625rem;
+    font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+    transition: color var(--transition-fast);
+  }
+
+  .svc-card--dark h3 {
+    color: var(--color-on-dark);
+  }
+
+  .svc-card p {
+    margin: 0;
+    font-size: 0.9875rem;
+    color: var(--muted);
+  }
+
+  .svc-card--dark p {
     color: rgba(251, 244, 236, 0.72);
   }
 
-  .svc-feature__tags {
+  .svc-card__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: auto;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
   }
 
-  .svc-feature__tags li {
-    padding: 0.375rem 0.75rem;
+  .svc-card--dark .svc-card__tags {
+    border-color: rgba(251, 244, 236, 0.14);
+  }
+
+  .svc-card__tags li {
+    padding: 0.3rem 0.7rem;
     font-size: 0.8125rem;
     font-weight: 500;
     border-radius: var(--radius-full);
-    border: 1px solid var(--line);
-    color: var(--ink-soft);
-  }
-
-  .svc-feature--dark .svc-feature__tags li {
-    border-color: rgba(251, 244, 236, 0.18);
-    color: rgba(251, 244, 236, 0.86);
-  }
-
-  .services__growth {
-    padding: 2rem;
     background: var(--paper-2);
-    border-radius: var(--radius-lg);
-  }
-
-  .services__growth-title {
-    margin: 0 0 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .services__list {
-    display: grid;
-  }
-
-  .svc-row {
-    display: flex;
-    gap: 1.25rem;
-    padding-block: 1.5rem;
-    border-bottom: 1px solid var(--line-strong);
-  }
-
-  .svc-row:last-child {
-    border-bottom: 0;
-    padding-bottom: 0.25rem;
-  }
-
-  .svc-row__icon {
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 50%;
-    background: var(--white);
-    color: var(--accent);
-  }
-
-  .svc-row h3 {
-    margin: 0 0 0.25rem;
-    font-size: 1.25rem;
-  }
-
-  .svc-row p {
-    margin: 0;
-    font-size: 0.9375rem;
-    color: var(--muted);
-  }
-
-  .svc-row__features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem 1rem;
-    margin-top: 0.75rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
     color: var(--ink-soft);
   }
 
-  .svc-row__features li::before {
-    content: '·';
-    margin-right: 0.375rem;
-    color: var(--accent);
+  .svc-card--dark .svc-card__tags li {
+    background: rgba(251, 244, 236, 0.08);
+    color: rgba(251, 244, 236, 0.86);
   }
 
   .services__footer {
     margin-top: 2.5rem;
   }
 
-  @media (min-width: 768px) {
-    .services__primary {
-      grid-template-columns: 1.3fr 1fr;
-    }
-
-    .services__growth {
-      padding: 2.5rem 3rem;
-    }
-
-    .services__list {
+  @media (min-width: 640px) {
+    .services__grid {
       grid-template-columns: 1fr 1fr;
-      column-gap: 3rem;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
     }
 
-    .svc-row:nth-last-child(2) {
-      border-bottom: 0;
-      padding-bottom: 0.25rem;
+    .services__grid--compact {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .services__grid--compact .svc-card {
+      padding: 1.5rem 1.25rem;
+    }
+
+    .services__grid--compact .svc-card h3 {
+      font-size: 1.25rem;
+    }
+
+    .services__grid--compact .svc-card__top {
+      margin-bottom: 1.5rem;
     }
   }
 </style>

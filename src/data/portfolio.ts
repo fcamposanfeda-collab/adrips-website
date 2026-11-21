@@ -43,7 +43,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       'Identidad digital y web a medida. Caso completo con proceso, decisiones de diseño y resultados muy pronto.',
     status: 'coming-soon',
-    tone: 'terracotta',
+    tone: 'rose',
     featured: true,
     tags: ['Diseño UI', 'Desarrollo', 'SEO'],
     links: [],

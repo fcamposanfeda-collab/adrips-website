@@ -2,7 +2,7 @@
   /*
    * Sistema visual Adrips 2026
    * Base cálida y editorial (papel + tinta ciruela) con un único acento fuerte
-   * (rosa terracota) y la paleta original (rosa empolvado, crema, lavanda)
+   * (rosa empolvado intenso) y la paleta original (rosa empolvado, crema, lavanda)
    * reservada para fondos suaves y detalles.
    */
 
@@ -11,19 +11,19 @@
   --ink-2: #3b2a31;
   --ink-soft: #4c3a41;
   --muted: #6b5960;
-  --paper: #faf6f1;
-  --paper-2: #f3ebe2;
-  --paper-3: #ece1d5;
+  --paper: #fbf6f4;
+  --paper-2: #f6ebe8;
+  --paper-3: #efe0dc;
   --white: #fffdfb;
-  --line: #e5d9cd;
-  --line-strong: #d6c6b7;
+  --line: #ecdcd7;
+  --line-strong: #ddc7c1;
 
   /* Acentos */
-  --accent: #b84f47;
-  --accent-hover: #9a3e37;
-  --accent-soft: #f6dcd6;
-  --accent-light: #e88d80;
-  --blush: #ebcac4;
+  --accent: #a35f6b;
+  --accent-hover: #8a4d58;
+  --accent-soft: #f6e2e3;
+  --accent-light: #e3a9ae;
+  --blush: #efcfd0;
   --rose: #d4a5a5;
   --cream: #f1e3b9;
   --lavender: #c9b8ec;
