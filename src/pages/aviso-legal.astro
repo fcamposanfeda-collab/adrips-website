@@ -21,15 +21,16 @@ const meta = getPageMeta('/aviso-legal');
 
     <h2>1. Titular del sitio web</h2>
     <ul>
-      <li><strong>Denominación / titular:</strong> {legal.holder}</li>
+      <li><strong>Titular:</strong> {legal.holder}</li>
       <li><strong>Marca comercial:</strong> {brand.name}</li>
       <li><strong>NIF:</strong> {legal.nif}</li>
       <li>
-        <strong>Domicilio:</strong> {legal.address}, {legal.postalCode} {legal.city} ({legal.province}),
-        {legal.country}
+        <strong>Domicilio:</strong>
+        {[legal.address, [legal.postalCode, legal.city].filter(Boolean).join(' ')].filter(Boolean).join(', ')}
+        ({legal.province}), {legal.country}
       </li>
       <li><strong>Actividad:</strong> {legal.activity}</li>
-      <li><strong>Datos registrales:</strong> {legal.registryInfo}</li>
+      {legal.registryInfo && <li><strong>Datos registrales:</strong> {legal.registryInfo}</li>}
       <li>
         <strong>Correo electrónico:</strong>
         <a href={`mailto:${contact.email}`}>{contact.email}</a>

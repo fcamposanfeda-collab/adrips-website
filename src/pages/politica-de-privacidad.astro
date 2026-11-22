@@ -23,8 +23,9 @@ const meta = getPageMeta('/politica-de-privacidad');
       <li><strong>Identidad:</strong> {legal.holder}</li>
       <li><strong>NIF:</strong> {legal.nif}</li>
       <li>
-        <strong>Domicilio:</strong> {legal.address}, {legal.postalCode} {legal.city} ({legal.province}),
-        {legal.country}
+        <strong>Domicilio:</strong>
+        {[legal.address, [legal.postalCode, legal.city].filter(Boolean).join(' ')].filter(Boolean).join(', ')}
+        ({legal.province}), {legal.country}
       </li>
       <li><strong>Actividad:</strong> {legal.activity}</li>
       <li>
