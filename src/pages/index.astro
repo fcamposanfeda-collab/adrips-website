@@ -17,7 +17,6 @@ const meta = getPageMeta('/');
 ---
 
 <BaseLayout title={meta.title} description={meta.description}>
-  <link rel="preload" as="image" href={owner.photos.portrait.src} slot="head" />
   <Hero />
   <TrustStrip />
   <PortfolioTeaser />

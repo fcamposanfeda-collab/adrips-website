@@ -42,12 +42,12 @@ const [front, back] = webProjects;
 
     <div class="hero__visual" aria-hidden="true">
       <div class="hero__stack">
-        {back && <div class="hero__card hero__card--back"><ProjectCover project={back} /></div>}
-        {front && <div class="hero__card hero__card--front"><ProjectCover project={front} size="lg" eager /></div>}
+        {back && <div class="hero__card hero__card--back"><ProjectCover project={back} priority /></div>}
+        {front && <div class="hero__card hero__card--front"><ProjectCover project={front} size="lg" priority /></div>}
       </div>
 
       <div class="hero__chip hero__chip--person">
-        <img src={owner.photos.portrait.src} alt="Adriana Pérez Salmerón, diseñadora web en Ciudad Real" width="48" height="48" loading="eager" />
+        <img src="/images/adriana-retrato-96.webp" alt="Adriana Pérez Salmerón, diseñadora web en Ciudad Real" width="48" height="48" loading="eager" />
         <div>
           <strong>Hola, soy {owner.firstName}</strong>
           <span>Diseño tu web y te ayudo a que funcione</span>

@@ -10,9 +10,11 @@ interface Props {
   project: PortfolioItem;
   size?: 'md' | 'lg';
   eager?: boolean;
+  /** Imagen principal de la primera pantalla: se pide con prioridad alta */
+  priority?: boolean;
 }
 
-const { project, size = 'md', eager = false } = Astro.props;
+const { project, size = 'md', eager = false, priority = false } = Astro.props;
 const label = project.domain ?? project.title;
 ---
 
@@ -29,7 +31,8 @@ const label = project.domain ?? project.title;
           srcset={`${project.image.replace(/\.webp$/, '-800.webp')} 800w, ${project.image} 1440w`}
           sizes="(max-width: 760px) 92vw, 50vw"
           alt={`Captura de la web de ${project.title}`}
-          loading={eager ? 'eager' : 'lazy'}
+          loading={eager || priority ? 'eager' : 'lazy'}
+          fetchpriority={priority ? 'high' : undefined}
           decoding="async"
           width="1600"
           height="1000"
