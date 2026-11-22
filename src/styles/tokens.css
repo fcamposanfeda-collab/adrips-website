@@ -38,6 +38,10 @@
   --lavender-deep: #6e57a8;
   --sage: #cfd9c6;
 
+  /* Flor de marca (logo, favicon, Instagram): mismo color en todo el sitio */
+  --logo-star: #ecbec8;
+  --logo-flower-center: #ffdc8b;
+
   /* Alias heredados (componentes existentes) */
   --color-brand-pink: var(--rose);
   --color-brand-pink-deep: var(--accent);
