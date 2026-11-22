@@ -16,12 +16,12 @@ export const mainNav: NavLink[] = [
   },
   { label: 'Sobre mí', href: routes.about },
   { label: 'Blog', href: routes.blog },
-  { label: 'Contacto', href: routes.contact },
 ];
 
 /** Eventos e Inspiración salen del menú principal para no diluir la oferta web */
 export const footerNav: NavLink[] = [
   ...mainNav.map(({ label, href }) => ({ label, href })),
+  { label: 'Contacto', href: routes.contact },
   { label: 'Papelería para eventos', href: routes.events },
   { label: 'Inspiración', href: routes.inspiration },
 ];
