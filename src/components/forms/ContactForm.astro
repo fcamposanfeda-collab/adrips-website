@@ -22,9 +22,9 @@ const choiceGroups = [
   },
   {
     name: 'presupuesto',
-    legend: 'Presupuesto orientativo',
-    multiple: true,
-    options: ['Menos de 500 €', '500 – 1.000 €', '1.000 – 2.500 €', 'Más de 2.500 €', 'Aún no lo sé'],
+    legend: 'Inversión',
+    multiple: false,
+    options: ['A consultar', 'Aún no lo sé'],
   },
   {
     name: 'plazo',
@@ -61,7 +61,7 @@ const honeypotId = `${formId}-company`;
     name="subject"
     value={isAudit ? `Revisión gratuita de web — ${owner.fullName}` : `Nuevo mensaje — ${owner.fullName}`}
   />
-  <input type="hidden" name="tipo_solicitud" value={isAudit ? 'Revisión gratuita' : 'Contacto / presupuesto'} />
+  <input type="hidden" name="tipo_solicitud" value={isAudit ? 'Revisión gratuita' : 'Contacto'} />
   <input type="hidden" name="from_name" value={`Web ${owner.fullName}`} />
 
   {

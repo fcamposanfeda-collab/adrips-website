@@ -71,7 +71,7 @@ export const services: Service[] = [
         'Trato directo conmigo de principio a fin',
       ],
       steps: [
-        { title: 'Conversación y propuesta', text: 'Entiendo tu negocio y te envío alcance, plazos y precio cerrado.' },
+        { title: 'Conversación y propuesta', text: 'Entiendo tu negocio y te oriento sobre el alcance y los plazos. El proyecto queda a consultar.' },
         { title: 'Diseño', text: 'Estructura, mensajes y diseño visual que revisas y apruebas.' },
         { title: 'Desarrollo y lanzamiento', text: 'Construyo la web, la publico y te explico cómo gestionarla.' },
       ],

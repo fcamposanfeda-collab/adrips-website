@@ -10,7 +10,7 @@ export const owner = {
   bio: [
     'Soy especialista en marketing digital con formación en marketing y diseño gráfico. He liderado departamentos, lanzado productos y construido funnels de captación de principio a fin.',
     'Mi experiencia abarca desde community management hasta responsable de marketing: Google Ads, RRSS, email marketing, CRM, landings y analítica orientada a resultados.',
-    'Trabajo desde Ciudad Real con negocios de toda España en remoto: misma cercanía, mismo criterio y presupuesto cerrado.',
+    'Trabajo desde Ciudad Real con negocios de toda España en remoto: misma cercanía y mismo criterio. Cada proyecto, a consultar.',
     'Creativa, extrovertida y con ganas de mejorar cada día. Creo que las ideas mejoran si se comparten — y que el marketing funciona cuando combina estrategia, diseño y datos reales.',
   ],
   personal: {

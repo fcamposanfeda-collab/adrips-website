@@ -31,7 +31,7 @@ export const inspirationMeta = {
   leadExtra:
     'No es solo un hobby: es de donde nace buena parte de la paleta de Adrips.',
   paletteNote:
-    'Rosa empolvado, crema dorada, coral suave y lavanda — los mismos tonos que encuentro cuando el cielo se despide del día o cuando las flores empiezan a abrirse.',
+    'Rosa empolvado, crema dorada, coral suave y lavanda. A ese rosa del cielo se le llama arrebol: el color de las nubes iluminadas por el sol al atardecer.',
 } as const;
 
 export const inspirationCategories: { id: InspirationCategory | 'todas'; label: string }[] = [

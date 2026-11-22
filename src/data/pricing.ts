@@ -13,7 +13,7 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: 'starter',
     name: 'Impulso',
-    price: 'Desde 490€',
+    price: 'A consultar',
     period: 'proyecto único',
     description: 'Ideal para emprendedores y negocios locales que quieren dar el salto online.',
     features: [
@@ -28,8 +28,8 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: 'growth',
     name: 'Crecimiento',
-    price: 'Desde 890€',
-    period: '/ mes',
+    price: 'A consultar',
+    period: 'acompañamiento',
     description: 'Para marcas que buscan visibilidad constante y leads recurrentes.',
     features: [
       'Web completa o mantenimiento',
@@ -44,8 +44,8 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: 'custom',
     name: 'A medida',
-    price: 'Consultar',
-    period: 'presupuesto personalizado',
+    price: 'A consultar',
+    period: 'según el proyecto',
     description: 'Estrategia integral adaptada a tus objetivos, sector y presupuesto.',
     features: [
       'Auditoría completa',

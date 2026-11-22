@@ -4,7 +4,7 @@ export const pagesMeta = {
   '/': {
     title: `Diseño web y marketing en Ciudad Real y toda España | ${brand.name}`,
     description:
-      'Diseño web a medida, SEO y marketing digital desde Ciudad Real para negocios de toda España. Webs bonitas, rápidas y pensadas para vender. Presupuesto cerrado.',
+      'Diseño web a medida, SEO y marketing digital desde Ciudad Real para negocios de toda España. Webs bonitas, rápidas y pensadas para vender. Cada proyecto, a consultar.',
   },
   '/ciudad-real': {
     title: `Páginas web y SEO local en Ciudad Real | ${brand.name}`,
@@ -24,12 +24,12 @@ export const pagesMeta = {
   '/proyectos': {
     title: `Proyectos | ${brand.name} — Adriana Pérez Salmerón`,
     description:
-      'Proyectos de diseño web y casos de marketing digital: webs a medida, SEO local, Exaccta Xpens y la campaña #ElWallpaperDeIbai de Finetwork.',
+      'Proyectos de diseño web y casos de marketing digital: Càrom Studio Vintage, webs a medida, SEO local, Exaccta Xpens y la campaña #ElWallpaperDeIbai de Finetwork.',
   },
   '/servicios': {
     title: `Servicios de diseño web y marketing | ${brand.name}`,
     description:
-      'Desarrollo web, SEO, posicionamiento en IA, Google Ads, redes y analítica. Para negocios de Ciudad Real y de toda España. Presupuesto cerrado y trato directo.',
+      'Desarrollo web, SEO, posicionamiento en IA, Google Ads, redes y analítica. Para negocios de Ciudad Real y de toda España. Cada servicio, a consultar, y trato directo.',
   },
   '/organizacion-eventos': {
     title: `Organización de eventos | ${brand.name}`,
@@ -39,7 +39,7 @@ export const pagesMeta = {
   '/contacto': {
     title: `Contacto | ${brand.name} — Adriana Pérez Salmerón`,
     description:
-      'Cuéntame tu proyecto. Respondo desde Ciudad Real a clientes de toda España. Primera conversación sin compromiso y presupuesto claro.',
+      'Cuéntame tu proyecto. Respondo desde Ciudad Real a clientes de toda España. Primera conversación sin compromiso y, si quieres algo más, a consultar.',
   },
   '/politica-de-privacidad': {
     title: `Política de privacidad | ${brand.name}`,

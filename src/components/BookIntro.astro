@@ -59,16 +59,26 @@ import { brand } from '../data/brand';
       avisarAbierto();
     }
 
-    function abrir() {
-      libro.classList.add('is-abierto');
+    function soltar() {
+      libro.classList.add('is-fuera');
+      document.documentElement.classList.add('libro-ya-abierto');
       document.body.classList.remove('is-bloqueado');
+      const activo = document.activeElement;
+      if (activo instanceof HTMLElement) activo.blur();
+    }
+
+    function abrir() {
+      const movil = window.matchMedia('(max-width: 899px)').matches;
+      libro.classList.add('is-abierto');
+      const activo = document.activeElement;
+      if (activo instanceof HTMLElement) activo.blur();
       try {
         sessionStorage.setItem(CLAVE, '1');
       } catch {
         /* ignore */
       }
-      setTimeout(() => libro.classList.add('is-fuera'), reduce ? 280 : 1900);
-      setTimeout(avisarAbierto, reduce ? 0 : 320);
+      setTimeout(avisarAbierto, reduce ? 0 : 280);
+      setTimeout(soltar, reduce ? 280 : movil ? 1000 : 1700);
     }
 
     let yaAbierto = false;
@@ -91,13 +101,16 @@ import { brand } from '../data/brand';
 <style is:global>
   body.is-bloqueado {
     overflow: hidden;
+    overscroll-behavior: none;
   }
 
   .libro {
     position: fixed;
     inset: 0;
     z-index: 200;
+    overflow: hidden;
     background: transparent;
+    touch-action: none;
   }
 
   .libro.is-fuera,
@@ -204,7 +217,7 @@ import { brand } from '../data/brand';
   .libro__velo {
     position: absolute;
     inset: 0;
-    background: rgba(176, 116, 124, 0.74);
+    background: rgba(190, 138, 146, 0.76);
   }
 
   .libro__cara::before {
@@ -316,6 +329,7 @@ import { brand } from '../data/brand';
 
   .libro.is-abierto {
     pointer-events: none;
+    touch-action: auto;
   }
 
   .libro.is-abierto .libro__portada {
@@ -391,6 +405,24 @@ import { brand } from '../data/brand';
       bottom: 1.15rem;
       font-size: 1.2rem;
       padding: 0.35rem 0.15rem;
+    }
+
+    .libro {
+      background: rgba(26, 16, 30, 0.58);
+    }
+
+    .libro__album,
+    .libro.is-abierto .libro__album {
+      box-shadow: none;
+    }
+
+    .libro.is-abierto {
+      background: transparent;
+      transition: background 0.35s ease 0.15s;
+    }
+
+    .libro.is-abierto .libro__portada {
+      transform: rotateY(-128deg);
     }
   }
 

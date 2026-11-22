@@ -9,7 +9,7 @@ import ContactCta from '../components/sections/ContactCta.astro';
 import Button from '../components/ui/Button.astro';
 import { webProjects } from '../data/portfolio';
 
-const localProjects = webProjects.filter((p) => p.status === 'live' && p.image);
+const localProjects = webProjects.filter((p) => p.local && p.status === 'live' && p.image);
 
 const meta = getPageMeta('/ciudad-real');
 
@@ -75,7 +75,7 @@ const localFaqs = [
         </ul>
         <div class="local-seo__actions">
           <Button href={routes.services} variant="secondary">Ver servicios</Button>
-          <Button href={routes.contact} variant="primary">Pedir presupuesto</Button>
+          <Button href={routes.contact} variant="primary">Consultar</Button>
         </div>
       </article>
     </div>

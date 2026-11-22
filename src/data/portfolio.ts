@@ -20,6 +20,8 @@ export type PortfolioItem = {
   status: 'live' | 'in-progress' | 'coming-soon';
   tone: CoverTone;
   featured?: boolean;
+  /** Negocio de Ciudad Real o provincia: sale en la página local */
+  local?: boolean;
   /** Dominio que se muestra en la barra del navegador de la portada */
   domain?: string;
   /** Captura real (ruta en /public). Si existe, sustituye a la portada generada. */
@@ -36,6 +38,24 @@ export type PortfolioItem = {
  */
 export const portfolioItems: PortfolioItem[] = [
   {
+    id: 'carom-vintage',
+    title: 'Càrom Studio Vintage',
+    kind: 'web',
+    category: 'Web · Moda vintage',
+    description:
+      'Tienda online para Càrom Studio Vintage: vestidos vintage de pieza única, de los años 20 al 2000. Catálogo, ficha de cada pieza y contacto directo, con una imagen editorial pensada para una marca de moda.',
+    status: 'live',
+    tone: 'sage',
+    featured: true,
+    domain: 'caromvintage.com',
+    image: '/images/proyectos/carom-vintage.webp',
+    tags: ['Diseño y desarrollo', 'Catálogo', 'Moda'],
+    links: [
+      { label: 'Ver web', href: 'https://www.caromvintage.com/', type: 'web' },
+      { label: 'Instagram', href: 'https://www.instagram.com/carom_vintage/', type: 'social' },
+    ],
+  },
+  {
     id: 'los-collados',
     title: 'Finca Los Collados',
     kind: 'web',
@@ -45,6 +65,7 @@ export const portfolioItems: PortfolioItem[] = [
     status: 'live',
     tone: 'sage',
     featured: true,
+    local: true,
     domain: 'loscolladosdesanmiguel.com',
     image: '/images/proyectos/los-collados.webp',
     tags: ['Diseño y desarrollo', 'Multidioma', 'Reservas'],
@@ -60,23 +81,11 @@ export const portfolioItems: PortfolioItem[] = [
     status: 'live',
     tone: 'cream',
     featured: true,
+    local: true,
     domain: 'azureacatering.com',
     image: '/images/proyectos/azurea-catering.webp',
     tags: ['Diseño y desarrollo', 'SEO local', 'Captación'],
     links: [{ label: 'Ver web', href: 'https://azureacatering.com/', type: 'web' }],
-  },
-  {
-    id: 'carom-vintage',
-    title: 'Carom Vintage',
-    kind: 'web',
-    category: 'Diseño y desarrollo web',
-    description:
-      'Identidad digital y web a medida. Caso completo con proceso, decisiones de diseño y resultados muy pronto.',
-    status: 'coming-soon',
-    tone: 'rose',
-    featured: true,
-    tags: ['Diseño UI', 'Desarrollo', 'SEO'],
-    links: [],
   },
   {
     id: 'inversound',

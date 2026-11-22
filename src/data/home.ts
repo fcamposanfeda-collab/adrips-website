@@ -1,6 +1,6 @@
 /** Contenido de la home: propuesta de valor, proceso, FAQ y prueba social. */
 
-export const heroPoints = ['Diseño 100% a medida', 'Presupuesto cerrado', 'Respuesta en 24 h'];
+export const heroPoints = ['Diseño 100% a medida', 'Precio a consultar', 'Respuesta en 24 h'];
 
 /** Empresas donde Adriana ha llevado el marketing (texto, sin logotipos de terceros) */
 export const trustedBy = ['Exaccta', 'Finetwork', 'Stellantis &You', 'Wenance', 'Acadef'];
@@ -35,7 +35,7 @@ export const processSteps: ProcessStep[] = [
     step: '01',
     title: 'Conversación y propuesta',
     description:
-      'Hablamos de tu negocio, tus clientes y tus objetivos. Te envío una propuesta con alcance, plazos y precio cerrado.',
+      'Hablamos de tu negocio, tus clientes y tus objetivos. Te oriento sobre el alcance y los plazos, y el proyecto queda a consultar.',
     duration: 'Semana 1',
   },
   {
@@ -64,7 +64,7 @@ export const processSteps: ProcessStep[] = [
 export const faqs = [
   {
     q: '¿Cuánto cuesta una web?',
-    a: 'Depende del alcance: no es lo mismo una landing que una web corporativa con varias secciones o una tienda. Tras una primera conversación te envío un presupuesto cerrado y por escrito, sin sorpresas ni letra pequeña.',
+    a: 'Por ahora cada proyecto va a consultar. No es lo mismo una landing que una web con varias secciones o una tienda. En la primera conversación te oriento y, si encaja, seguimos. Si ya tienes web, el análisis es gratis.',
   },
   {
     q: '¿Cuánto se tarda?',
