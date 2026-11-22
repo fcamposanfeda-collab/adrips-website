@@ -22,4 +22,15 @@ export function initRevealOnScroll(): void {
   elements.forEach((el) => observer.observe(el));
 }
 
-initRevealOnScroll();
+function maybeInitReveal(): void {
+  if (document.documentElement.classList.contains('libro-pendiente')) return;
+  initRevealOnScroll();
+}
+
+document.addEventListener('adrips:libro-abierto', () => initRevealOnScroll());
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', maybeInitReveal);
+} else {
+  maybeInitReveal();
+}

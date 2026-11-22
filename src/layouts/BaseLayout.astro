@@ -4,6 +4,7 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import WhatsAppFloat from '../components/ui/WhatsAppFloat.astro';
+import BookIntro from '../components/BookIntro.astro';
 import SeoSchema from '../components/SeoSchema.astro';
 import { site } from '../data/site';
 import { owner } from '../data/owner';
@@ -59,6 +60,35 @@ const ogImageURL = new URL('/images/og-adrips.jpg', site.url).href;
     <slot name="head" />
   </head>
   <body>
+    <script is:inline>
+      var escritorio = window.matchMedia('(min-width: 900px)').matches;
+      if (!escritorio) {
+        document.documentElement.classList.add('libro-ya-abierto');
+      } else {
+        try {
+          if (sessionStorage.getItem('adrips-libro-abierto') === '1') {
+            document.documentElement.classList.add('libro-ya-abierto');
+          } else {
+            document.documentElement.classList.add('libro-pendiente');
+            document.body.classList.add('is-bloqueado');
+          }
+        } catch (e) {
+          document.documentElement.classList.add('libro-pendiente');
+          document.body.classList.add('is-bloqueado');
+        }
+      }
+    </script>
+    <noscript>
+      <style>
+        body.is-bloqueado {
+          overflow: auto !important;
+        }
+        .libro {
+          display: none !important;
+        }
+      </style>
+    </noscript>
+    <BookIntro />
     <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     <Header />
     <main id="main-content">

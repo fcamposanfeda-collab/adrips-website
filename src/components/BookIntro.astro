@@ -1,0 +1,404 @@
+---
+import { owner } from '../data/owner';
+import { brand } from '../data/brand';
+---
+
+<div
+  class="libro"
+  id="libro"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="titulo-libro"
+>
+  <div class="libro__escena">
+    <div class="libro__album">
+      <div class="libro__lomo" aria-hidden="true"></div>
+
+      <div class="libro__canto" aria-hidden="true"></div>
+
+      <div class="libro__portada">
+        <div class="libro__cara">
+          <img class="libro__fondo" src="/images/fondo-book.jpeg" alt="" width="1200" height="1600" />
+          <div class="libro__velo" aria-hidden="true"></div>
+          <div class="libro__marco">
+            <img class="libro__logo" src={brand.logo} alt="" width="280" height="84" />
+            <p class="libro__eyebrow">{brand.name}</p>
+            <h2 id="titulo-libro" class="libro__titulo">
+              Hola, soy <em>{owner.firstName}</em>
+            </h2>
+            <span class="libro__ornamento"></span>
+            <p class="libro__texto">{brand.tagline}</p>
+          </div>
+          <button type="button" class="libro__esquina" id="boton-libro">Abrir libro</button>
+        </div>
+        <div class="libro__guarda" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const CLAVE = 'adrips-libro-abierto';
+  const EVENTO = 'adrips:libro-abierto';
+  const ESCRITORIO = '(min-width: 900px)';
+  const libro = document.getElementById('libro');
+  const boton = document.getElementById('boton-libro');
+
+  if (libro && boton) {
+    const escritorio = window.matchMedia(ESCRITORIO);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function avisarAbierto() {
+      document.documentElement.classList.remove('libro-pendiente');
+      document.dispatchEvent(new CustomEvent(EVENTO));
+    }
+
+    function ocultar() {
+      libro.classList.add('is-fuera');
+      document.documentElement.classList.add('libro-ya-abierto');
+      document.documentElement.classList.remove('libro-pendiente');
+      document.body.classList.remove('is-bloqueado');
+      avisarAbierto();
+    }
+
+    function abrir() {
+      libro.classList.add('is-abierto');
+      document.body.classList.remove('is-bloqueado');
+      try {
+        sessionStorage.setItem(CLAVE, '1');
+      } catch {
+        /* ignore */
+      }
+      setTimeout(() => libro.classList.add('is-fuera'), reduce ? 280 : 1900);
+      setTimeout(avisarAbierto, reduce ? 0 : 320);
+    }
+
+    if (!escritorio.matches) {
+      ocultar();
+    } else {
+      let yaAbierto = false;
+      try {
+        yaAbierto = sessionStorage.getItem(CLAVE) === '1';
+      } catch {
+        yaAbierto = false;
+      }
+
+      if (yaAbierto) {
+        ocultar();
+      } else {
+        document.body.classList.add('is-bloqueado');
+        boton.focus({ preventScroll: true });
+        boton.addEventListener('click', abrir, { once: true });
+        escritorio.addEventListener('change', (event) => {
+          if (!event.matches) ocultar();
+        });
+      }
+    }
+  }
+</script>
+
+<style is:global>
+  body.is-bloqueado {
+    overflow: hidden;
+  }
+
+  .libro {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: transparent;
+  }
+
+  .libro.is-fuera,
+  .libro-ya-abierto .libro {
+    display: none;
+  }
+
+  .libro__escena {
+    width: 100%;
+    height: 100%;
+  }
+
+  .libro__album {
+    position: absolute;
+    inset: 0.85rem 1rem 0.85rem 0.75rem;
+    perspective: 2400px;
+    perspective-origin: 8% 50%;
+    box-shadow: 0 0 0 100vmax rgba(26, 16, 30, 0.58);
+    transition: box-shadow 0.45s ease 0.15s;
+  }
+
+  .libro__lomo {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3.4rem;
+    border-radius: 0.7rem 0.12rem 0.12rem 0.7rem;
+    background: linear-gradient(
+      90deg,
+      #c98992 0%,
+      #fbe8e4 13%,
+      #f3cfc8 32%,
+      #e8b7b2 50%,
+      #f6d4ce 68%,
+      #e2b0b2 84%,
+      #c4848e 100%
+    );
+    box-shadow:
+      inset -7px 0 8px rgba(140, 80, 90, 0.28),
+      inset 3px 0 4px rgba(255, 255, 255, 0.55),
+      4px 0 8px rgba(84, 64, 90, 0.1);
+    transition: opacity 0.35s ease 0.12s;
+  }
+
+  .libro__canto {
+    position: absolute;
+    z-index: 1;
+    top: 0.55rem;
+    right: 0;
+    bottom: 0.55rem;
+    width: 0.7rem;
+    border-radius: 0 2px 2px 0;
+    background: repeating-linear-gradient(
+      90deg,
+      #fbf7f2 0 1px,
+      #e7d9cc 1px 2px,
+      #f3ebe3 2px 3px
+    );
+    box-shadow: 4px 0 10px rgba(40, 22, 32, 0.18);
+    transition: opacity 0.35s ease 0.12s;
+  }
+
+  .libro__portada {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0.45rem;
+    bottom: 0;
+    left: 3.05rem;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 1.25s cubic-bezier(0.55, 0.02, 0.2, 1);
+  }
+
+  .libro__cara,
+  .libro__guarda {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 0 0.45rem 0.5rem 0;
+    backface-visibility: hidden;
+  }
+
+  .libro__cara {
+    display: grid;
+    place-items: center;
+    padding: 1.25rem 1.5rem 1.25rem 1.1rem;
+    background: #54405a;
+    transform: translateZ(1px);
+  }
+
+  .libro__fondo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 42%;
+    filter: saturate(0.72) brightness(0.92);
+  }
+
+  .libro__velo {
+    position: absolute;
+    inset: 0;
+    background: rgba(176, 116, 124, 0.74);
+  }
+
+  .libro__cara::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 0.7rem 0.8rem 0.7rem 0.6rem;
+    border: 1px solid rgba(250, 242, 236, 0.72);
+    pointer-events: none;
+  }
+
+  .libro__guarda {
+    background:
+      radial-gradient(circle at 22% 30%, rgba(236, 182, 189, 0.45), transparent 36%),
+      radial-gradient(circle at 78% 70%, rgba(201, 184, 236, 0.35), transparent 40%),
+      #f6ece6;
+    transform: rotateY(180deg) translateZ(1px);
+  }
+
+  .libro__marco {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: min(18.5rem, 62%);
+    aspect-ratio: 1;
+    max-height: calc(100% - 1.4rem);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1rem 1.05rem 0.95rem;
+    text-align: center;
+    background: var(--cream);
+    border: 1px solid rgba(84, 64, 90, 0.35);
+    box-shadow: 0 0 0 6px rgba(84, 64, 90, 0.22);
+  }
+
+  .libro__logo {
+    width: min(11.5rem, 78%);
+    height: auto;
+    mix-blend-mode: multiply;
+  }
+
+  .libro__eyebrow {
+    margin: 0;
+    color: var(--plum);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .libro__titulo {
+    margin: 0;
+    color: var(--plum);
+    font-family: var(--font-heading);
+    font-size: clamp(1.45rem, 2.6vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .libro__titulo em {
+    color: #a86d7c;
+    font-style: italic;
+    font-weight: 450;
+  }
+
+  .libro__ornamento {
+    width: 2.2rem;
+    height: 1px;
+    background: var(--plum);
+    opacity: 0.45;
+  }
+
+  .libro__texto {
+    margin: 0;
+    color: var(--plum);
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .libro__esquina {
+    position: absolute;
+    z-index: 4;
+    right: 1.25rem;
+    bottom: 1rem;
+    padding: 0.15rem 0.1rem;
+    color: var(--cream);
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 2px rgba(36, 22, 32, 0.55);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .libro__esquina:hover {
+    color: #fff;
+  }
+
+  .libro__esquina:focus-visible {
+    outline: 2px solid var(--cream);
+    outline-offset: 3px;
+  }
+
+  .libro.is-abierto {
+    pointer-events: none;
+  }
+
+  .libro.is-abierto .libro__portada {
+    transform: rotateY(-112deg);
+  }
+
+  .libro.is-abierto .libro__album {
+    box-shadow: 0 0 0 100vmax rgba(26, 16, 30, 0);
+  }
+
+  .libro.is-abierto .libro__lomo,
+  .libro.is-abierto .libro__canto {
+    opacity: 0;
+  }
+
+  .libro.is-abierto .libro__escena {
+    animation: libro-sale 0.5s ease 1.15s forwards;
+  }
+
+  @keyframes libro-sale {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .libro {
+      display: none !important;
+    }
+
+    body.is-bloqueado {
+      overflow: auto;
+    }
+  }
+
+  @media (max-height: 640px) {
+    .libro__marco {
+      gap: 0.28rem;
+      padding: 0.7rem 0.8rem;
+    }
+
+    .libro__logo {
+      width: min(8.5rem, 70%);
+    }
+
+    .libro__titulo {
+      font-size: 1.35rem;
+    }
+
+    .libro__esquina {
+      right: 1rem;
+      bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .libro__portada {
+      transition: opacity 0.25s ease;
+    }
+
+    .libro.is-abierto .libro__portada {
+      transform: none;
+      opacity: 0;
+    }
+
+    .libro.is-abierto .libro__escena {
+      animation: none;
+      opacity: 0;
+    }
+
+    .libro__esquina:hover {
+      color: var(--cream);
+    }
+  }
+</style>
