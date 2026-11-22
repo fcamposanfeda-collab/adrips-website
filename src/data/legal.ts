@@ -5,8 +5,10 @@ export const legal = {
   lastUpdated: 'noviembre 2026',
 
   /** Identificación del responsable (LSSI / RGPD) */
-  holder: 'Arascam Gestión Integral, S.L.',
-  nif: 'B19475961',
+  /** Titular persona física (profesional autónoma) */
+  holder: 'Adriana Pérez Salmerón',
+  nif: '05718916N',
+  /** Domicilio profesional (LSSI art. 10) */
   address: 'Ctra. de Toledo, 26 (Hotel Cumbria)',
   postalCode: '13005',
   city: 'Ciudad Real',
@@ -14,9 +16,8 @@ export const legal = {
   country: 'España',
   activity: 'Servicios de marketing digital, consultoría y diseño',
 
-  /** Datos registrales (LSSI art. 10) */
-  registryInfo:
-    'Inscrita en el Registro Mercantil de Ciudad Real, hoja CR-34498, inscripción 1.ª.',
+  /** Datos registrales (LSSI art. 10): no aplica a persona física no inscrita */
+  registryInfo: '',
 
   /** Jurisdicción para litigios */
   jurisdiction: 'Ciudad Real',

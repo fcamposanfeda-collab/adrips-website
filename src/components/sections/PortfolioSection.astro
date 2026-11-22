@@ -1,6 +1,9 @@
 ---
 import ProjectCover from '../ui/ProjectCover.astro';
-import { webProjects, marketingCases, statusLabel } from '../../data/portfolio';
+import { webProjects as allWebProjects, marketingCases, statusLabel } from '../../data/portfolio';
+
+/** Los proyectos «Próximamente» se ocultan hasta que tengan web publicada */
+const webProjects = allWebProjects.filter((p) => p.status !== 'coming-soon');
 ---
 
 <section id="proyectos-web" class="portfolio section" aria-labelledby="web-title">
