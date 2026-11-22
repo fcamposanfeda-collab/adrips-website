@@ -45,10 +45,4 @@ export const legal = {
     measurementId: '[COMPLETAR: G-XXXXXXXXXX — dejar vacío si no usas Analytics]',
     privacyUrl: 'https://policies.google.com/privacy',
   },
-
-  /** Tipografías cargadas desde Google Fonts */
-  fonts: {
-    provider: 'Google Fonts (Google LLC)',
-    privacyUrl: 'https://policies.google.com/privacy',
-  },
 } as const;

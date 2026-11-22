@@ -107,12 +107,6 @@ const usesAnalytics = !legal.analytics.measurementId.startsWith('[COMPLETAR');
     <h2>5. Cookies de terceros</h2>
     <p>Algunos servicios integrados pueden instalar cookies de terceros:</p>
     <ul>
-      <li>
-        <strong>Google Fonts</strong> — tipografías cargadas desde los servidores de Google. Consulta la
-        <a href={legal.fonts.privacyUrl} rel="noopener noreferrer" target="_blank">
-          política de privacidad de Google
-        </a>.
-      </li>
       {usesAnalytics && (
         <li>
           <strong>{legal.analytics.provider}</strong> — medición de audiencia, solo con tu consentimiento.

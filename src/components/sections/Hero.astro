@@ -13,20 +13,20 @@ const [front, back] = webProjects;
   <div class="hero__glow" aria-hidden="true"></div>
   <div class="container hero__grid">
     <div class="hero__content">
-      <p class="eyebrow hero__eyebrow" data-reveal>Diseño web · Marketing digital · Toda España</p>
-      <h1 id="hero-title" class="hero__title" data-reveal data-reveal-delay="1">
+      <p class="eyebrow hero__eyebrow" data-reveal-now>Diseño web · Marketing digital · Toda España</p>
+      <h1 id="hero-title" class="hero__title" data-reveal-now data-reveal-delay="1">
         Webs que hacen que <em>te elijan</em>.
       </h1>
-      <p class="lead hero__lead" data-reveal data-reveal-delay="2">
+      <p class="lead hero__lead" data-reveal-now data-reveal-delay="2">
         Diseño y desarrollo webs a medida para negocios que quieren verse profesionales y conseguir más
         clientes. Trabajo desde Ciudad Real con proyectos en toda España: bonitas, rápidas y pensadas
         para vender.
       </p>
-      <div class="hero__actions" data-reveal data-reveal-delay="3">
+      <div class="hero__actions" data-reveal-now data-reveal-delay="3">
         <Button href={routes.contact} variant="primary" size="lg" arrow>Pide tu propuesta</Button>
         <Button href={routes.projects} variant="outline" size="lg">Ver proyectos</Button>
       </div>
-      <ul class="hero__points" data-reveal data-reveal-delay="4">
+      <ul class="hero__points" data-reveal-now data-reveal-delay="4">
         {
           heroPoints.map((p) => (
             <li>
