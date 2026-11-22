@@ -40,12 +40,10 @@ import { brand } from '../data/brand';
 <script>
   const CLAVE = 'adrips-libro-abierto';
   const EVENTO = 'adrips:libro-abierto';
-  const ESCRITORIO = '(min-width: 900px)';
   const libro = document.getElementById('libro');
   const boton = document.getElementById('boton-libro');
 
   if (libro && boton) {
-    const escritorio = window.matchMedia(ESCRITORIO);
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function avisarAbierto() {
@@ -73,26 +71,19 @@ import { brand } from '../data/brand';
       setTimeout(avisarAbierto, reduce ? 0 : 320);
     }
 
-    if (!escritorio.matches) {
+    let yaAbierto = false;
+    try {
+      yaAbierto = sessionStorage.getItem(CLAVE) === '1';
+    } catch {
+      yaAbierto = false;
+    }
+
+    if (yaAbierto) {
       ocultar();
     } else {
-      let yaAbierto = false;
-      try {
-        yaAbierto = sessionStorage.getItem(CLAVE) === '1';
-      } catch {
-        yaAbierto = false;
-      }
-
-      if (yaAbierto) {
-        ocultar();
-      } else {
-        document.body.classList.add('is-bloqueado');
-        boton.focus({ preventScroll: true });
-        boton.addEventListener('click', abrir, { once: true });
-        escritorio.addEventListener('change', (event) => {
-          if (!event.matches) ocultar();
-        });
-      }
+      document.body.classList.add('is-bloqueado');
+      boton.focus({ preventScroll: true });
+      boton.addEventListener('click', abrir, { once: true });
     }
   }
 </script>
@@ -351,12 +342,55 @@ import { brand } from '../data/brand';
   }
 
   @media (max-width: 899px) {
-    .libro {
-      display: none !important;
+    .libro__album {
+      inset: 0.7rem 0.65rem 0.8rem 0.5rem;
+      perspective: 1600px;
+      perspective-origin: 14% 42%;
     }
 
-    body.is-bloqueado {
-      overflow: auto;
+    .libro__lomo {
+      width: 1.55rem;
+      border-radius: 0.55rem 0.1rem 0.1rem 0.55rem;
+    }
+
+    .libro__canto {
+      top: 0.4rem;
+      bottom: 0.4rem;
+      width: 0.45rem;
+    }
+
+    .libro__portada {
+      right: 0.3rem;
+      left: 1.25rem;
+    }
+
+    .libro__cara {
+      padding: 1.1rem 0.85rem 1.15rem 0.65rem;
+    }
+
+    .libro__cara::before {
+      inset: 0.5rem 0.55rem 0.5rem 0.4rem;
+    }
+
+    .libro__marco {
+      width: min(15rem, 82%);
+      gap: 0.45rem;
+      padding: 1.05rem 0.85rem 0.95rem;
+    }
+
+    .libro__logo {
+      width: min(9.5rem, 82%);
+    }
+
+    .libro__titulo {
+      font-size: 1.7rem;
+    }
+
+    .libro__esquina {
+      right: 0.85rem;
+      bottom: 1.15rem;
+      font-size: 1.2rem;
+      padding: 0.35rem 0.15rem;
     }
   }
 
