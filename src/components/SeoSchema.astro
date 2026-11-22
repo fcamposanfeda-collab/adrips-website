@@ -1,41 +1,122 @@
 ---
-import { site, contact } from '../data/site';
+import { site, contact, location, sameAs } from '../data/site';
 import { owner } from '../data/owner';
+import { brand } from '../data/brand';
 import { services } from '../data/services';
+
+const orgId = `${site.url}/#organization`;
+const personId = `${site.url}/#person`;
+const websiteId = `${site.url}/#website`;
+
+const address = {
+  '@type': 'PostalAddress',
+  addressLocality: location.addressLocality,
+  addressRegion: location.addressRegion,
+  postalCode: location.postalCode,
+  addressCountry: location.addressCountry,
+  ...(location.streetAddress ? { streetAddress: location.streetAddress } : {}),
+};
+
+const areaServed = [
+  {
+    '@type': 'Country',
+    name: 'España',
+  },
+  {
+    '@type': 'AdministrativeArea',
+    name: 'Castilla-La Mancha',
+  },
+  {
+    '@type': 'City',
+    name: 'Ciudad Real',
+  },
+];
 
 const graph = [
   {
     '@type': 'WebSite',
-    '@id': `${site.url}/#website`,
+    '@id': websiteId,
     url: site.url,
-    name: owner.fullName,
+    name: brand.name,
+    alternateName: [owner.fullName, brand.shortName],
     description: site.description,
     inLanguage: site.lang,
-    author: { '@id': `${site.url}/#person` },
+    publisher: { '@id': orgId },
+    author: { '@id': personId },
+  },
+  {
+    '@type': 'ProfessionalService',
+    '@id': orgId,
+    name: brand.name,
+    alternateName: owner.fullName,
+    url: site.url,
+    image: `${site.url}/images/og-adrips.jpg`,
+    logo: `${site.url}/branding/adrips-logo.png`,
+    description: site.description,
+    email: contact.email,
+    telephone: contact.phoneDisplay,
+    priceRange: '€€',
+    founder: { '@id': personId },
+    employee: { '@id': personId },
+    address,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: location.latitude,
+      longitude: location.longitude,
+    },
+    areaServed,
+    serviceType: services.map((s) => s.title),
+    knowsLanguage: ['es', 'en'],
+    ...(sameAs.length ? { sameAs } : {}),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Servicios Adrips Marketing',
+      itemListElement: services.map((s, i) => ({
+        '@type': 'Offer',
+        position: i + 1,
+        itemOffered: {
+          '@type': 'Service',
+          name: s.title,
+          description: s.description,
+          provider: { '@id': orgId },
+          areaServed,
+        },
+      })),
+    },
   },
   {
     '@type': 'Person',
-    '@id': `${site.url}/#person`,
+    '@id': personId,
     name: owner.fullName,
     givenName: owner.firstName,
     jobTitle: owner.role,
     url: site.url,
     email: contact.email,
+    telephone: contact.phoneDisplay,
     description: owner.intro,
     image: `${site.url}${owner.photos.hero.src}`,
+    homeLocation: {
+      '@type': 'Place',
+      name: location.label,
+      address,
+    },
+    worksFor: { '@id': orgId },
     knowsAbout: [
       'Marketing digital',
+      'Diseño web',
       'Desarrollo web',
       'SEO',
+      'SEO local',
+      'GEO',
+      'Posicionamiento en IA',
       'SEM',
       'Google Ads',
       'Redes sociales',
       'Estrategia de contenidos',
+      'Ciudad Real',
+      'Castilla-La Mancha',
     ],
-    makesOffer: services.map((s) => ({
-      '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: s.title, description: s.description },
-    })),
+    ...(sameAs.length ? { sameAs } : {}),
   },
 ];
 ---

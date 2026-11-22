@@ -1,7 +1,7 @@
 import { owner } from './owner';
 import { brand } from './brand';
 
-/** Dominio, contacto y metadatos del sitio */
+/** Dominio, contacto, ubicación y metadatos del sitio */
 export const site = {
   name: owner.fullName,
   shortName: brand.shortName,
@@ -11,8 +11,8 @@ export const site = {
   lang: 'es',
   copyright: `© 2026 ${owner.fullName} · ${brand.name}. Todos los derechos reservados.`,
   tagline: `${brand.name} — ${owner.role.toLowerCase()}`,
-  description: `${owner.fullName} · ${brand.name} (${brand.tagline}): SEO, Google Ads, web, redes sociales y estrategia inbound. Marketing digital con resultados medibles.`,
-  ogImage: 'https://adripsmarketing.com/images/adriana-ilustracion-hero.png',
+  description: `${brand.name}: diseño web y marketing digital para negocios en toda España. Sede en Ciudad Real. Webs a medida, SEO, SEM y estrategia con resultados medibles.`,
+  ogImage: 'https://adripsmarketing.com/images/og-adrips.jpg',
 } as const;
 
 export const contact = {
@@ -20,6 +20,31 @@ export const contact = {
   phone: '+34657650598',
   phoneDisplay: '+34 657 650 598',
   whatsapp: '34657650598',
-  linkedin: '',
-  instagram: '',
+  linkedin: 'https://www.linkedin.com/in/adriana-p%C3%A9rez-salmer%C3%B3n-01860a109',
+  instagram: '', // pega aquí la URL pública de Instagram cuando esté lista
 } as const;
+
+/**
+ * Sede física (SEO local) + alcance de servicio (SEO nacional).
+ * Ciudad Real ayuda en búsquedas locales y Google Business Profile;
+ * areaServed España deja claro que trabajas en remoto en todo el país.
+ */
+export const location = {
+  addressLocality: 'Ciudad Real',
+  addressRegion: 'Castilla-La Mancha',
+  addressCountry: 'ES',
+  postalCode: '13001',
+  streetAddress: '', // opcional: calle si quieres mostrarla en GBP / schema
+  latitude: 38.9861,
+  longitude: -3.9274,
+  /** Texto visible en web / footer */
+  label: 'Ciudad Real, España',
+  /** Cómo lo explicamos a humanos e IAs */
+  serviceAreaCopy:
+    'Trabajo con negocios de toda España en remoto. Mi sede está en Ciudad Real (Castilla-La Mancha).',
+} as const;
+
+export const sameAs = [
+  contact.linkedin,
+  // Añade Instagram, Google Business Profile y Domestika cuando tengas URL definitiva
+].filter(Boolean) as string[];

@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://adripsmarketing.com/sitemap.xml
+
+# GEO / LLMs
+# https://adripsmarketing.com/llms.txt

@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   /*
    * Sistema visual Adrips 2026
    * Base cálida y editorial (papel + tinta ciruela) con un único acento fuerte
@@ -6,30 +6,34 @@
    * reservada para fondos suaves y detalles.
    */
 
+  /*
+   * Paleta definitiva (alineada con Instagram):
+   * Ciruela #54405A · Rosa #ECB6BD · Crema #FAF2EC
+   */
   /* Núcleo */
-  --ink: #4a3340;
-  --ink-2: #563c4a;
-  --ink-soft: #5e4653;
-  /* Fondo oscuro de secciones, botones y tarjetas destacadas (ciruela suave) */
-  --plum: #4a3340;
-  --plum-2: #563c4a;
-  --muted: #6b5960;
-  --paper: #fbf6f4;
-  --paper-2: #f6ebe8;
-  --paper-3: #efe0dc;
+  --ink: #54405a;
+  --ink-2: #63506a;
+  --ink-soft: #72607a;
+  /* Fondo oscuro de secciones, botones y tarjetas destacadas */
+  --plum: #54405a;
+  --plum-2: #63506a;
+  --muted: #7a6a80;
+  --paper: #faf2ec;
+  --paper-2: #f5ebe4;
+  --paper-3: #efe3db;
   --white: #fffdfb;
-  --line: #ecdcd7;
-  --line-strong: #ddc7c1;
+  --line: #eadfd8;
+  --line-strong: #dccfc6;
 
   /* Acentos */
-  --accent: #a35f6b;
-  --accent-hover: #8a4d58;
-  --accent-soft: #f6e2e3;
-  --accent-light: #e3a9ae;
-  --accent-em: #b87582; /* cursivas de titulares: rosa más claro (contraste 3.3:1, válido para texto grande) */
-  --blush: #efcfd0;
-  --rose: #d4a5a5;
-  --cream: #f1e3b9;
+  --accent: #54405a;
+  --accent-hover: #433248;
+  --accent-soft: #f4e4e8;
+  --accent-light: #ecb6bd;
+  --accent-em: #c98996; /* cursivas de titulares: rosa legible en grande */
+  --blush: #ecb6bd;
+  --rose: #ecb6bd;
+  --cream: #faf2ec;
   --lavender: #c9b8ec;
   --lavender-deep: #6e57a8;
   --sage: #cfd9c6;
@@ -47,7 +51,7 @@
   --color-bg-soft: var(--paper-2);
   --color-surface: var(--white);
   --color-border: var(--line);
-  --color-on-dark: #fbf4ec;
+  --color-on-dark: #faf2ec;
   --color-lila: var(--lavender);
   --color-lila-strong: var(--lavender-deep);
   --color-rosa: var(--blush);

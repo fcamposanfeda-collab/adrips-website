@@ -6,10 +6,11 @@ export const owner = {
   yearsExperience: 5,
   headline: 'Diseño webs con cabeza de marketing: bonitas, rápidas y pensadas para vender',
   intro:
-    'Te acompaño de cerca para llevar tu marca al siguiente nivel: estrategia con sentido, creatividad con criterio y resultados que funcionan desde el primer mes.',
+    'Te acompaño de cerca para llevar tu marca al siguiente nivel: estrategia con sentido, creatividad con criterio y resultados que funcionan desde el primer mes. Sede en Ciudad Real; trabajo con clientes de toda España.',
   bio: [
     'Soy especialista en marketing digital con formación en marketing y diseño gráfico. He liderado departamentos, lanzado productos y construido funnels de captación de principio a fin.',
     'Mi experiencia abarca desde community management hasta responsable de marketing: Google Ads, RRSS, email marketing, CRM, landings y analítica orientada a resultados.',
+    'Trabajo desde Ciudad Real con negocios de toda España en remoto: misma cercanía, mismo criterio y presupuesto cerrado.',
     'Creativa, extrovertida y con ganas de mejorar cada día. Creo que las ideas mejoran si se comparten — y que el marketing funciona cuando combina estrategia, diseño y datos reales.',
   ],
   personal: {

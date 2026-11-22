@@ -83,6 +83,10 @@ export const faqs = [
     a: 'Toda web sale con SEO técnico de base: velocidad, estructura, metadatos y sitemap. Para competir por búsquedas concretas te propongo un plan de SEO o campañas según tu sector.',
   },
   {
+    q: '¿Solo trabajas en Ciudad Real?',
+    a: 'Mi sede está en Ciudad Real, pero trabajo con negocios de toda España en remoto. Si estás en otra provincia, el proceso es el mismo: videollamada, propuesta clara y seguimiento cercano.',
+  },
+  {
     q: '¿Y después del lanzamiento?',
     a: 'No desaparezco. Puedes contar conmigo para cambios, mantenimiento, SEO o campañas, sin permanencias obligatorias.',
   },

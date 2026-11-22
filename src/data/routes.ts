@@ -1,6 +1,7 @@
 export const routes = {
   home: '/',
   about: '/sobre-mi',
+  city: '/ciudad-real',
   inspiration: '/inspiracion',
   projects: '/proyectos',
   services: '/servicios',

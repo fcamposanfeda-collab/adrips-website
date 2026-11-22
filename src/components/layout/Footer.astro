@@ -1,8 +1,9 @@
 ---
-import { contact } from '../../data/site';
+import { contact, location } from '../../data/site';
 import { owner } from '../../data/owner';
 import { brand } from '../../data/brand';
 import { footerNav, legalNav } from '../../data/navigation';
+import { routes } from '../../data/routes';
 import LogoMark from '../brand/LogoMark.astro';
 
 const year = new Date().getFullYear();
@@ -16,7 +17,7 @@ const year = new Date().getFullYear();
           <LogoMark height="2.75rem" />
         </a>
         <p class="footer__claim">
-          Diseño webs a medida para negocios que quieren verse profesionales y conseguir más clientes.
+          Diseño webs a medida para negocios de toda España. Sede en {location.addressLocality}.
         </p>
       </div>
 
@@ -30,6 +31,7 @@ const year = new Date().getFullYear();
               </li>
             ))
           }
+          <li><a href={routes.city}>Diseño web en Ciudad Real</a></li>
         </ul>
       </div>
 
@@ -47,6 +49,9 @@ const year = new Date().getFullYear();
               </li>
             )
           }
+          <li>
+            <a href={routes.city}>{location.label}</a>
+          </li>
         </ul>
       </div>
     </div>

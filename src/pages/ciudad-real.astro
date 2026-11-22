@@ -1,0 +1,202 @@
+---
+import { getPageMeta } from '../data/pages-meta';
+import { location, contact } from '../data/site';
+import { brand } from '../data/brand';
+import { routes } from '../data/routes';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/sections/PageIntro.astro';
+import ContactCta from '../components/sections/ContactCta.astro';
+import Button from '../components/ui/Button.astro';
+
+const meta = getPageMeta('/ciudad-real');
+
+const localFaqs = [
+  {
+    q: '¿Haces webs para negocios de Ciudad Real?',
+    a: 'Sí. Diseño y desarrollo webs a medida para empresas, autónomos y marcas personales de Ciudad Real y provincia: hostelería, turismo rural, servicios profesionales, comercio y más.',
+  },
+  {
+    q: '¿También trabajas fuera de Castilla-La Mancha?',
+    a: 'Sí. Mi sede está en Ciudad Real, pero atiendo clientes de toda España en remoto con el mismo proceso y cercanía.',
+  },
+  {
+    q: '¿Qué es el SEO local en Ciudad Real?',
+    a: 'Es aparecer cuando alguien busca servicios cerca: “diseño web Ciudad Real”, “catering Ciudad Real”, etc. Combino tu web, Google Business Profile y contenidos locales para que te encuentren.',
+  },
+];
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: localFaqs.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    })}
+  />
+  <PageIntro
+    eyebrow="Ciudad Real"
+    title="Diseño web y marketing"
+    emphasis="en Ciudad Real"
+    description={`Soy ${brand.shortName}: diseño webs a medida y estrategias de marketing para negocios de ${location.addressLocality} y provincia. Si estás en otra ciudad de España, también podemos trabajar juntos en remoto.`}
+  />
+
+  <section class="local-seo section">
+    <div class="container local-seo__grid">
+      <article class="local-seo__card" data-reveal>
+        <h2>Por qué tiene sentido una sede aquí</h2>
+        <p>
+          En ciudades como Ciudad Real la competencia digital es menor que en Madrid o Barcelona,
+          y eso es una ventaja: con una web bien hecha y SEO local claro, es más fácil destacar
+          cuando te buscan en Google o en ChatGPT.
+        </p>
+        <p>
+          Conozco el tejido local (hostelería, turismo, servicios, pymes) y también proyectos
+          nacionales. Traducción: criterio de marketing grande, trato cercano.
+        </p>
+      </article>
+
+      <article class="local-seo__card" data-reveal data-reveal-delay="1">
+        <h2>Qué puedo hacer por tu negocio</h2>
+        <ul>
+          <li>Web a medida, rápida y pensada para conseguir contactos</li>
+          <li>SEO local (Ciudad Real y alrededores) y SEO nacional</li>
+          <li>Posicionamiento en IA (GEO)</li>
+          <li>Google Ads, redes y analítica</li>
+        </ul>
+        <div class="local-seo__actions">
+          <Button href={routes.services} variant="secondary">Ver servicios</Button>
+          <Button href={routes.contact} variant="primary">Pedir presupuesto</Button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="local-faq section surface-soft">
+    <div class="container narrow">
+      <h2 class="local-faq__title" data-reveal>Preguntas frecuentes (Ciudad Real)</h2>
+      <div class="local-faq__list">
+        {
+          localFaqs.map((item, i) => (
+            <details class="local-faq__item" data-reveal data-reveal-delay={String((i % 3) + 1)}>
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+      <p class="local-faq__nap" data-reveal>
+        <strong>{brand.name}</strong> · {location.label}
+        <br />
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        {' · '}
+        <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>
+      </p>
+    </div>
+  </section>
+
+  <ContactCta compact formId="contact-ciudad-real" />
+</BaseLayout>
+
+<style>
+  .local-seo__grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 900px) {
+    .local-seo__grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: start;
+    }
+  }
+
+  .local-seo__card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md, 1rem);
+    padding: 1.75rem;
+  }
+
+  .local-seo__card h2 {
+    margin: 0 0 1rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 2vw, 1.9rem);
+    color: var(--color-text);
+  }
+
+  .local-seo__card p,
+  .local-seo__card li {
+    color: var(--color-muted);
+    line-height: 1.65;
+  }
+
+  .local-seo__card ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .local-seo__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .local-faq.surface-soft {
+    background: var(--color-bg-soft);
+  }
+
+  .local-faq__title {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  }
+
+  .narrow {
+    max-width: 46rem;
+  }
+
+  .local-faq__list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .local-faq__item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.9rem;
+    padding: 1rem 1.1rem;
+  }
+
+  .local-faq__item summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .local-faq__item p {
+    margin: 0.75rem 0 0;
+    color: var(--color-muted);
+    line-height: 1.65;
+  }
+
+  .local-faq__nap {
+    margin-top: 2rem;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  .local-faq__nap a {
+    color: var(--color-text);
+  }
+</style>

@@ -2,14 +2,19 @@ import { brand } from './brand';
 
 export const pagesMeta = {
   '/': {
+    title: `Diseño web y marketing digital en España | ${brand.name}`,
+    description:
+      'Diseño y desarrollo web a medida, SEO y marketing para negocios de toda España. Sede en Ciudad Real. Webs bonitas, rápidas y pensadas para vender. Presupuesto cerrado.',
+  },
+  '/ciudad-real': {
     title: `Diseño web y marketing en Ciudad Real | ${brand.name}`,
     description:
-      'Diseño y desarrollo de páginas web a medida para negocios y marcas personales: bonitas, rápidas, optimizadas para Google y pensadas para vender. Presupuesto cerrado.',
+      'Diseñadora web y marketing digital en Ciudad Real: webs a medida, SEO local y estrategia para negocios de la provincia y Castilla-La Mancha. También trabajo en remoto en toda España.',
   },
   '/sobre-mi': {
     title: `Sobre mí | ${brand.name} — Adriana Pérez Salmerón`,
     description:
-      'Especialista en marketing digital: Exaccta, Wenance, Stellantis, Finetwork y más. Grado en Marketing, máster digital y diseño gráfico.',
+      'Diseñadora web y marketing digital con sede en Ciudad Real. Experiencia en Exaccta, Wenance, Stellantis y Finetwork. Trabajo con clientes de toda España.',
   },
   '/inspiracion': {
     title: `Inspiración | ${brand.name} — Atardeceres y flores`,
@@ -24,7 +29,7 @@ export const pagesMeta = {
   '/servicios': {
     title: `Servicios de diseño web y marketing | ${brand.name}`,
     description:
-      'Diseño y desarrollo web a medida, landing pages, SEO, Google Ads, Social Ads y estrategia digital. Presupuesto cerrado y trato directo.',
+      'Desarrollo web, SEO, posicionamiento en IA, Google Ads, redes y analítica. Para negocios de Ciudad Real y de toda España. Presupuesto cerrado y trato directo.',
   },
   '/organizacion-eventos': {
     title: `Organización de eventos | ${brand.name}`,
@@ -34,7 +39,7 @@ export const pagesMeta = {
   '/contacto': {
     title: `Contacto | ${brand.name} — Adriana Pérez Salmerón`,
     description:
-      'Cuéntame tu objetivo y te respondo yo. Primera conversación sin compromiso y presupuesto claro.',
+      'Cuéntame tu proyecto. Respondo desde Ciudad Real a clientes de toda España. Primera conversación sin compromiso y presupuesto claro.',
   },
   '/politica-de-privacidad': {
     title: `Política de privacidad | ${brand.name}`,
