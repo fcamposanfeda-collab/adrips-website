@@ -2,12 +2,12 @@ import { brand } from './brand';
 
 export const pagesMeta = {
   '/': {
-    title: `Diseño web y marketing digital en España | ${brand.name}`,
+    title: `Diseño web y marketing en Ciudad Real y toda España | ${brand.name}`,
     description:
-      'Diseño y desarrollo web a medida, SEO y marketing para negocios de toda España. Sede en Ciudad Real. Webs bonitas, rápidas y pensadas para vender. Presupuesto cerrado.',
+      'Diseño web a medida, SEO y marketing digital desde Ciudad Real para negocios de toda España. Webs bonitas, rápidas y pensadas para vender. Presupuesto cerrado.',
   },
   '/ciudad-real': {
-    title: `Diseño web y marketing en Ciudad Real | ${brand.name}`,
+    title: `Páginas web y SEO local en Ciudad Real | ${brand.name}`,
     description:
       'Diseñadora web y marketing digital en Ciudad Real: webs a medida, SEO local y estrategia para negocios de la provincia y Castilla-La Mancha. También trabajo en remoto en toda España.',
   },

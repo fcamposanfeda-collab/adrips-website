@@ -119,7 +119,7 @@ export const azureaTeaser = {
   ctaLabel: 'Conocer Azurea Catering',
   ctaHref: 'https://azureacatering.com/',
   image: {
-    src: '/images/azurea-catering.png',
+    src: '/images/azurea-catering.webp',
     alt: 'Camarero de Azurea Catering con delantal bordado y bandeja de aperitivos',
   },
 };

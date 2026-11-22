@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   /*
    * Sistema visual Adrips 2026
    * Base cálida y editorial (papel + tinta ciruela) con un único acento fuerte
@@ -17,7 +17,7 @@
   /* Fondo oscuro de secciones, botones y tarjetas destacadas */
   --plum: #54405a;
   --plum-2: #63506a;
-  --muted: #7a6a80;
+  --muted: #706076;
   --paper: #faf2ec;
   --paper-2: #f5ebe4;
   --paper-3: #efe3db;
@@ -30,7 +30,7 @@
   --accent-hover: #433248;
   --accent-soft: #f4e4e8;
   --accent-light: #ecb6bd;
-  --accent-em: #c98996; /* cursivas de titulares: rosa legible en grande */
+  --accent-em: #ad6f80; /* cursivas de titulares: rosa empolvado, contraste ≥3:1 sobre todos los fondos claros */
   --blush: #ecb6bd;
   --rose: #ecb6bd;
   --cream: #faf2ec;
