@@ -49,6 +49,13 @@ const year = new Date().getFullYear();
               </li>
             )
           }
+          {
+            contact.instagram && (
+              <li>
+                <a href={contact.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+              </li>
+            )
+          }
           <li>{location.label}</li>
         </ul>
       </div>

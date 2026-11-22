@@ -21,7 +21,7 @@ export const contact = {
   phoneDisplay: '+34 657 650 598',
   whatsapp: '34657650598',
   linkedin: 'https://www.linkedin.com/in/adriana-p%C3%A9rez-salmer%C3%B3n-01860a109',
-  instagram: '', // pega aquí la URL pública de Instagram cuando esté lista
+  instagram: 'https://www.instagram.com/adripsmarketing/',
 } as const;
 
 /**
@@ -46,5 +46,6 @@ export const location = {
 
 export const sameAs = [
   contact.linkedin,
-  // Añade Instagram, Google Business Profile y Domestika cuando tengas URL definitiva
+  contact.instagram,
+  // Añade Google Business Profile cuando tengas la URL
 ].filter(Boolean) as string[];
