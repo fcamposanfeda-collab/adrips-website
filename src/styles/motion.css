@@ -25,6 +25,38 @@
   }
 }
 
+/*
+ * Primera pantalla (hero e intro de página): animación solo CSS, sin esperar al JS.
+ * Mismo efecto visual que [data-reveal], pero arranca con el primer pintado,
+ * así el texto principal cuenta como LCP al instante (PageSpeed móvil).
+ */
+[data-reveal-now] {
+  animation: reveal-up 0.9s var(--ease-out) both;
+}
+
+[data-reveal-now][data-reveal-delay='1'] {
+  animation-delay: 0.08s;
+}
+
+[data-reveal-now][data-reveal-delay='2'] {
+  animation-delay: 0.16s;
+}
+
+[data-reveal-now][data-reveal-delay='3'] {
+  animation-delay: 0.24s;
+}
+
+[data-reveal-now][data-reveal-delay='4'] {
+  animation-delay: 0.32s;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
 /* Solo se ocultan si hay JS: evita contenido invisible sin JavaScript */
 .js [data-reveal] {
   opacity: 0;

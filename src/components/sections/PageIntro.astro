@@ -15,13 +15,13 @@ const { eyebrow, title, emphasis, description, descriptionExtra } = Astro.props;
 <header class="page-intro">
   <div class="page-intro__glow" aria-hidden="true"></div>
   <div class="container page-intro__inner">
-    <p class="eyebrow" data-reveal>{eyebrow}</p>
-    <h1 class="page-intro__title" data-reveal data-reveal-delay="1">
+    <p class="eyebrow" data-reveal-now>{eyebrow}</p>
+    <h1 class="page-intro__title" data-reveal-now data-reveal-delay="1">
       {title}{emphasis && <> <em>{emphasis}</em></>}
     </h1>
     {
       (description || descriptionExtra) && (
-        <div class="page-intro__copy" data-reveal data-reveal-delay="2">
+        <div class="page-intro__copy" data-reveal-now data-reveal-delay="2">
           {description && <p class="lead">{description}</p>}
           {descriptionExtra && <p class="lead">{descriptionExtra}</p>}
         </div>

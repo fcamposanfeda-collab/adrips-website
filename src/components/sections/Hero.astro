@@ -13,20 +13,20 @@ const [front, back] = webProjects;
   <div class="hero__glow" aria-hidden="true"></div>
   <div class="container hero__grid">
     <div class="hero__content">
-      <p class="eyebrow hero__eyebrow" data-reveal>Diseño web · Marketing digital · Toda España</p>
-      <h1 id="hero-title" class="hero__title" data-reveal data-reveal-delay="1">
+      <p class="eyebrow hero__eyebrow" data-reveal-now>Diseño web · Marketing digital · Toda España</p>
+      <h1 id="hero-title" class="hero__title" data-reveal-now data-reveal-delay="1">
         Webs que hacen que <em>te elijan</em>.
       </h1>
-      <p class="lead hero__lead" data-reveal data-reveal-delay="2">
+      <p class="lead hero__lead" data-reveal-now data-reveal-delay="2">
         Diseño y desarrollo webs a medida para negocios que quieren verse profesionales y conseguir más
         clientes. Trabajo desde Ciudad Real con proyectos en toda España: bonitas, rápidas y pensadas
         para vender.
       </p>
-      <div class="hero__actions" data-reveal data-reveal-delay="3">
+      <div class="hero__actions" data-reveal-now data-reveal-delay="3">
         <Button href={routes.contact} variant="primary" size="lg" arrow>Pide tu propuesta</Button>
         <Button href={routes.projects} variant="outline" size="lg">Ver proyectos</Button>
       </div>
-      <ul class="hero__points" data-reveal data-reveal-delay="4">
+      <ul class="hero__points" data-reveal-now data-reveal-delay="4">
         {
           heroPoints.map((p) => (
             <li>
@@ -42,12 +42,12 @@ const [front, back] = webProjects;
 
     <div class="hero__visual" aria-hidden="true">
       <div class="hero__stack">
-        {back && <div class="hero__card hero__card--back"><ProjectCover project={back} /></div>}
-        {front && <div class="hero__card hero__card--front"><ProjectCover project={front} size="lg" eager /></div>}
+        {back && <div class="hero__card hero__card--back"><ProjectCover project={back} priority /></div>}
+        {front && <div class="hero__card hero__card--front"><ProjectCover project={front} size="lg" priority /></div>}
       </div>
 
       <div class="hero__chip hero__chip--person">
-        <img src={owner.photos.portrait.src} alt="Adriana Pérez Salmerón, diseñadora web en Ciudad Real" width="48" height="48" loading="eager" />
+        <img src="/images/adriana-retrato-96.webp" alt="Adriana Pérez Salmerón, diseñadora web en Ciudad Real" width="48" height="48" loading="eager" />
         <div>
           <strong>Hola, soy {owner.firstName}</strong>
           <span>Diseño tu web y te ayudo a que funcione</span>

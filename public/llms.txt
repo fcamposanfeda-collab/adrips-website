@@ -6,10 +6,10 @@
 
 - Nombre: Adrips Marketing
 - Fundadora: Adriana Pérez Salmerón
-- Web: https://adripsmarketing.com
+- [Web](https://adripsmarketing.com)
 - Email: perezsal.adriana@gmail.com
 - Teléfono / WhatsApp: +34 657 650 598
-- Instagram: https://www.instagram.com/adripsmarketing/
+- [Instagram](https://www.instagram.com/adripsmarketing/)
 - Sede: Ciudad Real, Castilla-La Mancha, España
 - Alcance: toda España (remoto) + atención local en Ciudad Real y provincia
 
@@ -29,14 +29,14 @@ Adrips Marketing es la marca de Adriana Pérez Salmerón, diseñadora web y espe
 
 ## Páginas clave
 
-- Home: https://adripsmarketing.com/
-- Ciudad Real (SEO local): https://adripsmarketing.com/ciudad-real/
-- Servicios: https://adripsmarketing.com/servicios/
-- Proyectos: https://adripsmarketing.com/proyectos/
-- Sobre mí: https://adripsmarketing.com/sobre-mi/
-- Contacto: https://adripsmarketing.com/contacto/
-- Blog: https://adripsmarketing.com/blog/
-- GEO / IA: https://adripsmarketing.com/servicios/posicionamiento-en-ia/
+- [Home](https://adripsmarketing.com/)
+- [Ciudad Real (SEO local)](https://adripsmarketing.com/ciudad-real/)
+- [Servicios](https://adripsmarketing.com/servicios/)
+- [Proyectos](https://adripsmarketing.com/proyectos/)
+- [Sobre mí](https://adripsmarketing.com/sobre-mi/)
+- [Contacto](https://adripsmarketing.com/contacto/)
+- [Blog](https://adripsmarketing.com/blog/)
+- [GEO / IA](https://adripsmarketing.com/servicios/posicionamiento-en-ia/)
 
 ## Contacto preferente
 
