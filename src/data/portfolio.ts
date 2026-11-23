@@ -50,10 +50,7 @@ export const portfolioItems: PortfolioItem[] = [
     domain: 'caromvintage.com',
     image: '/images/proyectos/carom-vintage.webp',
     tags: ['Diseño y desarrollo', 'Catálogo', 'Moda'],
-    links: [
-      { label: 'Ver web', href: 'https://www.caromvintage.com/', type: 'web' },
-      { label: 'Instagram', href: 'https://www.instagram.com/carom_vintage/', type: 'social' },
-    ],
+    links: [{ label: 'Ver web', href: 'https://www.caromvintage.com/', type: 'web' }],
   },
   {
     id: 'los-collados',
@@ -69,7 +66,10 @@ export const portfolioItems: PortfolioItem[] = [
     domain: 'loscolladosdesanmiguel.com',
     image: '/images/proyectos/los-collados.webp',
     tags: ['Diseño y desarrollo', 'Multidioma', 'Reservas'],
-    links: [{ label: 'Ver web', href: 'https://loscolladosdesanmiguel.com/', type: 'web' }],
+    links: [
+      { label: 'Ver web', href: 'https://loscolladosdesanmiguel.com/', type: 'web' },
+      { label: 'Instagram', href: 'https://www.instagram.com/loscolladosdesanmiguel', type: 'social' },
+    ],
   },
   {
     id: 'azurea-catering',
@@ -85,7 +85,10 @@ export const portfolioItems: PortfolioItem[] = [
     domain: 'azureacatering.com',
     image: '/images/proyectos/azurea-catering.webp',
     tags: ['Diseño y desarrollo', 'SEO local', 'Captación'],
-    links: [{ label: 'Ver web', href: 'https://azureacatering.com/', type: 'web' }],
+    links: [
+      { label: 'Ver web', href: 'https://azureacatering.com/', type: 'web' },
+      { label: 'Instagram', href: 'https://www.instagram.com/azurea_catering/', type: 'social' },
+    ],
   },
   {
     id: 'inversound',
